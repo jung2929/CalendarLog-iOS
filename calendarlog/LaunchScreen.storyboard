@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="74D-kq-Uc9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Dc4-Ga-CTE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwa-lS-ftA">
-                                <rect key="frame" x="152" y="620" width="72.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLg-Ds-3RV">
+                                <rect key="frame" x="151" y="620" width="73" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -30,14 +30,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="74D-kq-Uc9" secondAttribute="trailing" id="5FP-pp-3Hj"/>
-                            <constraint firstItem="74D-kq-Uc9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UFm-LV-EjE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="74D-kq-Uc9" secondAttribute="bottom" id="ZJK-ck-Vfg"/>
-                            <constraint firstItem="74D-kq-Uc9" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gQZ-WE-Opr"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Iwa-lS-ftA" secondAttribute="bottom" constant="30" id="nrP-Ru-UaL"/>
-                            <constraint firstItem="Iwa-lS-ftA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vjW-a1-f8k"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="KLg-Ds-3RV" secondAttribute="bottom" constant="30" id="0Rw-Wo-GCX"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Dc4-Ga-CTE" secondAttribute="trailing" id="DRY-f1-YJa"/>
+                            <constraint firstItem="Dc4-Ga-CTE" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="Gei-0U-QYa"/>
+                            <constraint firstAttribute="bottom" secondItem="Dc4-Ga-CTE" secondAttribute="bottom" id="J8L-Qt-Wa3"/>
+                            <constraint firstItem="Dc4-Ga-CTE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="kWo-fP-Y0u"/>
+                            <constraint firstItem="KLg-Ds-3RV" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="kp7-kG-AZu"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

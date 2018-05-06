@@ -11,12 +11,12 @@
 		9E4B31F795B8061C0EA2AA08 /* Pods_calendarlogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BB0266C096E57EAB9622C5 /* Pods_calendarlogTests.framework */; };
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
 		BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD889B95209F779A005A8043 /* InfoPlist.strings */; };
+		BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */; };
 		BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2C20749318000519E0 /* AppDelegate.swift */; };
 		BDCECB2F20749318000519E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2E20749318000519E0 /* ViewController.swift */; };
 		BDCECB3220749318000519E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDCECB3020749318000519E0 /* Main.storyboard */; };
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
 		BDCECB3720749318000519E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDCECB3620749318000519E0 /* Assets.xcassets */; };
-		BDCECB3A20749318000519E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDCECB3820749318000519E0 /* LaunchScreen.storyboard */; };
 		BDCECB4520749318000519E0 /* calendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* calendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* calendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* calendarlogUITests.swift */; };
 /* End PBXBuildFile section */
@@ -48,16 +48,15 @@
 		7CB0386452B9EC2F7B28F9DE /* Pods-calendarlogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogTests/Pods-calendarlogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD889B96209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
-		BD889B97209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BD889B98209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD889B99209F77DD005A8043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDCECB2920749318000519E0 /* calendarlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendarlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB2C20749318000519E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCECB2E20749318000519E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BDCECB3120749318000519E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDCECB3420749318000519E0 /* calendarlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = calendarlog.xcdatamodel; sourceTree = "<group>"; };
 		BDCECB3620749318000519E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BDCECB3920749318000519E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDCECB3B20749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDCECB4020749318000519E0 /* calendarlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calendarlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB4420749318000519E0 /* calendarlogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendarlogTests.swift; sourceTree = "<group>"; };
@@ -144,9 +143,9 @@
 				BDCECB2E20749318000519E0 /* ViewController.swift */,
 				BDCECB3020749318000519E0 /* Main.storyboard */,
 				BDCECB3620749318000519E0 /* Assets.xcassets */,
-				BDCECB3820749318000519E0 /* LaunchScreen.storyboard */,
 				BDCECB3B20749318000519E0 /* Info.plist */,
 				BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */,
+				BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */,
 			);
 			path = calendarlog;
 			sourceTree = "<group>";
@@ -299,8 +298,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDCECB3A20749318000519E0 /* LaunchScreen.storyboard in Resources */,
 				BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */,
+				BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */,
 				BDCECB3720749318000519E0 /* Assets.xcassets in Resources */,
 				BDCECB3220749318000519E0 /* Main.storyboard in Resources */,
 			);
@@ -528,15 +527,6 @@
 				BD889B96209F77C3005A8043 /* ko */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BDCECB3820749318000519E0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDCECB3920749318000519E0 /* Base */,
-				BD889B97209F77C3005A8043 /* ko */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
