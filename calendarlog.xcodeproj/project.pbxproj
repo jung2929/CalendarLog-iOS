@@ -10,6 +10,7 @@
 		596C8FD844F051B1879B0BD5 /* Pods_calendarlogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AF1425BACEC05F6F0733E5 /* Pods_calendarlogUITests.framework */; };
 		9E4B31F795B8061C0EA2AA08 /* Pods_calendarlogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BB0266C096E57EAB9622C5 /* Pods_calendarlogTests.framework */; };
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
+		BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD889B95209F779A005A8043 /* InfoPlist.strings */; };
 		BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2C20749318000519E0 /* AppDelegate.swift */; };
 		BDCECB2F20749318000519E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2E20749318000519E0 /* ViewController.swift */; };
 		BDCECB3220749318000519E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDCECB3020749318000519E0 /* Main.storyboard */; };
@@ -46,6 +47,10 @@
 		772C4C7E6A67BA84593C247C /* Pods-calendarlogUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CB0386452B9EC2F7B28F9DE /* Pods-calendarlogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogTests/Pods-calendarlogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD889B96209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		BD889B97209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BD889B98209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD889B99209F77DD005A8043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BDCECB2920749318000519E0 /* calendarlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendarlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB2C20749318000519E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCECB2E20749318000519E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +106,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD889B90209F7766005A8043 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				BD889B95209F779A005A8043 /* InfoPlist.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		BDCECB2020749318000519E0 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +139,7 @@
 		BDCECB2B20749318000519E0 /* calendarlog */ = {
 			isa = PBXGroup;
 			children = (
+				BD889B90209F7766005A8043 /* Strings */,
 				BDCECB2C20749318000519E0 /* AppDelegate.swift */,
 				BDCECB2E20749318000519E0 /* ViewController.swift */,
 				BDCECB3020749318000519E0 /* Main.storyboard */,
@@ -266,6 +280,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = BDCECB2020749318000519E0;
 			productRefGroup = BDCECB2A20749318000519E0 /* Products */;
@@ -285,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCECB3A20749318000519E0 /* LaunchScreen.storyboard in Resources */,
+				BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */,
 				BDCECB3720749318000519E0 /* Assets.xcassets in Resources */,
 				BDCECB3220749318000519E0 /* Main.storyboard in Resources */,
 			);
@@ -496,10 +512,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		BD889B95209F779A005A8043 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD889B98209F77C3005A8043 /* ko */,
+				BD889B99209F77DD005A8043 /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		BDCECB3020749318000519E0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BDCECB3120749318000519E0 /* Base */,
+				BD889B96209F77C3005A8043 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -508,6 +534,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BDCECB3920749318000519E0 /* Base */,
+				BD889B97209F77C3005A8043 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -519,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -578,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
