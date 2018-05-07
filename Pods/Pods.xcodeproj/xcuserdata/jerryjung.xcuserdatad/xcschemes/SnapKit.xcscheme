@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4B53693228DE919754DF6A2E7D217071"
-               BlueprintName = "Pods-calendarlog"
+               BlueprintIdentifier = "E3A8B78E2BAA7245E256C04E0C74B34E"
+               BlueprintName = "SnapKit"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-calendarlog.framework">
+               BuildableName = "SnapKit.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

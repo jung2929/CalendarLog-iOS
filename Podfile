@@ -5,7 +5,7 @@ target 'calendarlog' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for calendarlog
+  pod 'SnapKit', '~> 4.0.0'
 
   target 'calendarlogTests' do
     inherit! :search_paths
