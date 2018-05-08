@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Dc4-Ga-CTE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLg-Ds-3RV">
                                 <rect key="frame" x="151" y="620" width="73" height="17"/>
@@ -33,8 +33,8 @@
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="KLg-Ds-3RV" secondAttribute="bottom" constant="30" id="0Rw-Wo-GCX"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Dc4-Ga-CTE" secondAttribute="trailing" id="DRY-f1-YJa"/>
                             <constraint firstItem="Dc4-Ga-CTE" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="Gei-0U-QYa"/>
-                            <constraint firstAttribute="bottom" secondItem="Dc4-Ga-CTE" secondAttribute="bottom" id="J8L-Qt-Wa3"/>
-                            <constraint firstItem="Dc4-Ga-CTE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="kWo-fP-Y0u"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Dc4-Ga-CTE" secondAttribute="bottom" id="J8L-Qt-Wa3"/>
+                            <constraint firstItem="Dc4-Ga-CTE" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" id="kWo-fP-Y0u"/>
                             <constraint firstItem="KLg-Ds-3RV" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="kp7-kG-AZu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
