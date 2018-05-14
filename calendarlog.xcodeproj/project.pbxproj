@@ -12,6 +12,8 @@
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
 		BD1ABEA920A1C4CA0072417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1ABEA820A1C4CA0072417B /* Assets.xcassets */; };
 		BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */; };
+		BD1FD4DF20A88A0C00BBBB07 /* LoginDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FD4DE20A88A0C00BBBB07 /* LoginDetailViewController.swift */; };
+		BD1FD4E120A88A1400BBBB07 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */; };
 		BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD889B95209F779A005A8043 /* InfoPlist.strings */; };
 		BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */; };
 		BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA020A1A468005A8043 /* Extenstions.swift */; };
@@ -51,6 +53,8 @@
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1ABEA820A1C4CA0072417B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalatte.swift; sourceTree = "<group>"; };
+		BD1FD4DE20A88A0C00BBBB07 /* LoginDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDetailViewController.swift; sourceTree = "<group>"; };
+		BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BD889B98209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD889B99209F77DD005A8043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,6 +112,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD1FD4DD20A889BB00BBBB07 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
+				BDCECB2E20749318000519E0 /* LoginViewController.swift */,
+				BD1FD4DE20A88A0C00BBBB07 /* LoginDetailViewController.swift */,
+				BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		BD889B90209F7766005A8043 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,10 +165,9 @@
 		BDCECB2B20749318000519E0 /* calendarlog */ = {
 			isa = PBXGroup;
 			children = (
+				BD1FD4DD20A889BB00BBBB07 /* ViewControllers */,
 				BD889B9F20A1A438005A8043 /* Utils */,
 				BD889B90209F7766005A8043 /* Strings */,
-				BDCECB2E20749318000519E0 /* LoginViewController.swift */,
-				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
 				BD1ABEA820A1C4CA0072417B /* Assets.xcassets */,
 				BDCECB2C20749318000519E0 /* AppDelegate.swift */,
 				BDCECB3B20749318000519E0 /* Info.plist */,
@@ -504,6 +518,8 @@
 			files = (
 				BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */,
 				BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */,
+				BD1FD4DF20A88A0C00BBBB07 /* LoginDetailViewController.swift in Sources */,
+				BD1FD4E120A88A1400BBBB07 /* RegisterViewController.swift in Sources */,
 				BDCECB2F20749318000519E0 /* LoginViewController.swift in Sources */,
 				BD889BA320A1A4CC005A8043 /* SuperViewController.swift in Sources */,
 				BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */,

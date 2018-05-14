@@ -42,10 +42,12 @@ class LoginViewController: SuperViewController {
         textField.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedStringKey.foregroundColor: ColorPalette.GrayForText])
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        textField.textContentType = UITextContentType.emailAddress
+        textField.autocapitalizationType = UITextAutocapitalizationType.none
         return textField
     }()
     // 로그인 뷰 이메일 텍스트 필드 하단 라인 설정
-    let bottomBorderView: UIView = {
+    let emailBottomBorderView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorPalette.GrayForBottomBorder
         return view
@@ -53,7 +55,7 @@ class LoginViewController: SuperViewController {
     // 로그인 뷰 로그인 혹은 회원가입 버튼 설정
     let loginOrRegisterButton: UIButton = {
         let button = UIButton()
-        button.setTitle("로그인", for: .normal)
+        button.setTitle("로그인 혹은 회원가입", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         button.backgroundColor = ColorPalette.BlueForButton
@@ -65,6 +67,7 @@ class LoginViewController: SuperViewController {
         self.initializeUI()
         self.emailTextField.delegate = self
         self.loginOrRegisterButton.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
+        self.emailTextField.text = "asdf"
     }
     func initializeUI() {
         // 로고 이미지 추가
@@ -89,16 +92,16 @@ class LoginViewController: SuperViewController {
         self.centerView.addSubview(self.emailTextField)
         self.emailTextField.snp.makeConstraints { view in
             view.centerX.equalToSuperview()
-            view.top.equalTo(100)
+            view.top.equalTo(90)
             view.left.equalTo(20)
             view.right.equalTo(-20)
         }
         // 이메일 텍스트 필드 하단 라인 추가
-        self.centerView.addSubview(self.bottomBorderView)
-        self.bottomBorderView.snp.makeConstraints { view in
+        self.centerView.addSubview(self.emailBottomBorderView)
+        self.emailBottomBorderView.snp.makeConstraints { view in
             view.centerX.equalToSuperview()
             view.height.equalTo(1)
-            view.top.equalTo(128.5)
+            view.top.equalTo(118.5)
             view.left.equalTo(20)
             view.right.equalTo(-20)
         }
@@ -124,22 +127,38 @@ class LoginViewController: SuperViewController {
 extension LoginViewController: UITextFieldDelegate {
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
     @objc func buttonPressed() {
-        let alertViewController = UIAlertController(title: "이동", message: "어디로 갈래?", preferredStyle: .alert)
-        let actionLogin = UIAlertAction(title: "로그인으로", style: .default, handler: { _ in
-            //Todo. 로그인 페이지(비밀번호 포함)로 이동
-        })
-        let actionRegister = UIAlertAction(title: "회원가입으로", style: .default, handler: { _ in
-            //Todo. 회원가입페이지로 이동
-        })
-        alertViewController.addAction(actionRegister)
-        alertViewController.addAction(actionLogin)
-        self.present(alertViewController, animated: true, completion: nil)
+        if self.emailTextField.text == "" || self.emailTextField.text == nil {
+            self.presentAlert(title: "이메일을 입력해주세요.", message: "")
+        } else {
+            if let emailValue = self.emailTextField.text {
+                let alertViewController = UIAlertController(title: "이동", message: "어디로 갈래?", preferredStyle: .alert)
+                let actionLogin = UIAlertAction(title: "로그인으로", style: .default, handler: { _ in
+                    let loginDetailViewController = LoginDetailViewController()
+                    loginDetailViewController.emailValue = emailValue
+                    self.present(loginDetailViewController, animated: true, completion: nil)
+                })
+                let actionRegister = UIAlertAction(title: "회원가입으로", style: .default, handler: { _ in
+                    let registerViewController = RegisterViewController()
+                    registerViewController.emailValue = emailValue
+                    self.navigationController?.pushViewController(registerViewController, animated: true)
+                })
+                alertViewController.addAction(actionRegister)
+                alertViewController.addAction(actionLogin)
+                self.present(alertViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    // Return Key 눌렀을시 메소드
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.buttonPressed()
+        // Return Key 버튼으로 다음줄로 가는것 true, false 값 (여기선 다음 텍스트필드로 이동하므로 값이 상관없음)
+        return false
     }
     // 텍스트 필드 선택했을 경우 밑줄 색상 변경
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case self.emailTextField:
-            self.bottomBorderView.backgroundColor = ColorPalette.Primary
+            self.emailBottomBorderView.backgroundColor = ColorPalette.Primary
         default:
             ()
         }
@@ -149,7 +168,7 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case self.emailTextField:
-            self.bottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
+            self.emailBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         default:
             ()
         }

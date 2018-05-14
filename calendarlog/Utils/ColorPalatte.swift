@@ -20,11 +20,11 @@ struct ColorPalette {
     static let BlueForButton = UIColor(rgb: 0x3d96ff)
     static let BlueForText = UIColor(rgb: 0x358fff)
     /***
-     바탕 : f9fcfe
-     조금 더 진한 바탕 : f9fafe (회원가입 관심분야 밑에 배경)
+     바탕 : f9fcfe -> f6f6f6
+     조금 더 진한 바탕 : f9fafe -> f0f0f0 (회원가입 관심분야 밑에 배경)
      */
-    static let Background = UIColor(rgb: 0xf9fcfe)
-    static let BackgroundDark = UIColor(rgb: 0xf9fafe)
+    static let Background = UIColor(rgb: 0xf6f6f6)
+    static let BackgroundDark = UIColor(rgb: 0xf0f0f0)
     /***
      주황색 : ff9b3f
      */
@@ -33,10 +33,12 @@ struct ColorPalette {
      회색글자 : 9b9b9b
      텍스트 필드 하단 라인 : dfdfdf
      기본검은글자 : 4a4a4a
+     오류글자 : e25d6e
      */
     static let GrayForText = UIColor(rgb: 0x9b9b9b)
     static let GrayForBottomBorder = UIColor(rgb: 0xdfdfdf)
     static let BlackForText = UIColor(rgb: 0x4a4a4a)
+    static let RedForText = UIColor(rgb: 0xe25d6e)
 //    struct Gray {
 //        static let Light = UIColor(white: 0.8374, alpha: 1.0)
 //        static let Medium = UIColor(white: 0.4756, alpha: 1.0)

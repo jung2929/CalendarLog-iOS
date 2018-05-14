@@ -31,3 +31,20 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+//Alert 반복적으로 쓰여서 직접 만듬
+extension UIViewController {
+    func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionDone = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(actionDone)
+        self.present(alert, animated: true, completion: nil)
+    }
+    func presentAlertWithAction(title: String, message: String, _ actionCustom: UIAlertAction) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: "취소", style: .default, handler: nil)
+        alert.addAction(actionCancel)
+        alert.addAction(actionCustom)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
