@@ -10,5 +10,29 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "LoginViewController.pressedLoginOrRegisterButton():LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.emailTextField.text?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in RegisterViewController.addCategories():RegisterViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.categoryView.frame.width / 3">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in RegisterViewController.addCategories():RegisterViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "15 + (rowIndex * 20)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

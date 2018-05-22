@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class LoginViewController: SuperViewController {
+    private var isLoginProcess: Bool = false
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(named: "logo.png")
@@ -52,6 +53,30 @@ class LoginViewController: SuperViewController {
         view.backgroundColor = ColorPalette.GrayForBottomBorder
         return view
     }()
+    // 로그인 뷰 비밀번호 텍스트 필드 설정
+    let passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [NSAttributedStringKey.foregroundColor: ColorPalette.GrayForText])
+        textField.textColor = ColorPalette.BlackForText
+        textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        textField.textContentType = UITextContentType.password
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    // 로그인 뷰 비밀번호 텍스트 필드 하단 라인 설정
+    let passwordBottomBorderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ColorPalette.GrayForBottomBorder
+        return view
+    }()
+    // 로그인 뷰 오류 텍스트 필드 설정
+    let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+        label.textColor = ColorPalette.RedForText
+        return label
+    }()
     // 로그인 뷰 로그인 혹은 회원가입 버튼 설정
     let loginOrRegisterButton: UIButton = {
         let button = UIButton()
@@ -66,9 +91,12 @@ class LoginViewController: SuperViewController {
         super.viewDidLoad()
         self.initializeUI()
         self.emailTextField.delegate = self
-        self.loginOrRegisterButton.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
-        self.emailTextField.text = "asdf"
+        self.passwordTextField.delegate = self
+        self.loginOrRegisterButton.addTarget(self, action: #selector(self.pressedLoginOrRegisterButton), for: .touchUpInside)
     }
+}
+
+extension LoginViewController {
     func initializeUI() {
         // 로고 이미지 추가
         self.view.addSubview(self.logoImageView)
@@ -92,7 +120,7 @@ class LoginViewController: SuperViewController {
         self.centerView.addSubview(self.emailTextField)
         self.emailTextField.snp.makeConstraints { view in
             view.centerX.equalToSuperview()
-            view.top.equalTo(90)
+            view.top.equalTo(95)
             view.left.equalTo(20)
             view.right.equalTo(-20)
         }
@@ -100,19 +128,19 @@ class LoginViewController: SuperViewController {
         self.centerView.addSubview(self.emailBottomBorderView)
         self.emailBottomBorderView.snp.makeConstraints { view in
             view.centerX.equalToSuperview()
-            view.height.equalTo(1)
-            view.top.equalTo(118.5)
+            view.top.equalTo(120)
             view.left.equalTo(20)
             view.right.equalTo(-20)
+            view.height.equalTo(1)
         }
         // 로그인 혹은 회원가입 버튼 추가
         self.centerView.addSubview(self.loginOrRegisterButton)
         self.loginOrRegisterButton.snp.makeConstraints { view in
             view.centerX.equalToSuperview()
-            view.size.height.equalTo(50)
-            view.bottom.equalTo(-29)
             view.left.equalTo(20)
             view.right.equalTo(-20)
+            view.bottom.equalTo(-29)
+            view.size.height.equalTo(50)
         }
         // 로그인 뷰 추가
         self.view.addSubview(self.centerView)
@@ -126,31 +154,126 @@ class LoginViewController: SuperViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
-    @objc func buttonPressed() {
-        if self.emailTextField.text == "" || self.emailTextField.text == nil {
-            self.presentAlert(title: "이메일을 입력해주세요.", message: "")
+    @objc func pressedLoginOrRegisterButton() {
+        if self.isLoginProcess {
+            self.errorLabel.text = "비밀번호가 일치하지 않습니다."
+            self.passwordBottomBorderView.backgroundColor = ColorPalette.RedForText
         } else {
-            if let emailValue = self.emailTextField.text {
-                let alertViewController = UIAlertController(title: "이동", message: "어디로 갈래?", preferredStyle: .alert)
-                let actionLogin = UIAlertAction(title: "로그인으로", style: .default, handler: { _ in
-                    let loginDetailViewController = LoginDetailViewController()
-                    loginDetailViewController.emailValue = emailValue
-                    self.present(loginDetailViewController, animated: true, completion: nil)
-                })
-                let actionRegister = UIAlertAction(title: "회원가입으로", style: .default, handler: { _ in
-                    let registerViewController = RegisterViewController()
-                    registerViewController.emailValue = emailValue
-                    self.navigationController?.pushViewController(registerViewController, animated: true)
-                })
-                alertViewController.addAction(actionRegister)
-                alertViewController.addAction(actionLogin)
-                self.present(alertViewController, animated: true, completion: nil)
+            guard let emailValue = self.emailTextField.text else {
+                self.presentAlert(title: "이메일을 입력해주세요.", message: "")
+                return
             }
+            guard emailValue.count > 0 else {
+                self.presentAlert(title: "이메일을 입력해주세요.", message: "")
+                return
+            }
+            let alertViewController = UIAlertController(title: "이동", message: "어디로 갈래?", preferredStyle: .alert)
+            let actionLogin = UIAlertAction(title: "로그인으로", style: .default, handler: { _ in
+                UIView.animate(withDuration: 2.0) {
+                    self.emailTextField.isUserInteractionEnabled = false
+                    self.emailTextField.transform = CGAffineTransform(translationX: 0, y: -45)
+                    self.emailBottomBorderView.transform = CGAffineTransform(translationX: 0, y: -45)
+                    // 비밀번호 텍스트 필드 추가
+                    self.centerView.addSubview(self.passwordTextField)
+                    self.passwordTextField.snp.makeConstraints { view in
+                        view.centerX.equalToSuperview()
+                        view.top.equalTo(100)
+                        view.left.equalTo(20)
+                        view.right.equalTo(-20)
+                    }
+                    self.passwordTextField.layoutIfNeeded()
+                    // 비밀번호 텍스트 필드 하단 라인 추가
+                    self.centerView.addSubview(self.passwordBottomBorderView)
+                    self.passwordBottomBorderView.snp.makeConstraints { view in
+                        view.centerX.equalToSuperview()
+                        view.top.equalTo(125)
+                        view.left.equalTo(20)
+                        view.right.equalTo(-20)
+                        view.height.equalTo(1)
+                    }
+                    self.passwordBottomBorderView.layoutIfNeeded()
+                    // 오류 라벨 추가
+                    self.centerView.addSubview(self.errorLabel)
+                    self.errorLabel.snp.makeConstraints { view in
+                        view.centerX.equalToSuperview()
+                        view.top.equalTo(130)
+                        view.left.equalTo(20)
+                        view.right.equalTo(-20)
+                    }
+                    self.errorLabel.layoutIfNeeded()
+                }
+                self.isLoginProcess = true
+                self.loginOrRegisterButton.setTitle("로그인", for: .normal)
+            })
+            let actionRegister = UIAlertAction(title: "회원가입으로", style: .default, handler: { _ in
+                let registerViewController = RegisterViewController()
+                registerViewController.emailValue = emailValue
+                self.navigationController?.pushViewController(registerViewController, animated: true)
+            })
+            alertViewController.addAction(actionRegister)
+            alertViewController.addAction(actionLogin)
+            self.present(alertViewController, animated: true, completion: nil)
         }
+        //        if self.emailTextField.text == "" || self.emailTextField.text == nil {
+        //            self.presentAlert(title: "이메일을 입력해주세요.", message: "")
+        //        } else {
+        //            if let emailValue = self.emailTextField.text {
+        //                let alertViewController = UIAlertController(title: "이동", message: "어디로 갈래?", preferredStyle: .alert)
+        //                let actionLogin = UIAlertAction(title: "로그인으로", style: .default, handler: { _ in
+        //                    UIView.animate(withDuration: 2.0) {
+        //                        self.emailTextField.isUserInteractionEnabled = false
+        //                        self.emailTextField.transform = CGAffineTransform(translationX: 0, y: -45)
+        //                        self.emailBottomBorderView.transform = CGAffineTransform(translationX: 0, y: -45)
+        //                        // 비밀번호 텍스트 필드 추가
+        //                        self.centerView.addSubview(self.passwordTextField)
+        //                        self.passwordTextField.snp.makeConstraints { view in
+        //                            view.centerX.equalToSuperview()
+        //                            view.top.equalTo(100)
+        //                            view.left.equalTo(20)
+        //                            view.right.equalTo(-20)
+        //                        }
+        //                        self.passwordTextField.layoutIfNeeded()
+        //                        // 비밀번호 텍스트 필드 하단 라인 추가
+        //                        self.centerView.addSubview(self.passwordBottomBorderView)
+        //                        self.passwordBottomBorderView.snp.makeConstraints { view in
+        //                            view.centerX.equalToSuperview()
+        //                            view.top.equalTo(125)
+        //                            view.left.equalTo(20)
+        //                            view.right.equalTo(-20)
+        //                            view.height.equalTo(1)
+        //                        }
+        //                        self.passwordBottomBorderView.layoutIfNeeded()
+        //                    }
+        //                    self.isLoginProcess = true
+        //                    self.loginOrRegisterButton.setTitle("로그인", for: .normal)
+        //                })
+        //                let actionRegister = UIAlertAction(title: "회원가입으로", style: .default, handler: { _ in
+        //                    let registerViewController = RegisterViewController()
+        //                    registerViewController.emailValue = emailValue
+        //                    self.navigationController?.pushViewController(registerViewController, animated: true)
+        //                })
+        //                alertViewController.addAction(actionRegister)
+        //                alertViewController.addAction(actionLogin)
+        //                self.present(alertViewController, animated: true, completion: nil)
+        //            }
+        //        }
+    }
+    // 텍스트 필드 수정할때 길이 제한
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 15
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        if newString.length > maxLength {
+            self.errorLabel.text = "비밀번호는 15자리까지 입력해주세요."
+            self.passwordBottomBorderView.backgroundColor = ColorPalette.RedForText
+            return false
+        }
+        return true
     }
     // Return Key 눌렀을시 메소드
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.buttonPressed()
+        self.pressedLoginOrRegisterButton()
         // Return Key 버튼으로 다음줄로 가는것 true, false 값 (여기선 다음 텍스트필드로 이동하므로 값이 상관없음)
         return false
     }
@@ -159,6 +282,8 @@ extension LoginViewController: UITextFieldDelegate {
         switch textField {
         case self.emailTextField:
             self.emailBottomBorderView.backgroundColor = ColorPalette.Primary
+        case self.passwordTextField:
+            self.passwordBottomBorderView.backgroundColor = ColorPalette.Primary
         default:
             ()
         }
@@ -169,6 +294,8 @@ extension LoginViewController: UITextFieldDelegate {
         switch textField {
         case self.emailTextField:
             self.emailBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
+        case self.passwordTextField:
+            self.passwordBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         default:
             ()
         }

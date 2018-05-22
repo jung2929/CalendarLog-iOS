@@ -21,10 +21,10 @@ struct ColorPalette {
     static let BlueForText = UIColor(rgb: 0x358fff)
     /***
      바탕 : f9fcfe -> f6f6f6
-     조금 더 진한 바탕 : f9fafe -> f0f0f0 (회원가입 관심분야 밑에 배경)
+     조금 더 진한 바탕 : f9fafe (회원가입 관심분야 밑에 배경)
      */
     static let Background = UIColor(rgb: 0xf6f6f6)
-    static let BackgroundDark = UIColor(rgb: 0xf0f0f0)
+    static let BackgroundDark = UIColor(rgb: 0xf9fafe)
     /***
      주황색 : ff9b3f
      */
