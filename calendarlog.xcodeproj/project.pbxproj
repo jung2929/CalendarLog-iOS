@@ -22,6 +22,7 @@
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* CalendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */; };
+		BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0DFE220B4686A0062C72B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		BDCECB4B20749318000519E0 /* calendarlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calendarlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarlogUITests.swift; sourceTree = "<group>"; };
 		BDCECB5120749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDF0DFE220B4686A0062C72B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D129450DD4A1B9C659D1C1AD /* Pods-calendarlogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
 				BDCECB2E20749318000519E0 /* LoginViewController.swift */,
 				BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */,
+				BDF0DFE220B4686A0062C72B /* MainViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				BD889BA320A1A4CC005A8043 /* SuperViewController.swift in Sources */,
 				BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */,
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
+				BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
