@@ -23,7 +23,6 @@
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* CalendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */; };
 		BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0DFE220B4686A0062C72B /* MainViewController.swift */; };
-		BDF0E08220B55B960062C72B /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0E08120B55B960062C72B /* ScrollableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +71,6 @@
 		BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarlogUITests.swift; sourceTree = "<group>"; };
 		BDCECB5120749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDF0DFE220B4686A0062C72B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		BDF0E08120B55B960062C72B /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		D129450DD4A1B9C659D1C1AD /* Pods-calendarlogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +119,6 @@
 				BDCECB2E20749318000519E0 /* LoginViewController.swift */,
 				BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */,
 				BDF0DFE220B4686A0062C72B /* MainViewController.swift */,
-				BDF0E08120B55B960062C72B /* ScrollableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -224,7 +221,7 @@
 				BDCECB2720749318000519E0 /* Resources */,
 				012B23F01B0F894D5DF44597 /* [CP] Embed Pods Frameworks */,
 				5AE425EBF3DCFD17BDA2B57D /* [CP] Copy Pods Resources */,
-				BD889B9E20A15BD7005A8043 /* ShellScript */,
+				BD5E330C20B5DB4300B637FD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -359,12 +356,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-calendarlog/Pods-calendarlog-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityIndicator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,7 +493,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BD889B9E20A15BD7005A8043 /* ShellScript */ = {
+		BD5E330C20B5DB4300B637FD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -527,7 +534,6 @@
 				BDCECB2F20749318000519E0 /* LoginViewController.swift in Sources */,
 				BD889BA320A1A4CC005A8043 /* SuperViewController.swift in Sources */,
 				BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */,
-				BDF0E08220B55B960062C72B /* ScrollableViewController.swift in Sources */,
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
 				BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */,
 			);

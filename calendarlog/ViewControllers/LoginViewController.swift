@@ -164,7 +164,6 @@ extension LoginViewController: UITextFieldDelegate {
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
     @objc func pressedLoginOrRegisterButton() {
         UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainViewController())
-//        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ScrollableViewController())
         self.navigationController?.popToRootViewController(animated: true)
         return
         // 오류 문구 초기화

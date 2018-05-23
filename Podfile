@@ -8,6 +8,10 @@ target 'calendarlog' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftLint'
   pod 'FSCalendar'
+  pod 'Alamofire', '~> 4.7'
+  pod 'AlamofireImage', '~> 3.3'
+  pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
+  pod 'AlamofireObjectMapper', '~> 5.0'
 
   target 'calendarlogTests' do
     inherit! :search_paths
