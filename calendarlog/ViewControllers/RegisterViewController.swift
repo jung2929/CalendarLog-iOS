@@ -162,7 +162,11 @@ class RegisterViewController: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeUI()
+        //내비게이션바 설정
         self.title = "회원가입"
+        let imageBack = UIImage(named: "ic_back.png")
+        self.navigationController?.navigationBar.backIndicatorImage = imageBack
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
         // 전달받은 이메일 값 설정
         self.emailTextField.text = self.emailValue
         self.passwordTextField.delegate = self
@@ -205,9 +209,10 @@ extension RegisterViewController {
             view.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             view.left.equalTo(self.view).offset(offsetLeftValue)
             view.right.equalTo(self.view).offset(offsetRightValue)
-            view.size.height.equalTo(500)
+//            view.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
+//            view.size.height.equalTo(500)
         }
-        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: 500)
+//        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: 500)
         // 이메일 텍스트 필드 추가
         self.centerView.addSubview(self.emailTextField)
         self.emailTextField.snp.makeConstraints { view in
@@ -332,6 +337,7 @@ extension RegisterViewController {
             view.top.equalTo(self.assignedBottomBorderView).offset(offsetTopValue)
             view.left.equalTo(self.centerView).offset(offsetLeftValue)
             view.right.equalTo(self.centerView).offset(offsetRightValue)
+            view.bottom.equalTo(self.centerView).offset(-20)
             view.size.height.equalTo(50)
         }
     }

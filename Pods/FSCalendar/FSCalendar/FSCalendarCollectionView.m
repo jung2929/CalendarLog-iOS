@@ -45,11 +45,6 @@
     self.scrollsToTop = NO;
     self.contentInset = UIEdgeInsetsZero;
     
-#ifdef __IPHONE_9_0
-    if ([self respondsToSelector:@selector(setSemanticContentAttribute:)]) {
-        self.semanticContentAttribute = UISemanticContentAttributeForceLeftToRight;
-    }
-#endif
     
 #ifdef __IPHONE_10_0
     SEL selector = NSSelectorFromString(@"setPrefetchingEnabled:");

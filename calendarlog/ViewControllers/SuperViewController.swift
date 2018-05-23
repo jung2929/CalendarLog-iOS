@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SuperViewController: UIViewController {
     override func viewDidLoad() {
@@ -20,10 +21,7 @@ class SuperViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         // 내비게이션바 테두리 지우기
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        // MARK: NavigationBar 좌측상단 뒤로가기 이미지 설정
-        let imageBack = UIImage(named: "ic_back.png")
-        self.navigationController?.navigationBar.backIndicatorImage = imageBack
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
+        // MARK: 내비게이션바 Tint 색상 설정
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationController?.navigationBar.tintColor = .white
         // MARK: Navigation backbarbuttonitem 에 title 을 없애주기 위한 작업

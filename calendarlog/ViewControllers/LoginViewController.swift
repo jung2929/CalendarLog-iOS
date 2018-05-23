@@ -7,19 +7,20 @@
 //
 
 import UIKit
-import SnapKit
 
 class LoginViewController: SuperViewController {
     private var isLoginProcess: Bool = false
+    // 로고 설정
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "logo.png")
+        let image = UIImage(named: "logo_login.png")
         imageView.image = image
         return imageView
     }()
+    // 타이틀 설정
     let titleImageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "title.png")
+        let image = UIImage(named: "title_login.png")
         imageView.image = image
         return imageView
     }()
@@ -162,6 +163,10 @@ extension LoginViewController {
 extension LoginViewController: UITextFieldDelegate {
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
     @objc func pressedLoginOrRegisterButton() {
+        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainViewController())
+//        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: ScrollableViewController())
+        self.navigationController?.popToRootViewController(animated: true)
+        return
         // 오류 문구 초기화
         self.errorLabel.text = ""
         self.emailBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
@@ -169,7 +174,7 @@ extension LoginViewController: UITextFieldDelegate {
         if self.isLoginProcess {
 //            self.errorLabel.text = "비밀번호가 일치하지 않습니다."
 //            self.passwordBottomBorderView.backgroundColor = ColorPalette.RedForText
-            UIApplication.shared.keyWindow?.rootViewController = MainViewController()
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainViewController())
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             guard let emailValue = self.emailTextField.text else {
