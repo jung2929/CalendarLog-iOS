@@ -199,7 +199,7 @@ extension RegisterViewController {
             view.right.equalTo(self.view.safeAreaLayoutGuide.snp.rightMargin)
             view.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)
         }
-        // 좌,우 간격
+        // 상, 좌, 우 간격
         let offsetLeftValue = 20
         let offsetRightValue = -20
         let offsetTopValue = 25
