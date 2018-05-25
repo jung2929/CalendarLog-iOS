@@ -15,7 +15,7 @@ class LoginRemoteDataManager: LoginRemoteDataManagerInputProtocol {
     func retrieveEmail(_ email: String) {
         let parameters: Parameters = ["email": email]
         Alamofire
-            .request("\(API.baseUrl)login", method: .get, parameters: parameters)
+            .request("\(API.baseUrl)login", method: .get, parameters: parameters, encoding: JSONEncoding.default)
             .validate()
             .responseObject(completionHandler: { (response: DataResponse<DefaultResponse>) in
                 switch response.result {

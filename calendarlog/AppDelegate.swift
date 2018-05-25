@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // Alamofire 시도 중 Indicator 띄워주기 위한 옵션 설정
+        // StatusBar에 Alamofire 시도 중 Indicator 띄워주기 위한 옵션 설정
         NetworkActivityIndicatorManager.shared.isEnabled = true
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())

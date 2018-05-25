@@ -25,6 +25,7 @@
 		BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA020A1A468005A8043 /* Extenstions.swift */; };
 		BD889BA320A1A4CC005A8043 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA220A1A4CC005A8043 /* SuperViewController.swift */; };
 		BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557220B8645D00AE5460 /* DefaultResponse.swift */; };
+		BD98557720B875EF00AE5460 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557620B875EF00AE5460 /* API.swift */; };
 		BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2C20749318000519E0 /* AppDelegate.swift */; };
 		BDCECB2F20749318000519E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2E20749318000519E0 /* LoginViewController.swift */; };
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
@@ -75,6 +76,7 @@
 		BD889BA020A1A468005A8043 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		BD889BA220A1A4CC005A8043 /* SuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
 		BD98557220B8645D00AE5460 /* DefaultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResponse.swift; sourceTree = "<group>"; };
+		BD98557620B875EF00AE5460 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BDCECB2920749318000519E0 /* calendarlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendarlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB2C20749318000519E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCECB2E20749318000519E0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				BD889BA020A1A468005A8043 /* Extenstions.swift */,
 				BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */,
+				BD98557620B875EF00AE5460 /* API.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -492,6 +496,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,6 +668,7 @@
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
 				BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */,
 				BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */,
+				BD98557720B875EF00AE5460 /* API.swift in Sources */,
 				BD5E332B20B6758800B637FD /* LoginLocalDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
