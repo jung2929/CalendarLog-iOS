@@ -6,25 +6,37 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+protocol LoginWireFrameProtocol: class {
+    static func createLoginModule() -> LoginView
+    // PRESENTER -> WIREFRAME
+    //func presentPostDetailScreen(from view: LoginViewProtocol, forPost post: PostModel)
+}
+
 protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
     //func showPosts(with posts: [PostModel])
     
-    func showError()
+    func pressedLoginOrRegisterButton()
+    
+    func addSubviewPassword()
+    
+    func moveToRegister()
+    
+    func pressedLoginButton()
+    
+    func moveToMain()
+    
+    func showErrorForEmail(with errorMessage: String)
+    
+    func showErrorForPassword(with errorMessage: String)
     
     func showLoading()
     
     func hideLoading()
     
     func initializeUI()
-}
-
-protocol LoginWireFrameProtocol: class {
-    static func createLoginModule() -> LoginView
-    // PRESENTER -> WIREFRAME
-    //func presentPostDetailScreen(from view: LoginViewProtocol, forPost post: PostModel)
 }
 
 protocol LoginPresenterProtocol: class {
@@ -34,13 +46,8 @@ protocol LoginPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    //func showPostDetail(forPost post: PostModel)
-}
-
-protocol LoginInteractorOutputProtocol: class {
-    // INTERACTOR -> PRESENTER
-    //func didRetrievePosts(_ posts: [PostModel])
-    func onError()
+    func pressedLoginOrRegisterButton(_ email: String)
+    func pressedLoginButton(_ email: String, _ password: String)
 }
 
 protocol LoginInteractorInputProtocol: class {
@@ -49,28 +56,42 @@ protocol LoginInteractorInputProtocol: class {
     var remoteDatamanager: LoginRemoteDataManagerInputProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
-    //func retrievePostList()
+    func retrieveEmail(_ email: String)
+    
+    func tryLogin(_ email: String, _ password: String)
 }
 
-protocol LoginDataManagerInputProtocol: class {
-    // INTERACTOR -> DATAMANAGER
+protocol LoginInteractorOutputProtocol: class {
+    // INTERACTOR -> PRESENTER
+    func didRetrieveEmail()
+    func didNotRetrieveEmail()
+    func didTryLogin()
+    func onError()
 }
 
 protocol LoginRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: LoginRemoteDataManagerOutputProtocol? { get set }
 
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrievePostList()
+    func retrieveEmail(_ email: String)
+    
+    func tryLogin(_ email: String, _ password: String)
 }
 
 protocol LoginRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    //func onPostsRetrieved(_ posts: [PostModel])
+    func onLoginEmailRetrieved()
+    func onLoginEmailNotRetrieved()
+    func onLoginSuccess()
     func onError()
+}
+
+protocol LoginDataManagerInputProtocol: class {
+    // INTERACTOR -> DATAMANAGER
 }
 
 protocol LoginLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
     //func retrievePostList() throws -> [Post]
-    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
+    //func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }

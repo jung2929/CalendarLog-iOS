@@ -14,18 +14,33 @@ class LoginPresenter: LoginPresenterProtocol {
     func viewDidLoad() {
         view?.initializeUI()
     }
+    
+    func pressedLoginOrRegisterButton(_ email: String) {
+        interactor?.retrieveEmail(email)
+    }
+    
+    func pressedLoginButton(_ email: String, _ password: String) {
+        interactor?.tryLogin(email, password)
+    }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
+    func didRetrieveEmail() {
+        view?.addSubviewPassword()
+    }
     
-//    func didRetrievePosts(_ posts: [PostModel]) {
-//        view?.hideLoading()
-//        view?.showPosts(with: posts)
-//    }
+    func didNotRetrieveEmail() {
+        view?.moveToRegister()
+    }
+    
+    func didTryLogin() {
+        view?.moveToMain()
+    }
     
     func onError() {
         view?.hideLoading()
-        view?.showError()
+        view?.showErrorForEmail(with: "email")
+        view?.showErrorForPassword(with: "password")
     }
     
 }

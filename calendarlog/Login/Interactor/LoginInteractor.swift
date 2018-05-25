@@ -11,41 +11,27 @@ class LoginInteractor: LoginInteractorInputProtocol {
     var localDatamanager: LoginLocalDataManagerInputProtocol?
     var remoteDatamanager: LoginRemoteDataManagerInputProtocol?
     
-//    func retrievePostList() {
-//        do {
-//            if let postList = try localDatamanager?.retrievePostList() {
-//                let postModelList = postList.map() {
-//                    return PostModel(id: Int($0.id), title: $0.title!, imageUrl: $0.imageUrl!, thumbImageUrl: $0.thumbImageUrl!)
-//                }
-//                if  postModelList.isEmpty {
-//                    remoteDatamanager?.retrievePostList()
-//                }else{
-//                    presenter?.didRetrievePosts(postModelList)
-//                }
-//            } else {
-//                remoteDatamanager?.retrievePostList()
-//            }
-//
-//        } catch {
-//            presenter?.didRetrievePosts([])
-//        }
-//    }
+    func retrieveEmail(_ email: String) {
+        remoteDatamanager?.retrieveEmail(email)
+    }
     
+    func tryLogin(_ email: String, _ password: String) {
+        remoteDatamanager?.tryLogin(email, password)
+    }
 }
 
 extension LoginInteractor: LoginRemoteDataManagerOutputProtocol {
+    func onLoginEmailRetrieved() {
+        presenter?.didRetrieveEmail()
+    }
     
-//    func onPostsRetrieved(_ posts: [PostModel]) {
-//        presenter?.didRetrievePosts(posts)
-//
-//        for postModel in posts {
-//            do {
-//                try localDatamanager?.savePost(id: postModel.id, title: postModel.title, imageUrl: postModel.imageUrl, thumbImageUrl: postModel.thumbImageUrl)
-//            } catch  {
-//
-//            }
-//        }
-//    }
+    func onLoginEmailNotRetrieved() {
+        presenter?.didNotRetrieveEmail()
+    }
+    
+    func onLoginSuccess() {
+        presenter?.didTryLogin()
+    }
     
     func onError() {
         presenter?.onError()
