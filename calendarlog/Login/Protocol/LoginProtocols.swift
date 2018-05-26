@@ -16,7 +16,6 @@ protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-    //func showPosts(with posts: [PostModel])
     
     func pressedLoginOrRegisterButton()
     
@@ -28,9 +27,9 @@ protocol LoginViewProtocol: class {
     
     func moveToMain()
     
-    func showErrorForEmail(with errorMessage: String)
+    func showErrorForEmail(with message: String)
     
-    func showErrorForPassword(with errorMessage: String)
+    func showErrorForPassword(with message: String)
     
     func showLoading()
     
@@ -66,7 +65,7 @@ protocol LoginInteractorOutputProtocol: class {
     func didRetrieveEmail()
     func didNotRetrieveEmail()
     func didTryLogin()
-    func onError()
+    func onError(with message: String)
 }
 
 protocol LoginRemoteDataManagerInputProtocol: class {
@@ -83,7 +82,7 @@ protocol LoginRemoteDataManagerOutputProtocol: class {
     func onLoginEmailRetrieved()
     func onLoginEmailNotRetrieved()
     func onLoginSuccess()
-    func onError()
+    func onError(with message: String)
 }
 
 protocol LoginDataManagerInputProtocol: class {

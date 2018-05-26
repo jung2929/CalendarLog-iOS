@@ -33,8 +33,8 @@ extension LoginInteractor: LoginRemoteDataManagerOutputProtocol {
         presenter?.didTryLogin()
     }
     
-    func onError() {
-        presenter?.onError()
+    func onError(with message: String) {
+        presenter?.onError(with: message)
     }
     
 }

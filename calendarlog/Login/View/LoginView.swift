@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class LoginView: SuperViewController {
     var presenter: LoginPresenterProtocol?
@@ -221,11 +222,13 @@ extension LoginView: LoginViewProtocol {
     }
     
     func showLoading() {
-        //
+        // Indicator 배경 없애기
+        HUD.dimsBackground = false
+        HUD.show(.progress)
     }
     
     func hideLoading() {
-        //
+        HUD.hide()
     }
     
     func initializeUI() {

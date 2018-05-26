@@ -37,10 +37,9 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
         view?.moveToMain()
     }
     
-    func onError() {
+    func onError(with message: String) {
         view?.hideLoading()
-        view?.showErrorForEmail(with: "email")
-        view?.showErrorForPassword(with: "password")
+        view?.showErrorForPassword(with: message)
     }
     
 }
