@@ -38,7 +38,6 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
     }
     
     func onError(with message: String) {
-        view?.hideLoading()
         view?.showErrorForPassword(with: message)
     }
     

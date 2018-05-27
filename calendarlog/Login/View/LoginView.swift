@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class LoginView: SuperViewController {
     var presenter: LoginPresenterProtocol?
@@ -150,6 +149,12 @@ extension LoginView: LoginViewProtocol {
             self.showErrorForEmail(with: "이메일을 입력해주세요.")
             return
         }
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        if !emailTest.evaluate(with: email) {
+            self.showErrorForEmail(with: "이메일을 정확하게 입력해주세요.")
+            return
+        }
         self.presenter?.pressedLoginOrRegisterButton(email)
     }
     
@@ -219,16 +224,6 @@ extension LoginView: LoginViewProtocol {
     func showErrorForPassword(with message: String) {
         self.errorLabel.text = message
         self.passwordBottomBorderView.backgroundColor = ColorPalette.RedForText
-    }
-    
-    func showLoading() {
-        // Indicator 배경 없애기
-        HUD.dimsBackground = false
-        HUD.show(.progress)
-    }
-    
-    func hideLoading() {
-        HUD.hide()
     }
     
     func initializeUI() {

@@ -31,10 +31,6 @@ protocol LoginViewProtocol: class {
     
     func showErrorForPassword(with message: String)
     
-    func showLoading()
-    
-    func hideLoading()
-    
     func initializeUI()
 }
 
