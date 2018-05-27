@@ -19,6 +19,8 @@
 		BD3D054220BADA1F00F8284B /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D054120BADA1F00F8284B /* RegisterPresenter.swift */; };
 		BD3D054420BADA2A00F8284B /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D054320BADA2A00F8284B /* RegisterInteractor.swift */; };
 		BD3D054620BADA3B00F8284B /* RegisterRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D054520BADA3B00F8284B /* RegisterRemoteDataManager.swift */; };
+		BD3D054920BB215000F8284B /* MainWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D054820BB215000F8284B /* MainWireframe.swift */; };
+		BD3D054C20BB217D00F8284B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D054B20BB217D00F8284B /* MainView.swift */; };
 		BD5E331F20B5E49C00B637FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E331E20B5E49C00B637FD /* LoginView.swift */; };
 		BD5E332120B5E67900B637FD /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332020B5E67900B637FD /* LoginProtocols.swift */; };
 		BD5E332320B5EA7A00B637FD /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332220B5EA7A00B637FD /* LoginPresenter.swift */; };
@@ -74,6 +76,8 @@
 		BD3D054120BADA1F00F8284B /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
 		BD3D054320BADA2A00F8284B /* RegisterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
 		BD3D054520BADA3B00F8284B /* RegisterRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRemoteDataManager.swift; sourceTree = "<group>"; };
+		BD3D054820BB215000F8284B /* MainWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWireframe.swift; sourceTree = "<group>"; };
+		BD3D054B20BB217D00F8284B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BD5E331E20B5E49C00B637FD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD5E332020B5E67900B637FD /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		BD5E332220B5EA7A00B637FD /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
@@ -198,9 +202,27 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
+		BD3D054720BB214500F8284B /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				BD3D054820BB215000F8284B /* MainWireframe.swift */,
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
+		BD3D054A20BB217600F8284B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BD3D054B20BB217D00F8284B /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BD5E331520B5E08100B637FD /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				BD3D054A20BB217600F8284B /* View */,
+				BD3D054720BB214500F8284B /* Wireframe */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -716,6 +738,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD3D054920BB215000F8284B /* MainWireframe.swift in Sources */,
+				BD3D054C20BB217D00F8284B /* MainView.swift in Sources */,
 				BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */,
 				BD5E332120B5E67900B637FD /* LoginProtocols.swift in Sources */,
 				BD3D054620BADA3B00F8284B /* RegisterRemoteDataManager.swift in Sources */,

@@ -6,4 +6,7 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-import Foundation
+class RegisterRemoteDataManager: RegisterRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: RegisterRemoteDataManagerOutputProtocol?
+    
+}

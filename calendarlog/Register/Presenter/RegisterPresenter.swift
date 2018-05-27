@@ -6,4 +6,16 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-import Foundation
+class RegisterPresenter: RegisterPresenterProtocol {
+    var view: RegisterViewProtocol?
+    var interactor: RegisterInteractorInputProtocol?
+    var wireFrame: RegisterWireFrameProtocol?
+    
+    func viewDidLoad() {
+        view?.initializeUI()
+    }
+}
+
+extension RegisterPresenter: RegisterInteractorOutputProtocol {
+
+}

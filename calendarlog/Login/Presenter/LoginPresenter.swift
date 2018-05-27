@@ -29,12 +29,12 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
         view?.addSubviewPassword()
     }
     
-    func didNotRetrieveEmail() {
-        view?.moveToRegister()
+    func didNotRetrieveEmail(_ email: String) {
+        wireFrame?.presentRegister(from: view!, with: email)
     }
     
     func didTryLogin() {
-        view?.moveToMain()
+        wireFrame?.presentMain(from: view!)
     }
     
     func onError(with message: String) {

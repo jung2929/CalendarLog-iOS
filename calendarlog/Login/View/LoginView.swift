@@ -19,6 +19,7 @@ class LoginView: SuperViewController {
         self.presenter?.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
+        self.emailTextField.text = "dngus@dngus.com"
     }
     
     // 로그인 뷰 설정
@@ -187,12 +188,6 @@ extension LoginView: LoginViewProtocol {
         self.loginOrRegisterButton.addTarget(self, action: #selector(pressedLoginButton), for: .touchUpInside)
     }
     
-    func moveToRegister() {
-        let registerViewController = RegisterViewController()
-        registerViewController.emailValue = self.emailTextField.text!
-        self.navigationController?.pushViewController(registerViewController, animated: true)
-    }
-    
     @objc func pressedLoginButton() {
         // 오류 문구 초기화
         self.errorLabel.text = ""
@@ -209,11 +204,6 @@ extension LoginView: LoginViewProtocol {
         }
         
         self.presenter?.pressedLoginButton(self.emailTextField.text!, password)
-    }
-    
-    func moveToMain() {
-        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainViewController())
-        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func showErrorForEmail(with message: String) {
@@ -242,6 +232,14 @@ extension LoginView: LoginViewProtocol {
         titleImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(logoImageView.snp.bottom)
+        }
+        // 로그인 뷰 추가
+        self.view.addSubview(self.centerView)
+        self.centerView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(offsetLeftValue)
+            make.right.equalToSuperview().offset(offsetRightValue)
+            make.size.height.equalTo(252)
         }
         // 로그인 라벨 추가
         self.centerView.addSubview(self.loginLabel)
@@ -278,14 +276,6 @@ extension LoginView: LoginViewProtocol {
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
             make.bottom.equalTo(self.loginOrRegisterButton.snp.top).offset(-20)
-        }
-        // 로그인 뷰 추가
-        self.view.addSubview(self.centerView)
-        self.centerView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(offsetLeftValue)
-            make.right.equalToSuperview().offset(offsetRightValue)
-            make.size.height.equalTo(252)
         }
     }
 }

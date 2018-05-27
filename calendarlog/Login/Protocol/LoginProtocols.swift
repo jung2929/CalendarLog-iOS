@@ -9,7 +9,8 @@
 protocol LoginWireFrameProtocol: class {
     static func createLoginModule() -> LoginView
     // PRESENTER -> WIREFRAME
-    //func presentPostDetailScreen(from view: LoginViewProtocol, forPost post: PostModel)
+    func presentRegister(from view: LoginViewProtocol, with email: String)
+    func presentMain(from view: LoginViewProtocol)
 }
 
 protocol LoginViewProtocol: class {
@@ -21,11 +22,7 @@ protocol LoginViewProtocol: class {
     
     func addSubviewPassword()
     
-    func moveToRegister()
-    
     func pressedLoginButton()
-    
-    func moveToMain()
     
     func showErrorForEmail(with message: String)
     
@@ -59,7 +56,7 @@ protocol LoginInteractorInputProtocol: class {
 protocol LoginInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveEmail()
-    func didNotRetrieveEmail()
+    func didNotRetrieveEmail(_ email: String)
     func didTryLogin()
     func onError(with message: String)
 }
@@ -76,7 +73,7 @@ protocol LoginRemoteDataManagerInputProtocol: class {
 protocol LoginRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onLoginEmailRetrieved()
-    func onLoginEmailNotRetrieved()
+    func onLoginEmailNotRetrieved(_ email: String)
     func onLoginSuccess()
     func onError(with message: String)
 }

@@ -6,4 +6,12 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-import Foundation
+class RegisterInteractor: RegisterInteractorInputProtocol {
+    weak var presenter: RegisterInteractorOutputProtocol?
+    var remoteDatamanager: RegisterRemoteDataManagerInputProtocol?
+    
+}
+
+extension RegisterInteractor: RegisterRemoteDataManagerOutputProtocol {
+    
+}

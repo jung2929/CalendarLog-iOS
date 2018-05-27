@@ -28,4 +28,19 @@ class LoginWireFrame: LoginWireFrameProtocol {
         
         return view
     }
+    
+    func presentRegister(from view: LoginViewProtocol, with email: String) {
+        if let sourceView = view as? UIViewController {
+            let registerViewController = RegisterWireFrame.createRegisterModule()
+            registerViewController.emailValue = email
+            sourceView.navigationController?.pushViewController(registerViewController, animated: true)
+        }
+    }
+    
+    func presentMain(from view: LoginViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainWireframe.createMainModule())
+            sourceView.navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }

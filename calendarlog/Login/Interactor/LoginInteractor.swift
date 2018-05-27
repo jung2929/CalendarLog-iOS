@@ -25,8 +25,8 @@ extension LoginInteractor: LoginRemoteDataManagerOutputProtocol {
         presenter?.didRetrieveEmail()
     }
     
-    func onLoginEmailNotRetrieved() {
-        presenter?.didNotRetrieveEmail()
+    func onLoginEmailNotRetrieved(_ email: String) {
+        presenter?.didNotRetrieveEmail(email)
     }
     
     func onLoginSuccess() {
