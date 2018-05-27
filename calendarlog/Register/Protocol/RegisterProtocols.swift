@@ -18,6 +18,7 @@ protocol RegisterViewProtocol: class {
     // PRESENTER -> VIEW
     
     func initializeUI()
+    func addCategories()
 }
 
 protocol RegisterPresenterProtocol: class {
@@ -27,6 +28,7 @@ protocol RegisterPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    func viewDidAppear()
 }
 
 protocol RegisterInteractorInputProtocol: class {

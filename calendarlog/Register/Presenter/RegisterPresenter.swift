@@ -14,6 +14,10 @@ class RegisterPresenter: RegisterPresenterProtocol {
     func viewDidLoad() {
         view?.initializeUI()
     }
+    
+    func viewDidAppear() {
+        view?.addCategories()
+    }
 }
 
 extension RegisterPresenter: RegisterInteractorOutputProtocol {

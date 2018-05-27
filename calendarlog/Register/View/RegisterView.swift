@@ -28,6 +28,10 @@ class RegisterView: SuperViewController {
         self.maleButton.addTarget(self, action: #selector(self.pressedSexButton), for: .touchUpInside)
         self.femailButton.addTarget(self, action: #selector(self.pressedSexButton), for: .touchUpInside)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.presenter?.viewDidAppear()
+    }
     // 메인 스크롤 뷰 설정
     let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -155,22 +159,23 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton1: UIButton = {
         let button = UIButton()
-        button.setTitle("자바", for: .normal)
-        button.setTitleColor(ColorPalette.BlackForText, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
-        button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
-        button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        //button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-        button.contentHorizontalAlignment = .left
-        return button
-    }()
-    let categoryButton2: UIButton = {
-        let button = UIButton()
         button.setTitle("자바스크립트", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        button.contentHorizontalAlignment = .left
+        return button
+    }()
+    let categoryButton2: UIButton = {
+        let button = UIButton()
+        button.setTitle("자바", for: .normal)
+        button.setTitleColor(ColorPalette.BlackForText, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+        button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
+        button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         return button
     }()
@@ -181,6 +186,7 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         return button
     }()
@@ -191,6 +197,7 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         return button
     }()
@@ -201,6 +208,7 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         return button
     }()
@@ -211,6 +219,7 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         return button
     }()
@@ -255,6 +264,46 @@ extension RegisterView: RegisterViewProtocol {
     }
     @objc func pressedCategoryButton(_ sender: UIButton) {
         sender.isSelected = true
+    }
+    func addCategories() {
+        let viewWidthSize = self.categoryView.bounds.width
+        let buttonWidthSize = viewWidthSize / 3
+        self.categoryView.addSubview(self.categoryButton1)
+        self.categoryButton1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(10)
+            make.width.equalTo(buttonWidthSize)
+        }
+        self.categoryView.addSubview(self.categoryButton2)
+        self.categoryButton2.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalTo(self.categoryButton1.snp.right)
+            make.width.equalTo(buttonWidthSize - 10)
+        }
+        self.categoryView.addSubview(self.categoryButton3)
+        self.categoryButton3.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalTo(self.categoryButton2.snp.right)
+            make.width.equalTo(buttonWidthSize)
+        }
+        self.categoryView.addSubview(self.categoryButton4)
+        self.categoryButton4.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.equalTo(buttonWidthSize)
+        }
+        self.categoryView.addSubview(self.categoryButton5)
+        self.categoryButton5.snp.makeConstraints { make in
+            make.left.equalTo(self.categoryButton4.snp.right)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.equalTo(buttonWidthSize - 10)
+        }
+        self.categoryView.addSubview(self.categoryButton6)
+        self.categoryButton6.snp.makeConstraints { make in
+            make.left.equalTo(self.categoryButton5.snp.right)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.equalTo(buttonWidthSize)
+        }
     }
     func initializeUI() {
         // 메인 스크롤 뷰 추가
@@ -375,39 +424,6 @@ extension RegisterView: RegisterViewProtocol {
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
             make.size.height.equalTo(100)
-        }
-        // 관심분야들 추가
-        self.categoryView.addSubview(self.categoryButton1)
-        self.categoryButton1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.left.equalToSuperview().offset(15)
-        }
-        self.categoryButton1.sizeToFit()
-        self.categoryView.addSubview(self.categoryButton2)
-        self.categoryButton2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.left.equalTo(self.categoryButton1.snp.right).offset(15)
-        }
-        self.categoryView.addSubview(self.categoryButton3)
-        self.categoryButton3.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.left.equalTo(self.categoryButton2.snp.right).offset(15)
-        }
-        self.categoryView.addSubview(self.categoryButton4)
-        self.categoryButton4.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(15)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        self.categoryButton1.sizeToFit()
-        self.categoryView.addSubview(self.categoryButton5)
-        self.categoryButton5.snp.makeConstraints { make in
-            make.left.equalTo(self.categoryButton4.snp.right).offset(15)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        self.categoryView.addSubview(self.categoryButton6)
-        self.categoryButton6.snp.makeConstraints { make in
-            make.left.equalTo(self.categoryButton5.snp.right).offset(15)
-            make.bottom.equalToSuperview().offset(-20)
         }
         // 단체/기관 텍스트 필드 추가
         self.centerView.addSubview(self.assignedTextField)
