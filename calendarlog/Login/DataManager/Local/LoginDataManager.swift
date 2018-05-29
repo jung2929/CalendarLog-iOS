@@ -6,7 +6,7 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-class LoginLocalDataManager: LoginLocalDataManagerInputProtocol {
+class LoginDataManager: LoginLocalDataManagerInputProtocol {
     func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws {
         //
     }

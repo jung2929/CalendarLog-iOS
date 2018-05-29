@@ -26,7 +26,7 @@ class LoginRemoteDataManager: LoginRemoteDataManagerInputProtocol {
                         self.remoteRequestHandler?.onLoginEmailNotRetrieved(email)
                     }
                 case .failure:
-                    self.remoteRequestHandler?.onError(with: "이메일 확인에 실패하였습니다.")
+                    self.remoteRequestHandler?.onErrorForEmail(with: "이메일 확인에 실패하였습니다.")
                 }
             })
     }
@@ -42,10 +42,10 @@ class LoginRemoteDataManager: LoginRemoteDataManagerInputProtocol {
                     if defaultResponse.isSuccess {
                         self.remoteRequestHandler?.onLoginSuccess()
                     } else {
-                        self.remoteRequestHandler?.onError(with: defaultResponse.message)
+                        self.remoteRequestHandler?.onErrorForPassword(with: defaultResponse.message)
                     }
                 case .failure:
-                    self.remoteRequestHandler?.onError(with: "로그인에 실패하였습니다.")
+                    self.remoteRequestHandler?.onErrorForPassword(with: "로그인에 실패하였습니다.")
                 }
             })
     }

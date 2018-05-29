@@ -13,7 +13,7 @@ class LoginWireFrame: LoginWireFrameProtocol {
         let view = LoginView()
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol & LoginRemoteDataManagerOutputProtocol = LoginInteractor()
-        let localDataManager: LoginLocalDataManagerInputProtocol = LoginLocalDataManager()
+        let localDataManager: LoginLocalDataManagerInputProtocol = LoginDataManager()
         let remoteDataManager: LoginRemoteDataManagerInputProtocol = LoginRemoteDataManager()
         let wireFrame: LoginWireFrameProtocol = LoginWireFrame()
         

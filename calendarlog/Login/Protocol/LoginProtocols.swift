@@ -8,8 +8,10 @@
 
 protocol LoginWireFrameProtocol: class {
     static func createLoginModule() -> LoginView
+    
     // PRESENTER -> WIREFRAME
     func presentRegister(from view: LoginViewProtocol, with email: String)
+    
     func presentMain(from view: LoginViewProtocol)
 }
 
@@ -17,7 +19,6 @@ protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-    
     func pressedLoginOrRegisterButton()
     
     func addSubviewPassword()
@@ -38,7 +39,9 @@ protocol LoginPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
     func pressedLoginOrRegisterButton(_ email: String)
+    
     func pressedLoginButton(_ email: String, _ password: String)
 }
 
@@ -50,15 +53,20 @@ protocol LoginInteractorInputProtocol: class {
     // PRESENTER -> INTERACTOR
     func retrieveEmail(_ email: String)
     
-    func tryLogin(_ email: String, _ password: String)
+    func validateLogin(_ email: String, _ password: String)
 }
 
 protocol LoginInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveEmail()
+    
     func didNotRetrieveEmail(_ email: String)
+    
     func didTryLogin()
-    func onError(with message: String)
+    
+    func onErrorForEmail(with message: String)
+    
+    func onErrorForPassword(with message: String)
 }
 
 protocol LoginRemoteDataManagerInputProtocol: class {
@@ -73,9 +81,14 @@ protocol LoginRemoteDataManagerInputProtocol: class {
 protocol LoginRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onLoginEmailRetrieved()
+    
     func onLoginEmailNotRetrieved(_ email: String)
+    
     func onLoginSuccess()
-    func onError(with message: String)
+    
+    func onErrorForEmail(with message: String)
+    
+    func onErrorForPassword(with message: String)
 }
 
 protocol LoginDataManagerInputProtocol: class {

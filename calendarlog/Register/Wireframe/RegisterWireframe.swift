@@ -26,4 +26,11 @@ class RegisterWireFrame: RegisterWireFrameProtocol {
         
         return view
     }
+    
+    func presentMain(from view: RegisterViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: MainWireframe.createMainModule())
+            sourceView.navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }

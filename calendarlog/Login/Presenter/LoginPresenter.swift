@@ -12,33 +12,37 @@ class LoginPresenter: LoginPresenterProtocol {
     var wireFrame: LoginWireFrameProtocol?
     
     func viewDidLoad() {
-        view?.initializeUI()
+        self.view?.initializeUI()
     }
     
     func pressedLoginOrRegisterButton(_ email: String) {
-        interactor?.retrieveEmail(email)
+        self.interactor?.retrieveEmail(email)
     }
     
     func pressedLoginButton(_ email: String, _ password: String) {
-        interactor?.tryLogin(email, password)
+        self.interactor?.validateLogin(email, password)
     }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
     func didRetrieveEmail() {
-        view?.addSubviewPassword()
+        self.view?.addSubviewPassword()
     }
     
     func didNotRetrieveEmail(_ email: String) {
-        wireFrame?.presentRegister(from: view!, with: email)
+        self.wireFrame?.presentRegister(from: view!, with: email)
     }
     
     func didTryLogin() {
-        wireFrame?.presentMain(from: view!)
+        self.wireFrame?.presentMain(from: view!)
     }
     
-    func onError(with message: String) {
-        view?.showErrorForPassword(with: message)
+    func onErrorForEmail(with message: String) {
+        self.view?.showErrorForEmail(with: message)
+    }
+    
+    func onErrorForPassword(with message: String) {
+        self.view?.showErrorForPassword(with: message)
     }
     
 }

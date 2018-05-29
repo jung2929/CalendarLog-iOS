@@ -12,7 +12,6 @@ target 'calendarlog' do
   pod 'AlamofireImage', '~> 3.3'
   pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
   pod 'AlamofireObjectMapper', '~> 5.0'
-  pod 'PKHUD', '~> 5.0'
 
   target 'calendarlogTests' do
     inherit! :search_paths

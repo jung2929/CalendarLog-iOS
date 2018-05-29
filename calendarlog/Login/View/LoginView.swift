@@ -142,21 +142,7 @@ extension LoginView: LoginViewProtocol {
         self.errorLabel.text = ""
         self.emailBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         self.passwordBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
-        guard let email = self.emailTextField.text else {
-            self.showErrorForEmail(with: "이메일을 입력해주세요.")
-            return
-        }
-        guard email.count > 0 else {
-            self.showErrorForEmail(with: "이메일을 입력해주세요.")
-            return
-        }
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        if !emailTest.evaluate(with: email) {
-            self.showErrorForEmail(with: "이메일을 정확하게 입력해주세요.")
-            return
-        }
-        self.presenter?.pressedLoginOrRegisterButton(email)
+        self.presenter?.pressedLoginOrRegisterButton(self.emailTextField.text!)
     }
     
     func addSubviewPassword() {
@@ -193,17 +179,7 @@ extension LoginView: LoginViewProtocol {
         self.errorLabel.text = ""
         self.emailBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         self.passwordBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
-        
-        guard let password = self.passwordTextField.text else {
-            self.showErrorForPassword(with: "비밀번호를 입력해주세요.")
-            return
-        }
-        guard password.count > 0 else {
-            self.showErrorForPassword(with: "비밀번호를 입력해주세요.")
-            return
-        }
-        
-        self.presenter?.pressedLoginButton(self.emailTextField.text!, password)
+        self.presenter?.pressedLoginButton(self.emailTextField.text!, self.passwordTextField.text!)
     }
     
     func showErrorForEmail(with message: String) {

@@ -11,6 +11,7 @@ import UIKit
 class RegisterView: SuperViewController {
     var presenter: RegisterPresenterProtocol?
     var emailValue = ""
+    var categoryTuples: [(Int, Int)] = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +26,22 @@ class RegisterView: SuperViewController {
         self.passwordTextField.delegate = self
         self.passwordConfirmTextField.delegate = self
         self.nicknameTextField.delegate = self
+        self.associateTextField.delegate = self
         self.maleButton.addTarget(self, action: #selector(self.pressedSexButton), for: .touchUpInside)
         self.femailButton.addTarget(self, action: #selector(self.pressedSexButton), for: .touchUpInside)
+        self.categoryButton0.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.categoryButton1.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.categoryButton2.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.categoryButton3.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.categoryButton4.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.categoryButton5.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
+        self.registerButton.addTarget(self, action: #selector(self.pressedRegisterButton), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.presenter?.viewDidAppear()
     }
+    
     // 메인 스크롤 뷰 설정
     let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -67,6 +77,7 @@ class RegisterView: SuperViewController {
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         textField.textContentType = UITextContentType.password
         textField.isSecureTextEntry = true
+        textField.tag = 1000
         return textField
     }()
     // 비밀번호 텍스트 필드 하단 라인 설정
@@ -83,6 +94,7 @@ class RegisterView: SuperViewController {
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         textField.textContentType = UITextContentType.password
         textField.isSecureTextEntry = true
+        textField.tag = 1001
         return textField
     }()
     // 비밀번호 확인 텍스트 필드 하단 라인 설정
@@ -97,6 +109,7 @@ class RegisterView: SuperViewController {
         textField.attributedPlaceholder = NSAttributedString(string: "닉네임", attributes: [NSAttributedStringKey.foregroundColor: ColorPalette.GrayForText])
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        textField.tag = 1002
         return textField
     }()
     // 닉네임 텍스트 필드 하단 라인 설정
@@ -122,6 +135,7 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_radio_default"), for: .normal)
         button.setImage(UIImage(named: "ic_radio_selected"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        button.isSelected = true
         return button
     }()
     // 여자 버튼 설정
@@ -157,7 +171,7 @@ class RegisterView: SuperViewController {
         view.backgroundColor = ColorPalette.BackgroundDark
         return view
     }()
-    let categoryButton1: UIButton = {
+    let categoryButton0: UIButton = {
         let button = UIButton()
         button.setTitle("자바스크립트", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -166,9 +180,10 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 0
         return button
     }()
-    let categoryButton2: UIButton = {
+    let categoryButton1: UIButton = {
         let button = UIButton()
         button.setTitle("자바", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -177,9 +192,10 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 1
         return button
     }()
-    let categoryButton3: UIButton = {
+    let categoryButton2: UIButton = {
         let button = UIButton()
         button.setTitle("코틀린", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -188,9 +204,10 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 2
         return button
     }()
-    let categoryButton4: UIButton = {
+    let categoryButton3: UIButton = {
         let button = UIButton()
         button.setTitle("스칼라", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -199,9 +216,10 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 3
         return button
     }()
-    let categoryButton5: UIButton = {
+    let categoryButton4: UIButton = {
         let button = UIButton()
         button.setTitle("파이썬", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -210,9 +228,10 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 4
         return button
     }()
-    let categoryButton6: UIButton = {
+    let categoryButton5: UIButton = {
         let button = UIButton()
         button.setTitle("스위프트", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
@@ -221,18 +240,20 @@ class RegisterView: SuperViewController {
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
+        button.tag = 5
         return button
     }()
     // 단체/기관 텍스트 필드 설정
-    let assignedTextField: UITextField = {
+    let associateTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "단체 / 기관", attributes: [NSAttributedStringKey.foregroundColor: ColorPalette.GrayForText])
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        textField.tag = 1003
         return textField
     }()
     // 단체/기관 텍스트 필드 하단 라인 설정
-    let assignedBottomBorderView: UIView = {
+    let associateBottomBorderView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorPalette.GrayForBottomBorder
         return view
@@ -250,57 +271,57 @@ class RegisterView: SuperViewController {
 }
 
 extension RegisterView: RegisterViewProtocol {
-    @objc func pressedSexButton(_ sender: UIButton) {
-        switch sender {
-        case self.maleButton:
-            self.maleButton.isSelected = true
-            self.femailButton.isSelected = false
-        case self.femailButton:
-            self.maleButton.isSelected = false
-            self.femailButton.isSelected = true
-        default:
-            ()
-        }
+    func showError(with message: String) {
+        self.presentAlert(title: "오류", message: message)
     }
-    @objc func pressedCategoryButton(_ sender: UIButton) {
-        sender.isSelected = true
+    
+    // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
+    @objc func pressedRegisterButton() {
+        self.presenter?.pressedRegisterButton(self.emailValue,
+                                              self.passwordTextField.text!,
+                                              self.passwordConfirmTextField.text!,
+                                              self.nicknameTextField.text!,
+                                              self.maleButton.isSelected ? "M" : "F",
+                                              self.categoryTuples,
+                                              self.associateTextField.text!)
     }
+    
     func addCategories() {
         let viewWidthSize = self.categoryView.bounds.width
         let buttonWidthSize = viewWidthSize / 3
+        self.categoryView.addSubview(self.categoryButton0)
+        self.categoryButton0.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(10)
+            make.width.equalTo(buttonWidthSize + 5)
+        }
         self.categoryView.addSubview(self.categoryButton1)
         self.categoryButton1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.left.equalToSuperview().offset(10)
-            make.width.equalTo(buttonWidthSize)
+            make.left.equalTo(self.categoryButton0.snp.right)
+            make.width.equalTo(buttonWidthSize - 15)
         }
         self.categoryView.addSubview(self.categoryButton2)
         self.categoryButton2.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalTo(self.categoryButton1.snp.right)
-            make.width.equalTo(buttonWidthSize - 10)
+            make.width.equalTo(buttonWidthSize)
         }
         self.categoryView.addSubview(self.categoryButton3)
         self.categoryButton3.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.left.equalTo(self.categoryButton2.snp.right)
-            make.width.equalTo(buttonWidthSize)
+            make.left.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.equalTo(buttonWidthSize + 5)
         }
         self.categoryView.addSubview(self.categoryButton4)
         self.categoryButton4.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
+            make.left.equalTo(self.categoryButton3.snp.right)
             make.bottom.equalToSuperview().offset(-20)
-            make.width.equalTo(buttonWidthSize)
+            make.width.equalTo(buttonWidthSize - 15)
         }
         self.categoryView.addSubview(self.categoryButton5)
         self.categoryButton5.snp.makeConstraints { make in
             make.left.equalTo(self.categoryButton4.snp.right)
-            make.bottom.equalToSuperview().offset(-20)
-            make.width.equalTo(buttonWidthSize - 10)
-        }
-        self.categoryView.addSubview(self.categoryButton6)
-        self.categoryButton6.snp.makeConstraints { make in
-            make.left.equalTo(self.categoryButton5.snp.right)
             make.bottom.equalToSuperview().offset(-20)
             make.width.equalTo(buttonWidthSize)
         }
@@ -426,16 +447,16 @@ extension RegisterView: RegisterViewProtocol {
             make.size.height.equalTo(100)
         }
         // 단체/기관 텍스트 필드 추가
-        self.centerView.addSubview(self.assignedTextField)
-        self.assignedTextField.snp.makeConstraints { make in
+        self.centerView.addSubview(self.associateTextField)
+        self.associateTextField.snp.makeConstraints { make in
             make.top.equalTo(self.categoryView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // 단체/기관 텍스트 필드 하단 라인 추가
-        self.centerView.addSubview(self.assignedBottomBorderView)
-        self.assignedBottomBorderView.snp.makeConstraints { make in
-            make.top.equalTo(self.assignedTextField.snp.bottom).offset(4)
+        self.centerView.addSubview(self.associateBottomBorderView)
+        self.associateBottomBorderView.snp.makeConstraints { make in
+            make.top.equalTo(self.associateTextField.snp.bottom).offset(4)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
             make.size.height.equalTo(1)
@@ -443,7 +464,7 @@ extension RegisterView: RegisterViewProtocol {
         // 가입하기 버튼 추가
         self.centerView.addSubview(self.registerButton)
         self.registerButton.snp.makeConstraints { make in
-            make.top.equalTo(self.assignedBottomBorderView.snp.bottom).offset(20)
+            make.top.equalTo(self.associateBottomBorderView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
             make.bottom.equalToSuperview().offset(-20)
@@ -453,28 +474,74 @@ extension RegisterView: RegisterViewProtocol {
 }
 
 extension RegisterView: UITextFieldDelegate {
-    // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
-    @objc func pressedRegisterButton() {
+    @objc func pressedSexButton(_ sender: UIButton) {
+        switch sender {
+        case self.maleButton:
+            self.maleButton.isSelected = true
+            self.femailButton.isSelected = false
+        case self.femailButton:
+            self.maleButton.isSelected = false
+            self.femailButton.isSelected = true
+        default:
+            ()
+        }
+    }
+    
+    @objc func pressedCategoryButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.categoryTuples[sender.tag].1 = 0
+        } else {
+            sender.isSelected = true
+            self.categoryTuples[sender.tag].1 = 1
+        }
     }
     // Return Key 눌렀을시 메소드
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.pressedRegisterButton()
-        // Return Key 버튼으로 다음줄로 가는것 true, false 값 (여기선 다음 텍스트필드로 이동하므로 값이 상관없음)
+        // 태그 값 다음 찾을시 이동
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // 태그 값 다음 못찾을시 키보드 없애기
+            textField.resignFirstResponder()
+            self.pressedRegisterButton()
+        }
+        // Return Key 버튼으로 다음줄로 가는것 true, false 값
         return false
     }
+    
     // 텍스트 필드 수정할때 길이 제한
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let maxLength = 15
         let currentString: NSString = textField.text! as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
-        if newString.length > maxLength {
-            //            self.errorLabel.text = "비밀번호는 15자리까지 입력해주세요."
-            self.passwordBottomBorderView.backgroundColor = ColorPalette.RedForText
-            return false
+        switch textField {
+        case self.passwordTextField:
+            if newString.length > 15 {
+                self.showError(with: "비밀번호는 15자리까지 입력해주세요.")
+                return false
+            }
+        case self.passwordConfirmTextField:
+            if newString.length > 15 {
+                self.showError(with: "비밀번호 획인은 15자리까지 입력해주세요.")
+                return false
+            }
+        case self.nicknameTextField:
+            if newString.length > 15 {
+                self.showError(with: "닉네임은 15자리까지 입력해주세요.")
+                return false
+            }
+        case self.associateTextField:
+            if newString.length > 20 {
+                self.showError(with: "단체 / 기관은 20자리까지 입력해주세요.")
+                return false
+            }
+        default:
+            ()
         }
         return true
     }
+    
     // 텍스트 필드 선택했을 경우 밑줄 색상 변경
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
@@ -484,13 +551,14 @@ extension RegisterView: UITextFieldDelegate {
             self.passwordConfirmBottomBorderView.backgroundColor = ColorPalette.Primary
         case self.nicknameTextField:
             self.nicknameBottomBorderView.backgroundColor = ColorPalette.Primary
-        case self.assignedTextField:
-            self.assignedBottomBorderView.backgroundColor = ColorPalette.Primary
+        case self.associateTextField:
+            self.associateBottomBorderView.backgroundColor = ColorPalette.Primary
         default:
             ()
         }
         return
     }
+    
     // 텍스트 필드 빠져나갔을 경우 밑줄 색상 변경
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
@@ -500,8 +568,8 @@ extension RegisterView: UITextFieldDelegate {
             self.passwordConfirmBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         case self.nicknameTextField:
             self.nicknameBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
-        case self.assignedTextField:
-            self.assignedBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
+        case self.associateTextField:
+            self.associateBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         default:
             ()
         }

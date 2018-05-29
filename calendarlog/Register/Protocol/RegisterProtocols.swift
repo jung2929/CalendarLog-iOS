@@ -8,8 +8,9 @@
 
 protocol RegisterWireFrameProtocol: class {
     static func createRegisterModule() -> RegisterView
+    
     // PRESENTER -> WIREFRAME
-    //func presentPostDetailScreen(from view: LoginViewProtocol, forPost post: PostModel)
+    func presentMain(from view: RegisterViewProtocol)
 }
 
 protocol RegisterViewProtocol: class {
@@ -18,7 +19,10 @@ protocol RegisterViewProtocol: class {
     // PRESENTER -> VIEW
     
     func initializeUI()
+    
     func addCategories()
+    
+    func showError(with message: String)
 }
 
 protocol RegisterPresenterProtocol: class {
@@ -28,7 +32,10 @@ protocol RegisterPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
     func viewDidAppear()
+    
+    func pressedRegisterButton(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String)
 }
 
 protocol RegisterInteractorInputProtocol: class {
@@ -36,18 +43,26 @@ protocol RegisterInteractorInputProtocol: class {
     var remoteDatamanager: RegisterRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func validateRegister(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String)
 }
 
 protocol RegisterInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
+    func didTryRegister()
+    
+    func onError(with message: String)
 }
 
 protocol RegisterRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: RegisterRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func tryRegister(with userInfo: UserInfo)
 }
 
 protocol RegisterRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
+    func onRegisterSuccess()
+    
+    func onError(with message: String)
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 struct DefaultResponse {
