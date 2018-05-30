@@ -23,7 +23,11 @@ class LoginRemoteDataManager: LoginRemoteDataManagerInputProtocol {
                     if defaultResponse.isSuccess {
                         self.remoteRequestHandler?.onLoginEmailRetrieved()
                     } else {
-                        self.remoteRequestHandler?.onLoginEmailNotRetrieved(email)
+                        if defaultResponse.message.count > 0 {
+                            self.remoteRequestHandler?.onErrorForEmail(with: defaultResponse.message)
+                        } else {
+                            self.remoteRequestHandler?.onLoginEmailNotRetrieved(email)
+                        }
                     }
                 case .failure:
                     self.remoteRequestHandler?.onErrorForEmail(with: "이메일 확인에 실패하였습니다.")

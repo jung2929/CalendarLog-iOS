@@ -6,7 +6,7 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-protocol LoginWireFrameProtocol: class {
+protocol LoginWireframeProtocol: class {
     static func createLoginModule() -> LoginView
     
     // PRESENTER -> WIREFRAME
@@ -35,7 +35,7 @@ protocol LoginViewProtocol: class {
 protocol LoginPresenterProtocol: class {
     var view: LoginViewProtocol? { get set }
     var interactor: LoginInteractorInputProtocol? { get set }
-    var wireFrame: LoginWireFrameProtocol? { get set }
+    var wireFrame: LoginWireframeProtocol? { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad()

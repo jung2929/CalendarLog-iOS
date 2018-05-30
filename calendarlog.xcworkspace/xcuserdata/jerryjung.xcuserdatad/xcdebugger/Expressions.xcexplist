@@ -14,10 +14,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
+         contextName = "MainViewController.initializeUI():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.mainView.bounds.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.mainView.frame.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -26,6 +29,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.emailTextField.text?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.viewDidLoad():MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.mainView.bounds.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -57,6 +68,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "MainView.initializeUI():MainView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in LoginViewController.initializeUI():LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -65,13 +79,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainViewController.initializeUI():MainViewController.swift">
+         contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.mainView.bounds.width">
-            </PersistentString>
-            <PersistentString
-               value = "self.mainView.frame.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

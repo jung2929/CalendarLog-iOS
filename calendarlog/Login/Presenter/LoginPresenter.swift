@@ -9,7 +9,7 @@
 class LoginPresenter: LoginPresenterProtocol {
     var view: LoginViewProtocol?
     var interactor: LoginInteractorInputProtocol?
-    var wireFrame: LoginWireFrameProtocol?
+    var wireFrame: LoginWireframeProtocol?
     
     func viewDidLoad() {
         self.view?.initializeUI()

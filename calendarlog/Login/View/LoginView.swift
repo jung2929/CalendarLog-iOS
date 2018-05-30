@@ -19,7 +19,9 @@ class LoginView: SuperViewController {
         self.presenter?.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
-        self.emailTextField.text = "dngus@dngus.com"
+        self.emailTextField.text = "jerryjung2929@gmail.com"
+        self.passwordTextField.text = "dngus24"
+        self.pressedLoginButton()
     }
     
     // 로그인 뷰 설정
@@ -107,8 +109,15 @@ extension LoginView: UITextFieldDelegate {
     }
     // Return Key 눌렀을시 메소드
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.pressedLoginOrRegisterButton()
-        // Return Key 버튼으로 다음줄로 가는것 true, false 값 (여기선 다음 텍스트필드로 이동하므로 값이 상관없음)
+        switch textField {
+        case self.emailTextField:
+            self.pressedLoginOrRegisterButton()
+        case self.passwordTextField:
+            self.pressedLoginButton()
+        default:
+            ()
+        }
+        // Return Key 버튼으로 다음줄로 가는것 true, false 값
         return false
     }
     // 텍스트 필드 선택했을 경우 밑줄 색상 변경

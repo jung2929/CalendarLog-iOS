@@ -9,7 +9,7 @@
 class RegisterPresenter: RegisterPresenterProtocol {
     var view: RegisterViewProtocol?
     var interactor: RegisterInteractorInputProtocol?
-    var wireFrame: RegisterWireFrameProtocol?
+    var wireFrame: RegisterWireframeProtocol?
     
     func viewDidLoad() {
         self.view?.initializeUI()

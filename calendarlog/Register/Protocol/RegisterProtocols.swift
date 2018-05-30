@@ -6,7 +6,7 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-protocol RegisterWireFrameProtocol: class {
+protocol RegisterWireframeProtocol: class {
     static func createRegisterModule() -> RegisterView
     
     // PRESENTER -> WIREFRAME
@@ -17,7 +17,6 @@ protocol RegisterViewProtocol: class {
     var presenter: RegisterPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-    
     func initializeUI()
     
     func addCategories()
@@ -28,7 +27,7 @@ protocol RegisterViewProtocol: class {
 protocol RegisterPresenterProtocol: class {
     var view: RegisterViewProtocol? { get set }
     var interactor: RegisterInteractorInputProtocol? { get set }
-    var wireFrame: RegisterWireFrameProtocol? { get set }
+    var wireFrame: RegisterWireframeProtocol? { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad()

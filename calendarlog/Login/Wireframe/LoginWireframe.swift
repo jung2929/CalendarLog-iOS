@@ -8,14 +8,14 @@
 
 import UIKit
 
-class LoginWireFrame: LoginWireFrameProtocol {
+class LoginWireframe: LoginWireframeProtocol {
     class func createLoginModule() -> LoginView {
         let view = LoginView()
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol & LoginRemoteDataManagerOutputProtocol = LoginInteractor()
         let localDataManager: LoginLocalDataManagerInputProtocol = LoginDataManager()
         let remoteDataManager: LoginRemoteDataManagerInputProtocol = LoginRemoteDataManager()
-        let wireFrame: LoginWireFrameProtocol = LoginWireFrame()
+        let wireFrame: LoginWireframeProtocol = LoginWireframe()
         
         view.presenter = presenter
         presenter.view = view
@@ -31,7 +31,7 @@ class LoginWireFrame: LoginWireFrameProtocol {
     
     func presentRegister(from view: LoginViewProtocol, with email: String) {
         if let sourceView = view as? UIViewController {
-            let registerViewController = RegisterWireFrame.createRegisterModule()
+            let registerViewController = RegisterWireframe.createRegisterModule()
             registerViewController.emailValue = email
             sourceView.navigationController?.pushViewController(registerViewController, animated: true)
         }

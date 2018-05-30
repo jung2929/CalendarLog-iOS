@@ -6,17 +6,18 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-class MainWireframe {
+class MainWireframe: MainWireFrameProtocol {
     class func createMainModule() -> MainView {
         let view = MainView()
-//        let presenter: RegisterPresenterProtocol & RegisterInteractorOutputProtocol = RegisterPresenter()
+        //let presenter: MainPresenterProtocol & MainInteractorOutputProtocol = MainPresenter()
+        let presenter: MainPresenterProtocol = MainPresenter()
 //        let interactor: RegisterInteractorInputProtocol & RegisterRemoteDataManagerOutputProtocol = RegisterInteractor()
 //        let remoteDataManager: RegisterRemoteDataManagerInputProtocol = RegisterRemoteDataManager()
-//        let wireFrame: RegisterWireFrameProtocol = RegisterWireFrame()
+        let wireFrame: MainWireFrameProtocol = MainWireframe()
 //
-//        view.presenter = presenter
-//        presenter.view = view
-//        presenter.wireFrame = wireFrame
+        view.presenter = presenter
+        presenter.view = view
+        presenter.wireFrame = wireFrame
 //        presenter.interactor = interactor
 //        interactor.presenter = presenter
 //        interactor.remoteDatamanager = remoteDataManager

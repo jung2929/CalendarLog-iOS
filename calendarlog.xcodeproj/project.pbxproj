@@ -12,7 +12,6 @@
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
 		BD1ABEA920A1C4CA0072417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1ABEA820A1C4CA0072417B /* Assets.xcassets */; };
 		BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */; };
-		BD1FD4E120A88A1400BBBB07 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */; };
 		BD3D053C20BAD9EC00F8284B /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D053B20BAD9EC00F8284B /* RegisterView.swift */; };
 		BD3D053E20BADA0500F8284B /* RegisterWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D053D20BADA0500F8284B /* RegisterWireframe.swift */; };
 		BD3D054020BADA1100F8284B /* RegisterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D053F20BADA1100F8284B /* RegisterProtocols.swift */; };
@@ -28,6 +27,8 @@
 		BD5E332720B673EF00B637FD /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332620B673EF00B637FD /* LoginInteractor.swift */; };
 		BD5E332B20B6758800B637FD /* LoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332A20B6758800B637FD /* LoginDataManager.swift */; };
 		BD5E332D20B6759400B637FD /* LoginRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332C20B6759400B637FD /* LoginRemoteDataManager.swift */; };
+		BD65362720BEE97200E5C63B /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65362620BEE97200E5C63B /* MainProtocols.swift */; };
+		BD65362920BEE9D700E5C63B /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65362820BEE9D700E5C63B /* MainPresenter.swift */; };
 		BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD889B95209F779A005A8043 /* InfoPlist.strings */; };
 		BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */; };
 		BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA020A1A468005A8043 /* Extenstions.swift */; };
@@ -39,7 +40,6 @@
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* CalendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */; };
-		BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0DFE220B4686A0062C72B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +70,6 @@
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1ABEA820A1C4CA0072417B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalatte.swift; sourceTree = "<group>"; };
-		BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BD3D053B20BAD9EC00F8284B /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		BD3D053D20BADA0500F8284B /* RegisterWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWireframe.swift; sourceTree = "<group>"; };
 		BD3D053F20BADA1100F8284B /* RegisterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterProtocols.swift; sourceTree = "<group>"; };
@@ -86,6 +85,8 @@
 		BD5E332620B673EF00B637FD /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		BD5E332A20B6758800B637FD /* LoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataManager.swift; sourceTree = "<group>"; };
 		BD5E332C20B6759400B637FD /* LoginRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemoteDataManager.swift; sourceTree = "<group>"; };
+		BD65362620BEE97200E5C63B /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
+		BD65362820BEE9D700E5C63B /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		BD889B98209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD889B99209F77DD005A8043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		BDCECB4B20749318000519E0 /* calendarlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calendarlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarlogUITests.swift; sourceTree = "<group>"; };
 		BDCECB5120749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BDF0DFE220B4686A0062C72B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D129450DD4A1B9C659D1C1AD /* Pods-calendarlogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,16 +144,6 @@
 				10AF1425BACEC05F6F0733E5 /* Pods_calendarlogUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BD1FD4DD20A889BB00BBBB07 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
-				BD1FD4E020A88A1400BBBB07 /* RegisterViewController.swift */,
-				BDF0DFE220B4686A0062C72B /* MainViewController.swift */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		BD3D053520BAD48100F8284B /* Wireframe */ = {
@@ -225,6 +215,10 @@
 			children = (
 				BD3D054720BB214500F8284B /* Wireframe */,
 				BD3D054A20BB217600F8284B /* View */,
+				BD65362520BEDCC700E5C63B /* Presenter */,
+				BD65362420BEDCC000E5C63B /* Interactor */,
+				BD65362320BEDCAE00E5C63B /* DataManager */,
+				BD65362220BEDCAC00E5C63B /* Protocol */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -320,12 +314,34 @@
 			path = Local;
 			sourceTree = "<group>";
 		};
-		BD889B90209F7766005A8043 /* Strings */ = {
+		BD65362220BEDCAC00E5C63B /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				BD889B95209F779A005A8043 /* InfoPlist.strings */,
+				BD65362620BEE97200E5C63B /* MainProtocols.swift */,
 			);
-			path = Strings;
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		BD65362320BEDCAE00E5C63B /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		BD65362420BEDCC000E5C63B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		BD65362520BEDCC700E5C63B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BD65362820BEE9D700E5C63B /* MainPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		BD889B9F20A1A438005A8043 /* Utils */ = {
@@ -377,11 +393,11 @@
 				BD5E331720B5E08400B637FD /* Login */,
 				BD5E331620B5E08200B637FD /* Register */,
 				BD5E331520B5E08100B637FD /* Main */,
-				BD1FD4DD20A889BB00BBBB07 /* ViewControllers */,
-				BD889B90209F7766005A8043 /* Strings */,
+				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
 				BD1ABEA820A1C4CA0072417B /* Assets.xcassets */,
 				BDCECB2C20749318000519E0 /* AppDelegate.swift */,
 				BDCECB3B20749318000519E0 /* Info.plist */,
+				BD889B95209F779A005A8043 /* InfoPlist.strings */,
 				BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */,
 				BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */,
 			);
@@ -747,7 +763,6 @@
 				BD3D054620BADA3B00F8284B /* RegisterRemoteDataManager.swift in Sources */,
 				BD5E332520B5EE8600B637FD /* LoginWireframe.swift in Sources */,
 				BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */,
-				BD1FD4E120A88A1400BBBB07 /* RegisterViewController.swift in Sources */,
 				BD5E332320B5EA7A00B637FD /* LoginPresenter.swift in Sources */,
 				BD5E331F20B5E49C00B637FD /* LoginView.swift in Sources */,
 				BD3D053E20BADA0500F8284B /* RegisterWireframe.swift in Sources */,
@@ -758,10 +773,11 @@
 				BD5E332720B673EF00B637FD /* LoginInteractor.swift in Sources */,
 				BD5E332D20B6759400B637FD /* LoginRemoteDataManager.swift in Sources */,
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
+				BD65362720BEE97200E5C63B /* MainProtocols.swift in Sources */,
+				BD65362920BEE9D700E5C63B /* MainPresenter.swift in Sources */,
 				BD3D054420BADA2A00F8284B /* RegisterInteractor.swift in Sources */,
 				BD3D054220BADA1F00F8284B /* RegisterPresenter.swift in Sources */,
 				BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */,
-				BDF0DFE320B4686A0062C72B /* MainViewController.swift in Sources */,
 				BD98557720B875EF00AE5460 /* API.swift in Sources */,
 				BD5E332B20B6758800B637FD /* LoginDataManager.swift in Sources */,
 			);
