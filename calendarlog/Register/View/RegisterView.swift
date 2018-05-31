@@ -38,10 +38,6 @@ class RegisterView: SuperViewController {
         self.registerButton.addTarget(self, action: #selector(self.pressedRegisterButton), for: .touchUpInside)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.presenter?.viewDidAppear()
-    }
-    
     // 메인 스크롤 뷰 설정
     let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -134,7 +130,6 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_radio_default"), for: .normal)
         button.setImage(UIImage(named: "ic_radio_selected"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.isSelected = true
         return button
     }()
@@ -146,7 +141,6 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_radio_default"), for: .normal)
         button.setImage(UIImage(named: "ic_radio_selected"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         return button
     }()
     // 관심분야 라벨 설정
@@ -178,7 +172,6 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 0
         return button
@@ -190,7 +183,6 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 1
         return button
@@ -202,19 +194,17 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 2
         return button
     }()
     let categoryButton3: UIButton = {
         let button = UIButton()
-        button.setTitle("스칼라", for: .normal)
+        button.setTitle("스위프트", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 3
         return button
@@ -226,19 +216,17 @@ class RegisterView: SuperViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 4
         return button
     }()
     let categoryButton5: UIButton = {
         let button = UIButton()
-        button.setTitle("스위프트", for: .normal)
+        button.setTitle("스칼라", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
         button.setImage(UIImage(named: "ic_checkbox_checked"), for: .selected)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         button.tag = 5
         return button
@@ -287,7 +275,7 @@ extension RegisterView: RegisterViewProtocol {
     }
     
     func addCategories() {
-        let viewWidthSize = self.categoryView.bounds.width
+        let viewWidthSize = self.view.bounds.width - 60
         let buttonWidthSize = viewWidthSize / 3
         self.categoryView.addSubview(self.categoryButton0)
         self.categoryButton0.snp.makeConstraints { make in
@@ -446,6 +434,7 @@ extension RegisterView: RegisterViewProtocol {
             make.right.equalToSuperview().offset(offsetRightValue)
             make.size.height.equalTo(100)
         }
+        self.addCategories()
         // 단체/기관 텍스트 필드 추가
         self.centerView.addSubview(self.associateTextField)
         self.associateTextField.snp.makeConstraints { make in

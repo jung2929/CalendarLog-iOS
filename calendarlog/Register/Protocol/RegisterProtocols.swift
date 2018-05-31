@@ -32,8 +32,6 @@ protocol RegisterPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     
-    func viewDidAppear()
-    
     func pressedRegisterButton(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String)
 }
 

@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // StatusBar에 Alamofire 시도 중 Indicator 띄워주기 위한 옵션 설정
         NetworkActivityIndicatorManager.shared.isEnabled = true
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        //self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-        //self.window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
-        let loginViewController = LoginWireframe.createLoginModule()
-        self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        //let loginViewController = LoginWireframe.createLoginModule()
+        //self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        let mainViewController = MainWireframe.createMainModule()
+        self.window?.rootViewController = UINavigationController(rootViewController: mainViewController)
         self.window?.makeKeyAndVisible()
         return true
     }

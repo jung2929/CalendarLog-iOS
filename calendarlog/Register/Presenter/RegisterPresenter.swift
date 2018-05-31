@@ -15,10 +15,6 @@ class RegisterPresenter: RegisterPresenterProtocol {
         self.view?.initializeUI()
     }
     
-    func viewDidAppear() {
-        self.view?.addCategories()
-    }
-    
     func pressedRegisterButton(_ email: String, _ password: String, _ passwordConfirmation: String,
                                _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String) {
         self.interactor?.validateRegister(email, password, passwordConfirmation, nickname, sex, categoryTuples, associate)

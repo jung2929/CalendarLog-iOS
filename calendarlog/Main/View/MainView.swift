@@ -15,6 +15,12 @@ class MainView: SuperViewController {
     // 캘린더 설정
     fileprivate var fsCalendar: FSCalendar!
     
+    // 피드 설정
+    let mainTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -33,6 +39,10 @@ class MainView: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+        self.fsCalendar.delegate = self
+        self.fsCalendar.dataSource = self
+        self.mainTableView.delegate = self
+        self.mainTableView.dataSource = self
         //내비게이션바 설정
         let titleImageView = UIImageView(image: UIImage(named: "title_navigation.png"))
         self.navigationItem.titleView = titleImageView
@@ -58,7 +68,7 @@ extension MainView: MainViewProtocol {
     
     func initializeUI() {
         let calendarSize = self.view.bounds.width - 40
-        let calendar = FSCalendar(frame: CGRect(x: 20, y: 84, width: calendarSize, height: calendarSize))
+        let calendar = FSCalendar(frame: CGRect(x: 20, y: 94, width: calendarSize, height: calendarSize))
         calendar.backgroundColor = .white
         calendar.layer.cornerRadius = 19
         calendar.clipsToBounds = true
@@ -71,23 +81,34 @@ extension MainView: MainViewProtocol {
         calendar.appearance.headerTitleColor = ColorPalette.BlackForText
         calendar.appearance.titleFont = .systemFont(ofSize: 14, weight: .regular)
         calendar.appearance.subtitleFont = .systemFont(ofSize: 0, weight: .light)
-        //calendar.dataSource = self
-        calendar.delegate = self
+        calendar.appearance.selectionColor = .clear
+        calendar.appearance.todayColor = .clear
+        calendar.appearance.todaySelectionColor = .clear
+        calendar.appearance.titleTodayColor = .black
+        calendar.appearance.titleSelectionColor  = .black
         self.view.addSubview(calendar)
         self.fsCalendar = calendar
         let backBlueImageView = UIImageView(image: UIImage(named: "ic_back_blue.png"))
         let frontBlueImageView = UIImageView(image: UIImage(named: "ic_front_blue.png"))
         self.fsCalendar.addSubview(backBlueImageView)
-        backBlueImageView.snp.makeConstraints { view in
-            view.top.equalToSuperview().offset(15)
-            view.leading.equalToSuperview().inset(15)
+        backBlueImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().inset(15)
         }
         self.fsCalendar.addSubview(frontBlueImageView)
-        frontBlueImageView.snp.makeConstraints { view in
-            view.top.equalToSuperview().offset(15)
-            view.trailing.equalToSuperview().inset(15)
+        frontBlueImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().inset(15)
         }
+        // 수직 드래그 제스쳐를 통해 캘린더 월/주 설정 변경
         self.view.addGestureRecognizer(self.scopeGesture)
+        self.mainTableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        self.view.addSubview(self.mainTableView)
+        self.mainTableView.snp.makeConstraints { make in
+            make.top.equalTo(self.fsCalendar.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
+        }
     }
     
     func showError(with message: String) {
@@ -95,11 +116,56 @@ extension MainView: MainViewProtocol {
     }
 }
 
-extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
+extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentAlert(title: "알림", message: "\(indexPath.row)")
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = MainTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "myIdentifier")
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        var attributedString = NSMutableAttributedString(string: "")
+        var imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(named: "ic_comment.png")
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        attributedString.append(NSAttributedString(string: "12"))
+        cell.commentLabel.attributedText = attributedString
+        if indexPath.row == 0 {
+            cell.nicknameLabel.text = "닉네임입니다"
+            cell.titleLabel.text = "타이틀입니다"
+            cell.contentLabel.text = "내용입니다"
+            attributedString = NSMutableAttributedString(string: "")
+            imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(named: "ic_like_selected")
+            attributedString.append(NSAttributedString(attachment: imageAttachment))
+            attributedString.append(NSAttributedString(string: "13"))
+            cell.likeLabel.attributedText = attributedString
+            //
+            attributedString = NSMutableAttributedString(string: "")
+            imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(named: "ic_private.png")
+            attributedString.append(NSAttributedString(attachment: imageAttachment))
+            attributedString.append(NSAttributedString(string: "2018-01-01 오후 4:00"))
+            cell.commentDateTimeLabel.attributedText = attributedString
+        } else {
+            attributedString = NSMutableAttributedString(string: "")
+            imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(named: "ic_like_default.png")
+            attributedString.append(NSAttributedString(attachment: imageAttachment))
+            attributedString.append(NSAttributedString(string: "12"))
+            cell.likeLabel.attributedText = attributedString
+        }
+        return cell
+    }
+    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        //let shouldBegin = self.tableView.contentOffset.y <= -self.tableView.contentInset.top
-        //if shouldBegin {
-        if true {
+        let shouldBegin = self.mainTableView.contentOffset.y <= -self.mainTableView.contentInset.top
+        if shouldBegin {
             let velocity = self.scopeGesture.velocity(in: self.view)
             switch self.fsCalendar.scope {
             case .month:
@@ -108,7 +174,21 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
                 return velocity.y > 0
             }
         }
-        return true
+        return shouldBegin
+    }
+    
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        // SE -> 40 to 39 / 568.0
+        // 8 -> 43 / 667.0
+        // 8+ -> 43 / 736.0
+        // X -> 43 / 812.0
+        // iPad -> 43 / 1024.0
+        let viewHeight = self.view.bounds.height
+        if viewHeight < 600 {
+            return UIImage(named: "oval40")
+        } else {
+            return UIImage(named: "oval43")
+        }
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -125,5 +205,6 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
             calendar.setCurrentPage(date, animated: true)
             self.presentAlert(title: "알람", message: self.dateFormatter.string(from: date))
         }
+        self.presentAlert(title: "알람", message: self.dateFormatter.string(from: date))
     }
 }
