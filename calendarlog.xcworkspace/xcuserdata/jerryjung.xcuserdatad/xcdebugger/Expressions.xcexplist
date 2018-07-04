@@ -3,17 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MainViewController.loadView():MainViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.mainView.bounds.width">
-            </PersistentString>
-            <PersistentString
-               value = "UIScreen.main.bounds.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "MainViewController.initializeUI():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -21,6 +10,14 @@
             </PersistentString>
             <PersistentString
                value = "self.mainView.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.initializeUI():MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scheduleDetailList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,18 +30,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainView.viewDidLoad():MainView.swift">
+         contextName = "closure #2 in RegisterViewController.addCategories():RegisterViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.mainView.bounds.width">
+               value = "15 + (rowIndex * 20)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in RegisterViewController.addCategories():RegisterViewController.swift">
+         contextName = "closure #2 in LoginViewController.initializeUI():LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.categoryView.frame.width / 3">
+               value = "self.logoImageView.layer">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -60,21 +57,43 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in RegisterViewController.addCategories():RegisterViewController.swift">
+         contextName = "closure #2 in MainView.tableView(_:cellForRowAt:):MainView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainPresenter.didRetrieveScheduleList(_:):MainPresenter.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainView.viewDidLoad():MainView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "15 + (rowIndex * 20)">
+               value = "self.fsCalendar.cell(for: Date(), at: .notFound)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainView.initializeUI():MainView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in LoginViewController.initializeUI():LoginViewController.swift">
+         contextName = "closure #1 in RegisterViewController.addCategories():RegisterViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.logoImageView.layer">
+               value = "self.categoryView.frame.width / 3">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewController.loadView():MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.mainView.bounds.width">
+            </PersistentString>
+            <PersistentString
+               value = "UIScreen.main.bounds.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.tableView(_:cellForRowAt:):MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -83,6 +102,17 @@
          <PersistentStrings>
             <PersistentString
                value = "self.mainView.bounds.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.calendar(_:imageFor:):MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "self.scheduleDetailList == nil">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

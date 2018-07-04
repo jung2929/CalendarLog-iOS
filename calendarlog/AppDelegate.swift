@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import AlamofireNetworkActivityIndicator
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // StatusBar에 Alamofire 시도 중 Indicator 띄워주기 위한 옵션 설정
         NetworkActivityIndicatorManager.shared.isEnabled = true
+        
+        // HUD 설정
+        SVProgressHUD.setMinimumSize(CGSize(width: 120, height: 120))
+        SVProgressHUD.setDefaultMaskType(.black)
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        //let loginViewController = LoginWireframe.createLoginModule()
-        //self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+//        let loginViewController = LoginWireframe.createLoginModule()
+//        self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
         let mainViewController = MainWireframe.createMainModule()
         self.window?.rootViewController = UINavigationController(rootViewController: mainViewController)
         self.window?.makeKeyAndVisible()

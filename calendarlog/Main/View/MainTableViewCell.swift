@@ -25,21 +25,33 @@ class MainTableViewCell: UITableViewCell {
     }()
     let commentDateTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "2018-12-31 오후 5:00"
+        label.text = "2018-12-31 PM 5:00"
         label.textColor = ColorPalette.GrayForText
         label.font = .systemFont(ofSize: 12, weight: .medium)
         return label
     }()
+    // 이메일 텍스트 필드 하단 라인 설정
+    let borderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ColorPalette.GrayForBottomBorder
+        return view
+    }()
+    let scheduleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "ic_placeholder.png")
+        return imageView
+    }()
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "타이틀/타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀"
+        label.text = "타이틀"
         label.textColor = ColorPalette.BlackForText
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
     let contentLabel: UILabel = {
         let label = UILabel()
-        label.text = "내용/내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
+        label.text = "내용"
         label.textColor = ColorPalette.GrayForText
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 3
@@ -85,19 +97,23 @@ class MainTableViewCell: UITableViewCell {
             make.centerY.equalTo(self.profileImageView)
             make.right.equalToSuperview().offset(-10)
         }
-        // 이메일 텍스트 필드 하단 라인 설정
-        let borderView: UIView = UIView()
-        borderView.backgroundColor = ColorPalette.GrayForBottomBorder
-        self.feedView.addSubview(borderView)
-        borderView.snp.makeConstraints { make in
+        self.feedView.addSubview(self.borderView)
+        self.borderView.snp.makeConstraints { make in
             make.top.equalTo(self.profileImageView.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(8)
             make.right.equalToSuperview().offset(8)
             make.size.height.equalTo(1)
         }
+        self.feedView.addSubview(self.scheduleImageView)
+        self.scheduleImageView.snp.makeConstraints { make in
+            make.top.equalTo(self.borderView.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.size.height.equalTo(200)
+        }
         self.feedView.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(borderView.snp.bottom).offset(15)
+            make.top.equalTo(self.scheduleImageView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }

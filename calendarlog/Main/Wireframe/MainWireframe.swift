@@ -9,19 +9,18 @@
 class MainWireframe: MainWireFrameProtocol {
     class func createMainModule() -> MainView {
         let view = MainView()
-        //let presenter: MainPresenterProtocol & MainInteractorOutputProtocol = MainPresenter()
-        let presenter: MainPresenterProtocol = MainPresenter()
-//        let interactor: RegisterInteractorInputProtocol & RegisterRemoteDataManagerOutputProtocol = RegisterInteractor()
-//        let remoteDataManager: RegisterRemoteDataManagerInputProtocol = RegisterRemoteDataManager()
+        let presenter: MainPresenterProtocol & MainInteractorOutputProtocol = MainPresenter()
+        let interactor: MainInteractorInputProtocol & MainRemoteDataManagerOutputProtocol = MainInteractor()
+        let remoteDataManager: MainRemoteDataManagerInputProtocol = MainRemoteDataManager()
         let wireFrame: MainWireFrameProtocol = MainWireframe()
-//
+
         view.presenter = presenter
         presenter.view = view
         presenter.wireFrame = wireFrame
-//        presenter.interactor = interactor
-//        interactor.presenter = presenter
-//        interactor.remoteDatamanager = remoteDataManager
-//        remoteDataManager.remoteRequestHandler = interactor
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        interactor.remoteDatamanager = remoteDataManager
+        remoteDataManager.remoteRequestHandler = interactor
         
         return view
     }

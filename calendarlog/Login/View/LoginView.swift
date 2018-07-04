@@ -19,9 +19,9 @@ class LoginView: SuperViewController {
         self.presenter?.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
-        self.emailTextField.text = "jerryjung2929@gmail.com"
-        self.passwordTextField.text = "dngus24"
-        self.pressedLoginButton()
+        //self.emailTextField.text = "jerryjung2929@gmail.com"
+        //self.passwordTextField.text = "dngus24"
+        //self.pressedLoginButton()
     }
     
     // 로그인 뷰 설정

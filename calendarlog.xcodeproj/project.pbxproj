@@ -10,7 +10,6 @@
 		596C8FD844F051B1879B0BD5 /* Pods_calendarlogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AF1425BACEC05F6F0733E5 /* Pods_calendarlogUITests.framework */; };
 		9E4B31F795B8061C0EA2AA08 /* Pods_calendarlogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BB0266C096E57EAB9622C5 /* Pods_calendarlogTests.framework */; };
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
-		BD1ABEA920A1C4CA0072417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1ABEA820A1C4CA0072417B /* Assets.xcassets */; };
 		BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */; };
 		BD3D053C20BAD9EC00F8284B /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D053B20BAD9EC00F8284B /* RegisterView.swift */; };
 		BD3D053E20BADA0500F8284B /* RegisterWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3D053D20BADA0500F8284B /* RegisterWireframe.swift */; };
@@ -34,6 +33,10 @@
 		BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */; };
 		BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA020A1A468005A8043 /* Extenstions.swift */; };
 		BD889BA320A1A4CC005A8043 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD889BA220A1A4CC005A8043 /* SuperViewController.swift */; };
+		BD93C18E20EA3DFD00C9C981 /* ScheduleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93C18D20EA3DFD00C9C981 /* ScheduleResult.swift */; };
+		BD93C19020EA56E300C9C981 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93C18F20EA56E300C9C981 /* MainInteractor.swift */; };
+		BD93C19220EA590900C9C981 /* MainRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93C19120EA590900C9C981 /* MainRemoteDataManager.swift */; };
+		BD93C19420EA668900C9C981 /* FeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93C19320EA668900C9C981 /* FeedResult.swift */; };
 		BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557220B8645D00AE5460 /* DefaultResponse.swift */; };
 		BD98557720B875EF00AE5460 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557620B875EF00AE5460 /* API.swift */; };
 		BDBD364820BC2868004AFEF4 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBD364720BC2868004AFEF4 /* UserInfo.swift */; };
@@ -41,6 +44,7 @@
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* CalendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */; };
+		BDDFFF2320CD145800393504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDFFF2220CD145700393504 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +73,6 @@
 		772C4C7E6A67BA84593C247C /* Pods-calendarlogUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CB0386452B9EC2F7B28F9DE /* Pods-calendarlogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogTests/Pods-calendarlogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD1ABEA820A1C4CA0072417B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalatte.swift; sourceTree = "<group>"; };
 		BD3D053B20BAD9EC00F8284B /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		BD3D053D20BADA0500F8284B /* RegisterWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWireframe.swift; sourceTree = "<group>"; };
@@ -94,6 +97,10 @@
 		BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD889BA020A1A468005A8043 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		BD889BA220A1A4CC005A8043 /* SuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
+		BD93C18D20EA3DFD00C9C981 /* ScheduleResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleResult.swift; sourceTree = "<group>"; };
+		BD93C18F20EA56E300C9C981 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		BD93C19120EA590900C9C981 /* MainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRemoteDataManager.swift; sourceTree = "<group>"; };
+		BD93C19320EA668900C9C981 /* FeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResult.swift; sourceTree = "<group>"; };
 		BD98557220B8645D00AE5460 /* DefaultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResponse.swift; sourceTree = "<group>"; };
 		BD98557620B875EF00AE5460 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BDBD364720BC2868004AFEF4 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -107,6 +114,7 @@
 		BDCECB4B20749318000519E0 /* calendarlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calendarlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarlogUITests.swift; sourceTree = "<group>"; };
 		BDCECB5120749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDDFFF2220CD145700393504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D129450DD4A1B9C659D1C1AD /* Pods-calendarlogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +336,7 @@
 		BD65362320BEDCAE00E5C63B /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				BD93C19120EA590900C9C981 /* MainRemoteDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 		BD65362420BEDCC000E5C63B /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				BD93C18F20EA56E300C9C981 /* MainInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -362,6 +372,8 @@
 			children = (
 				BD98557220B8645D00AE5460 /* DefaultResponse.swift */,
 				BDBD364720BC2868004AFEF4 /* UserInfo.swift */,
+				BD93C18D20EA3DFD00C9C981 /* ScheduleResult.swift */,
+				BD93C19320EA668900C9C981 /* FeedResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -397,7 +409,7 @@
 				BD5E331620B5E08200B637FD /* Register */,
 				BD5E331520B5E08100B637FD /* Main */,
 				BD889BA220A1A4CC005A8043 /* SuperViewController.swift */,
-				BD1ABEA820A1C4CA0072417B /* Assets.xcassets */,
+				BDDFFF2220CD145700393504 /* Assets.xcassets */,
 				BDCECB2C20749318000519E0 /* AppDelegate.swift */,
 				BDCECB3B20749318000519E0 /* Info.plist */,
 				BD889B95209F779A005A8043 /* InfoPlist.strings */,
@@ -557,7 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */,
-				BD1ABEA920A1C4CA0072417B /* Assets.xcassets in Resources */,
+				BDDFFF2320CD145800393504 /* Assets.xcassets in Resources */,
 				BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +604,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -602,6 +615,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,12 +773,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD60DEFB20C0460300A3DF4E /* MainTableViewCell.swift in Sources */,
+				BD93C19420EA668900C9C981 /* FeedResult.swift in Sources */,
 				BD3D054920BB215000F8284B /* MainWireframe.swift in Sources */,
 				BD3D054C20BB217D00F8284B /* MainView.swift in Sources */,
 				BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */,
 				BDBD364820BC2868004AFEF4 /* UserInfo.swift in Sources */,
 				BD5E332120B5E67900B637FD /* LoginProtocols.swift in Sources */,
 				BD3D054620BADA3B00F8284B /* RegisterRemoteDataManager.swift in Sources */,
+				BD93C18E20EA3DFD00C9C981 /* ScheduleResult.swift in Sources */,
 				BD5E332520B5EE8600B637FD /* LoginWireframe.swift in Sources */,
 				BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */,
 				BD5E332320B5EA7A00B637FD /* LoginPresenter.swift in Sources */,
@@ -776,6 +792,7 @@
 				BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */,
 				BD5E332720B673EF00B637FD /* LoginInteractor.swift in Sources */,
 				BD5E332D20B6759400B637FD /* LoginRemoteDataManager.swift in Sources */,
+				BD93C19020EA56E300C9C981 /* MainInteractor.swift in Sources */,
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
 				BD65362720BEE97200E5C63B /* MainProtocols.swift in Sources */,
 				BD65362920BEE9D700E5C63B /* MainPresenter.swift in Sources */,
@@ -783,6 +800,7 @@
 				BD3D054220BADA1F00F8284B /* RegisterPresenter.swift in Sources */,
 				BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */,
 				BD98557720B875EF00AE5460 /* API.swift in Sources */,
+				BD93C19220EA590900C9C981 /* MainRemoteDataManager.swift in Sources */,
 				BD5E332B20B6758800B637FD /* LoginDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

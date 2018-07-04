@@ -14,17 +14,18 @@ class LoginInteractor: LoginInteractorInputProtocol {
     var remoteDatamanager: LoginRemoteDataManagerInputProtocol?
     
     func retrieveEmail(_ email: String) {
-        guard email.count > 0 else {
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmedEmail.count > 0 else {
             self.presenter?.onErrorForEmail(with: "이메일을 입력해주세요.")
             return
         }
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        if !emailTest.evaluate(with: email) {
+        if !emailTest.evaluate(with: trimmedEmail) {
             self.onErrorForEmail(with: "이메일을 정확하게 입력해주세요.")
             return
         }
-        self.remoteDatamanager?.retrieveEmail(email)
+        self.remoteDatamanager?.retrieveEmail(trimmedEmail)
     }
     
     func validateLogin(_ email: String, _ password: String) {

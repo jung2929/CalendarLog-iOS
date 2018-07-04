@@ -10,6 +10,7 @@ PODS:
   - FSCalendar (2.7.9)
   - ObjectMapper (3.1.0)
   - SnapKit (4.0.0)
+  - SVProgressHUD (2.2.5)
   - SwiftLint (0.25.0)
 
 DEPENDENCIES:
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper (~> 5.0)
   - FSCalendar
   - SnapKit (~> 4.0.0)
+  - SVProgressHUD
   - SwiftLint
 
 SPEC CHECKSUMS:
@@ -29,8 +31,9 @@ SPEC CHECKSUMS:
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
 
-PODFILE CHECKSUM: bb1f27e2c179eb63cc8fcfeeeacf8b2f7557dd45
+PODFILE CHECKSUM: 9e775313a846c9c759562ca8e6bbae9a861428da
 
 COCOAPODS: 1.4.0

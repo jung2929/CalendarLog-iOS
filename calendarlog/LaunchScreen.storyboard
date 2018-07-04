@@ -22,17 +22,17 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLg-Ds-3RV">
-                                <rect key="frame" x="151" y="620" width="73" height="17"/>
+                                <rect key="frame" x="151" y="600" width="73" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="KLg-Ds-3RV" secondAttribute="bottom" constant="30" id="0Rw-Wo-GCX"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Dc4-Ga-CTE" secondAttribute="trailing" id="DRY-f1-YJa"/>
                             <constraint firstItem="Dc4-Ga-CTE" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="Gei-0U-QYa"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Dc4-Ga-CTE" secondAttribute="bottom" id="J8L-Qt-Wa3"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="KLg-Ds-3RV" secondAttribute="bottom" constant="50" id="Uzf-Lz-7lD"/>
                             <constraint firstItem="Dc4-Ga-CTE" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" id="kWo-fP-Y0u"/>
                             <constraint firstItem="KLg-Ds-3RV" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="kp7-kG-AZu"/>
                         </constraints>

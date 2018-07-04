@@ -8,9 +8,14 @@
 
 import UIKit
 import FSCalendar
+import SVProgressHUD
+import Alamofire
+import AlamofireImage
 
 class MainView: SuperViewController {
     var presenter: MainPresenterProtocol?
+    var scheduleList: [Schedule]?
+    var feedList: [Feed]?
     
     // 캘린더 설정
     fileprivate var fsCalendar: FSCalendar!
@@ -52,18 +57,35 @@ class MainView: SuperViewController {
         profileButton.addTarget(self, action: #selector(self.pushUserInfo), for: .touchUpInside)
         let profileBarButtonImte = UIBarButtonItem.init(customView: profileButton)
         self.navigationItem.leftBarButtonItem = profileBarButtonImte
-        // 내비게이션바 우측상단 알람 이미지 설정
-        let notificationBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_notification.png"), style: .done, target: self, action: #selector(self.pushNotification))
-        self.navigationItem.rightBarButtonItem = notificationBarButtonItem
+        // 내비게이션바 우측상단 쪽지 이미지 설정
+        let letterBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_letter.png"), style: .done, target: self, action: #selector(self.pushLetter))
+        self.navigationItem.rightBarButtonItem = letterBarButtonItem
     }
 }
 extension MainView: MainViewProtocol {
+    func showHUD(with message: String) {
+        SVProgressHUD.show(withStatus: message)
+    }
+    
+    func dismissHUD() {
+        SVProgressHUD.dismiss()
+    }
+    
+    func showError(with message: String) {
+        SVProgressHUD.showError(withStatus: message)
+    }
+    
+    func reloadMainData() {
+        self.fsCalendar.reloadData()
+        self.mainTableView.reloadData()
+    }
+    
     @objc func pushUserInfo() {
         self.presentAlert(title: "사용자 계정정보", message: "클릭")
     }
     
-    @objc func pushNotification() {
-        self.presentAlert(title: "알람", message: "클릭")
+    @objc func pushLetter() {
+        self.presentAlert(title: "쪽지", message: "클릭")
     }
     
     func initializeUI() {
@@ -103,6 +125,7 @@ extension MainView: MainViewProtocol {
         // 수직 드래그 제스쳐를 통해 캘린더 월/주 설정 변경
         self.view.addGestureRecognizer(self.scopeGesture)
         self.mainTableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        self.mainTableView.showsVerticalScrollIndicator = false
         self.view.addSubview(self.mainTableView)
         self.mainTableView.snp.makeConstraints { make in
             make.top.equalTo(self.fsCalendar.snp.bottom).offset(20)
@@ -110,15 +133,15 @@ extension MainView: MainViewProtocol {
             make.bottom.equalToSuperview()
         }
     }
-    
-    func showError(with message: String) {
-        presentAlert(title: "오류", message: message)
-    }
 }
 
 extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if let feedList = self.feedList {
+            return feedList.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -126,39 +149,57 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MainTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "myIdentifier")
+        let cell = MainTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "feedCell")
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        var attributedString = NSMutableAttributedString(string: "")
-        var imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(named: "ic_comment.png")
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(NSAttributedString(string: "12"))
-        cell.commentLabel.attributedText = attributedString
-        if indexPath.row == 0 {
-            cell.nicknameLabel.text = "닉네임입니다"
-            cell.titleLabel.text = "타이틀입니다"
-            cell.contentLabel.text = "내용입니다"
-            attributedString = NSMutableAttributedString(string: "")
-            imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(named: "ic_like_selected")
-            attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: "13"))
-            cell.likeLabel.attributedText = attributedString
-            //
-            attributedString = NSMutableAttributedString(string: "")
-            imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(named: "ic_private.png")
-            attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: "2018-01-01 오후 4:00"))
-            cell.commentDateTimeLabel.attributedText = attributedString
-        } else {
-            attributedString = NSMutableAttributedString(string: "")
-            imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(named: "ic_like_default.png")
-            attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: "12"))
-            cell.likeLabel.attributedText = attributedString
+        if let feedList = self.feedList {
+            let feed = feedList[indexPath.row]
+            // 닉네임 설정
+            cell.nicknameLabel.text = feed.nickname
+            // 일정 이미지 설정
+            if let scheduleImageUrl = feed.url {
+                Alamofire.request(scheduleImageUrl).responseImage { response in
+                    if let image = response.result.value {
+                        cell.scheduleImageView.image = image
+                    }
+                }
+            } else {
+                cell.scheduleImageView.snp.makeConstraints { make in
+                    make.top.equalTo(cell.borderView.snp.bottom).offset(0)
+                    make.size.equalTo(0)
+                }
+            }
+            // 제목 설정
+            cell.titleLabel.text = feed.title
+            // 내용 설정
+            cell.contentLabel.text = feed.content
+            // 좋아요 숫자, 여부 설정
+            let likeCountAttributedString = NSMutableAttributedString(string: "")
+            let likeImage = NSTextAttachment()
+            if feed.isLike == "Y" {
+                likeImage.image = UIImage(named: "ic_like_selected.png")
+            } else {
+                likeImage.image = UIImage(named: "ic_like_default.png")
+            }
+            likeCountAttributedString.append(NSAttributedString(attachment: likeImage))
+            likeCountAttributedString.append(NSAttributedString(string: String(feed.likeCount)))
+            cell.likeLabel.attributedText = likeCountAttributedString
+            // 댓글 숫자 설정
+            let commentCountAttributedString = NSMutableAttributedString(string: "")
+            let commentImage = NSTextAttachment()
+            commentImage.image = UIImage(named: "ic_comment.png")
+            commentCountAttributedString.append(NSAttributedString(attachment: commentImage))
+            commentCountAttributedString.append(NSAttributedString(string: String(feed.commentCount)))
+            cell.commentLabel.attributedText = commentCountAttributedString
+            // 비공개 여부 설정
+            let registerDatetimeAttributedString = NSMutableAttributedString(string: "")
+            if feed.isPublic == "Y" {
+                let privateImage = NSTextAttachment()
+                privateImage.image = UIImage(named: "ic_private.png")
+                registerDatetimeAttributedString.append(NSAttributedString(attachment: privateImage))
+            }
+            registerDatetimeAttributedString.append(NSAttributedString(string: feed.registerDatetime))
+            cell.commentDateTimeLabel.attributedText = registerDatetimeAttributedString
         }
         return cell
     }
@@ -178,16 +219,48 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        if let scheduleList = self.scheduleList {
+            for schedule in scheduleList {
+                if schedule.scheduleDate == self.dateFormatter.string(from: date) {
+                    return self.setScheduleUIImage(viewHeight: self.view.bounds.height, schedule.scheduleCount)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func setScheduleUIImage(viewHeight height: CGFloat, _ scheduleCount: Int) -> UIImage? {
         // SE -> 40 to 39 / 568.0
         // 8 -> 43 / 667.0
         // 8+ -> 43 / 736.0
         // X -> 43 / 812.0
         // iPad -> 43 / 1024.0
-        let viewHeight = self.view.bounds.height
-        if viewHeight < 600 {
-            return UIImage(named: "oval40")
+        if height < 600 {
+            switch scheduleCount {
+            case 1:
+                return UIImage(named: "ic_schedule_39_1.png")!
+            case 2:
+                return UIImage(named: "ic_schedule_39_2.png")!
+            case 3:
+                return UIImage(named: "ic_schedule_39_3.png")!
+            case 4:
+                return UIImage(named: "ic_schedule_39_etc.png")!
+            default:
+                return nil
+            }
         } else {
-            return UIImage(named: "oval43")
+            switch scheduleCount {
+            case 1:
+                return UIImage(named: "ic_schedule_43_1.png")!
+            case 2:
+                return UIImage(named: "ic_schedule_43_2.png")!
+            case 3:
+                return UIImage(named: "ic_schedule_43_3.png")!
+            case 4:
+                return UIImage(named: "ic_schedule_43_etc.png")!
+            default:
+                return nil
+            }
         }
     }
     

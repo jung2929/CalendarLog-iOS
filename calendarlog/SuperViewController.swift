@@ -34,10 +34,10 @@ class SuperViewController: UIViewController {
             backgroundTopimageView.image = backgroundTopImage
         }
         self.view.addSubview(backgroundTopimageView)
-        backgroundTopimageView.snp.makeConstraints { view in
-            view.left.equalTo(0)
-            view.right.equalTo(0)
-            view.height.equalTo(self.view.frame.height / 2.5)
+        backgroundTopimageView.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.height.equalTo(self.view.frame.height / 2.5)
         }
     }
 }
