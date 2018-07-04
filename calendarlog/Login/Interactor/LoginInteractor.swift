@@ -10,7 +10,6 @@ import Foundation
 
 class LoginInteractor: LoginInteractorInputProtocol {
     weak var presenter: LoginInteractorOutputProtocol?
-    var localDatamanager: LoginLocalDataManagerInputProtocol?
     var remoteDatamanager: LoginRemoteDataManagerInputProtocol?
     
     func retrieveEmail(_ email: String) {
@@ -46,7 +45,12 @@ extension LoginInteractor: LoginRemoteDataManagerOutputProtocol {
         self.presenter?.didNotRetrieveEmail(email)
     }
     
-    func onLoginSuccess() {
+    func onLoginSuccess(_ email: String, _ password: String) {
+        if !UserDefaults.standard.bool(forKey: "isAutoLogin") {
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(password, forKey: "password")
+            UserDefaults.standard.set(true, forKey: "isAutoLogin")
+        }
         self.presenter?.didTryLogin()
     }
     

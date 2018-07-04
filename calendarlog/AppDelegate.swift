@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(.black)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-//        let loginViewController = LoginWireframe.createLoginModule()
-//        self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
-        let mainViewController = MainWireframe.createMainModule()
-        self.window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+        let loginViewController = LoginWireframe.createLoginModule()
+        self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        //let mainViewController = MainWireframe.createMainModule()
+        //self.window?.rootViewController = UINavigationController(rootViewController: mainViewController)
         self.window?.makeKeyAndVisible()
         return true
     }

@@ -6,13 +6,22 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import Foundation
+
 class LoginPresenter: LoginPresenterProtocol {
     var view: LoginViewProtocol?
     var interactor: LoginInteractorInputProtocol?
     var wireFrame: LoginWireframeProtocol?
     
     func viewDidLoad() {
-        self.view?.initializeUI()
+        if UserDefaults.standard.bool(forKey: "isAutoLogin") {
+            self.interactor?.validateLogin(
+                UserDefaults.standard.string(forKey: "email")!,
+                UserDefaults.standard.string(forKey: "password")!
+            )
+        } else {
+            self.view?.initializeUI()
+        }
     }
     
     func pressedLoginOrRegisterButton(_ email: String) {

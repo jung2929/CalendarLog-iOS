@@ -47,7 +47,6 @@ protocol LoginPresenterProtocol: class {
 
 protocol LoginInteractorInputProtocol: class {
     var presenter: LoginInteractorOutputProtocol? { get set }
-    var localDatamanager: LoginLocalDataManagerInputProtocol? { get set }
     var remoteDatamanager: LoginRemoteDataManagerInputProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
@@ -84,19 +83,9 @@ protocol LoginRemoteDataManagerOutputProtocol: class {
     
     func onLoginEmailNotRetrieved(_ email: String)
     
-    func onLoginSuccess()
+    func onLoginSuccess(_ email: String, _ password: String)
     
     func onErrorForEmail(with message: String)
     
     func onErrorForPassword(with message: String)
-}
-
-protocol LoginDataManagerInputProtocol: class {
-    // INTERACTOR -> DATAMANAGER
-}
-
-protocol LoginLocalDataManagerInputProtocol: class {
-    // INTERACTOR -> LOCALDATAMANAGER
-    //func retrievePostList() throws -> [Post]
-    //func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }
