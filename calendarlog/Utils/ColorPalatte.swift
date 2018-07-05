@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  ColorPalatte.swift
 //  calendarlog
 //
 //  Created by JerryJung on 2018. 5. 8..

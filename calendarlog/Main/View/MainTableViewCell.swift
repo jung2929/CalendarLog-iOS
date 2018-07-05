@@ -9,6 +9,8 @@
 import UIKit
 
 class MainTableViewCell: UITableViewCell {
+    var feed: Feed?
+    
     let feedView: UIView = {
         let view = UIView()
         view.backgroundColor = .white

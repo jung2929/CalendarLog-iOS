@@ -6,22 +6,62 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-class MainWireframe: MainWireFrameProtocol {
+import UIKit
+
+class MainWireframe: MainWireframeProtocol {
     class func createMainModule() -> MainView {
         let view = MainView()
         let presenter: MainPresenterProtocol & MainInteractorOutputProtocol = MainPresenter()
         let interactor: MainInteractorInputProtocol & MainRemoteDataManagerOutputProtocol = MainInteractor()
         let remoteDataManager: MainRemoteDataManagerInputProtocol = MainRemoteDataManager()
-        let wireFrame: MainWireFrameProtocol = MainWireframe()
+        let wireframe: MainWireframeProtocol = MainWireframe()
 
         view.presenter = presenter
         presenter.view = view
-        presenter.wireFrame = wireFrame
+        presenter.wireframe = wireframe
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager
         remoteDataManager.remoteRequestHandler = interactor
         
         return view
+    }
+    
+    func presentUserInfo(from view: MainViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let userInfoViewController = UserInfoWireframe.createUserInfoModule()
+            sourceView.navigationController?.pushViewController(userInfoViewController, animated: true)
+        }
+    }
+    
+    func presentNoteList(from view: MainViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let noteListViewController = NoteListWireframe.createNoteListModule()
+            sourceView.navigationController?.pushViewController(noteListViewController, animated: true)
+        }
+    }
+    
+    func presentScheduleDetail(from view: MainViewProtocol, with feed: Feed) {
+        if let sourceView = view as? UIViewController {
+            let scheduleDetailViewController = ScheduleDetailWireframe.createScheduleDetailModule()
+            scheduleDetailViewController.feedValue = feed
+            sourceView.navigationController?.pushViewController(scheduleDetailViewController, animated: true)
+        }
+    }
+    
+    func presentScheduleList(from view: MainViewProtocol, with date: String) {
+        if let sourceView = view as? UIViewController {
+            let scheduleListViewController = ScheduleListWireframe.createScheduleListModule()
+            scheduleListViewController.dateValue = date
+            sourceView.navigationController?.pushViewController(scheduleListViewController, animated: true)
+        }
+    }
+    
+    func presentScheduleForAdd(from view: MainViewProtocol, with date: String) {
+        if let sourceView = view as? UIViewController {
+            let addScheduleViewController = AddScheduleWireframe.createAddScheduleModule()
+            addScheduleViewController.dateValue = date
+            sourceView.navigationController?.pushViewController(addScheduleViewController, animated: true)
+        }
     }
 }

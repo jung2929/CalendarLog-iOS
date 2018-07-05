@@ -14,11 +14,11 @@ class LoginWireframe: LoginWireframeProtocol {
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol & LoginRemoteDataManagerOutputProtocol = LoginInteractor()
         let remoteDataManager: LoginRemoteDataManagerInputProtocol = LoginRemoteDataManager()
-        let wireFrame: LoginWireframeProtocol = LoginWireframe()
+        let wireframe: LoginWireframeProtocol = LoginWireframe()
         
         view.presenter = presenter
         presenter.view = view
-        presenter.wireFrame = wireFrame
+        presenter.wireframe = wireframe
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager

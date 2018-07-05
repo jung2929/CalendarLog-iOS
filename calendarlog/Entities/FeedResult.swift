@@ -28,8 +28,8 @@ extension FeedResult: Mappable {
 }
 
 struct Feed {
-    var email: String!
-    var sequence: Int!
+    var scheduleEmail: String!
+    var scheduleSequence: Int!
     var url: String!
     var nickname: String!
     var title: String!
@@ -47,8 +47,8 @@ extension Feed: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        email <- map["SCH_EMAIL"]
-        sequence <- map["SCH_SEQ"]
+        scheduleEmail <- map["SCH_EMAIL"]
+        scheduleSequence <- map["SCH_SEQ"]
         url <- map["IMG_URL"]
         nickname <- map["NICKNM"]
         title <- map["TITLE"]

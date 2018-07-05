@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class RegisterView: SuperViewController {
     var presenter: RegisterPresenterProtocol?
@@ -18,9 +19,6 @@ class RegisterView: SuperViewController {
         self.presenter?.viewDidLoad()
         //내비게이션바 설정
         self.title = "회원가입"
-        let imageBack = UIImage(named: "ic_back.png")
-        self.navigationController?.navigationBar.backIndicatorImage = imageBack
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
         // 전달받은 이메일 값 설정
         self.emailTextField.text = self.emailValue
         self.passwordTextField.delegate = self
@@ -258,11 +256,7 @@ class RegisterView: SuperViewController {
     }()
 }
 
-extension RegisterView: RegisterViewProtocol {
-    func showError(with message: String) {
-        self.presentAlert(title: "오류", message: message)
-    }
-    
+extension RegisterView: RegisterViewProtocol {    
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
     @objc func pressedRegisterButton() {
         self.presenter?.pressedRegisterButton(self.emailValue,
@@ -507,22 +501,22 @@ extension RegisterView: UITextFieldDelegate {
         switch textField {
         case self.passwordTextField:
             if newString.length > 15 {
-                self.showError(with: "비밀번호는 15자리까지 입력해주세요.")
+                SVProgressHUD.showError(withStatus: "비밀번호는 15자리까지 입력해주세요.")
                 return false
             }
         case self.passwordConfirmTextField:
             if newString.length > 15 {
-                self.showError(with: "비밀번호 획인은 15자리까지 입력해주세요.")
+                SVProgressHUD.showError(withStatus: "비밀번호 획인은 15자리까지 입력해주세요.")
                 return false
             }
         case self.nicknameTextField:
             if newString.length > 15 {
-                self.showError(with: "닉네임은 15자리까지 입력해주세요.")
+                SVProgressHUD.showError(withStatus: "닉네임은 15자리까지 입력해주세요.")
                 return false
             }
         case self.associateTextField:
             if newString.length > 20 {
-                self.showError(with: "단체 / 기관은 20자리까지 입력해주세요.")
+                SVProgressHUD.showError(withStatus: "단체 / 기관은 20자리까지 입력해주세요.")
                 return false
             }
         default:

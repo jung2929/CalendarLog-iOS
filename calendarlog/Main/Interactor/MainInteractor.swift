@@ -6,21 +6,33 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import Foundation
+
 class MainInteractor: MainInteractorInputProtocol {
     weak var presenter: MainInteractorOutputProtocol?
     var remoteDatamanager: MainRemoteDataManagerInputProtocol?
     
-    func retrieveScheduleAndFeedList(_ pageNo: Int) {
-        remoteDatamanager?.retrieveScheduleAndFeedList("dngus@dngus.com", pageNo)
+    func retrieveScheduleAndFeedList() {
+        let email = UserDefaults.standard.string(forKey: "email")!
+        self.remoteDatamanager?.retrieveScheduleAndFeedList(email)
+    }
+    
+    func retrieveFeedList(_ row: Int) {
+        let email = UserDefaults.standard.string(forKey: "email")!
+        self.remoteDatamanager?.retrieveFeedList(email, row)
     }
 }
 
 extension MainInteractor: MainRemoteDataManagerOutputProtocol {
     func onScheduleAndFeedListRetrieved(_ scheduleList: [Schedule], _ feedList: [Feed]) {
-        presenter?.didRetrieveScheduleAndFeedList(scheduleList, feedList)
+        self.presenter?.didRetrieveScheduleAndFeedList(scheduleList, feedList)
+    }
+    
+    func onFeedListRetrieved(_ feedList: [Feed]) {
+        self.presenter?.didRetrieveFeedList(feedList)
     }
     
     func onError(_ message: String) {
-        presenter?.onError(message)
+        self.presenter?.onError(message)
     }
 }

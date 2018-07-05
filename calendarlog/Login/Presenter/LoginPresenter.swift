@@ -6,51 +6,51 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-import Foundation
+import SVProgressHUD
 
 class LoginPresenter: LoginPresenterProtocol {
     var view: LoginViewProtocol?
     var interactor: LoginInteractorInputProtocol?
-    var wireFrame: LoginWireframeProtocol?
+    var wireframe: LoginWireframeProtocol?
     
     func viewDidLoad() {
-        if UserDefaults.standard.bool(forKey: "isAutoLogin") {
-            self.interactor?.validateLogin(
-                UserDefaults.standard.string(forKey: "email")!,
-                UserDefaults.standard.string(forKey: "password")!
-            )
-        } else {
-            self.view?.initializeUI()
-        }
+        self.view?.initializeUI()
     }
     
     func pressedLoginOrRegisterButton(_ email: String) {
+        SVProgressHUD.show(withStatus: "이메일을 확인 중 입니다.")
         self.interactor?.retrieveEmail(email)
     }
     
     func pressedLoginButton(_ email: String, _ password: String) {
+        SVProgressHUD.show(withStatus: "로그인 중 입니다.")
         self.interactor?.validateLogin(email, password)
     }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
     func didRetrieveEmail() {
+        SVProgressHUD.dismiss()
         self.view?.addSubviewPassword()
     }
     
     func didNotRetrieveEmail(_ email: String) {
-        self.wireFrame?.presentRegister(from: view!, with: email)
+        SVProgressHUD.dismiss()
+        self.wireframe?.presentRegister(from: view!, with: email)
     }
     
     func didTryLogin() {
-        self.wireFrame?.presentMain(from: view!)
+        SVProgressHUD.dismiss()
+        self.wireframe?.presentMain(from: view!)
     }
     
     func onErrorForEmail(with message: String) {
+        SVProgressHUD.dismiss()
         self.view?.showErrorForEmail(with: message)
     }
     
     func onErrorForPassword(with message: String) {
+        SVProgressHUD.dismiss()
         self.view?.showErrorForPassword(with: message)
     }
     

@@ -14,11 +14,11 @@ class RegisterWireframe: RegisterWireframeProtocol {
         let presenter: RegisterPresenterProtocol & RegisterInteractorOutputProtocol = RegisterPresenter()
         let interactor: RegisterInteractorInputProtocol & RegisterRemoteDataManagerOutputProtocol = RegisterInteractor()
         let remoteDataManager: RegisterRemoteDataManagerInputProtocol = RegisterRemoteDataManager()
-        let wireFrame: RegisterWireframeProtocol = RegisterWireframe()
+        let wireframe: RegisterWireframeProtocol = RegisterWireframe()
         
         view.presenter = presenter
         presenter.view = view
-        presenter.wireFrame = wireFrame
+        presenter.wireframe = wireframe
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager

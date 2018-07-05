@@ -6,10 +6,19 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
-protocol MainWireFrameProtocol: class {
+protocol MainWireframeProtocol: class {
     static func createMainModule() -> MainView
     
     // PRESENTER -> WIREFRAME
+    func presentUserInfo(from view: MainViewProtocol)
+    
+    func presentNoteList(from view: MainViewProtocol)
+    
+    func presentScheduleList(from view: MainViewProtocol, with date: String)
+    
+    func presentScheduleDetail(from view: MainViewProtocol, with feed: Feed)
+    
+    func presentScheduleForAdd(from view: MainViewProtocol, with date: String)
 }
 
 protocol MainViewProtocol: class {
@@ -21,15 +30,9 @@ protocol MainViewProtocol: class {
     // PRESENTER -> VIEW
     func pushUserInfo()
     
-    func pushLetter()
+    func pushNoteList()
     
     func initializeUI()
-    
-    func showHUD(with message: String)
-    
-    func dismissHUD()
-    
-    func showError(with message: String)
     
     func reloadMainData()
 }
@@ -37,14 +40,22 @@ protocol MainViewProtocol: class {
 protocol MainPresenterProtocol: class {
     var view: MainViewProtocol? { get set }
     var interactor: MainInteractorInputProtocol? { get set }
-    var wireFrame: MainWireFrameProtocol? { get set }
+    var wireframe: MainWireframeProtocol? { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad()
     
-    func pushUserInfo()
+    func detectEndOfScroll(_ row: Int)
     
-    func pushNotification()
+    func presentUserInfo()
+    
+    func presentNoteList()
+    
+    func presentScheduleList(with date: String)
+    
+    func presentScheduleDetail(with feed: Feed)
+    
+    func presentScheduleForAdd(with date: String)
 }
 
 protocol MainInteractorInputProtocol: class {
@@ -52,12 +63,16 @@ protocol MainInteractorInputProtocol: class {
     var remoteDatamanager: MainRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveScheduleAndFeedList(_ pageNo: Int)
+    func retrieveScheduleAndFeedList()
+    
+    func retrieveFeedList(_ row: Int)
 }
 
 protocol MainInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveScheduleAndFeedList(_ scheduleList: [Schedule], _ feedList: [Feed])
+    
+    func didRetrieveFeedList(_ feedList: [Feed])
     
     func onError(_ message: String)
 }
@@ -66,12 +81,16 @@ protocol MainRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: MainRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrieveScheduleAndFeedList(_ email: String, _ pageNo: Int)
+    func retrieveScheduleAndFeedList(_ email: String)
+    
+    func retrieveFeedList(_ email: String, _ row: Int)
 }
 
 protocol MainRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onScheduleAndFeedListRetrieved(_ scheduleList: [Schedule], _ feedList: [Feed])
+    
+    func onFeedListRetrieved(_ feedList: [Feed])
     
     func onError(_ message: String)
 }

@@ -20,14 +20,12 @@ protocol RegisterViewProtocol: class {
     func initializeUI()
     
     func addCategories()
-    
-    func showError(with message: String)
 }
 
 protocol RegisterPresenterProtocol: class {
     var view: RegisterViewProtocol? { get set }
     var interactor: RegisterInteractorInputProtocol? { get set }
-    var wireFrame: RegisterWireframeProtocol? { get set }
+    var wireframe: RegisterWireframeProtocol? { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad()

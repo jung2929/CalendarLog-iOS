@@ -6,10 +6,12 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import SVProgressHUD
+
 class RegisterPresenter: RegisterPresenterProtocol {
     var view: RegisterViewProtocol?
     var interactor: RegisterInteractorInputProtocol?
-    var wireFrame: RegisterWireframeProtocol?
+    var wireframe: RegisterWireframeProtocol?
     
     func viewDidLoad() {
         self.view?.initializeUI()
@@ -17,16 +19,18 @@ class RegisterPresenter: RegisterPresenterProtocol {
     
     func pressedRegisterButton(_ email: String, _ password: String, _ passwordConfirmation: String,
                                _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String) {
+        SVProgressHUD.show(withStatus: "회원가입을 진행 중 입니다.")
         self.interactor?.validateRegister(email, password, passwordConfirmation, nickname, sex, categoryTuples, associate)
     }
 }
 
 extension RegisterPresenter: RegisterInteractorOutputProtocol {
     func didTryRegister() {
-        self.wireFrame?.presentMain(from: view!)
+        SVProgressHUD.dismiss()
+        self.wireframe?.presentMain(from: view!)
     }
     
     func onError(with message: String) {
-        self.view?.showError(with: message)
+        SVProgressHUD.showError(withStatus: message)
     }
 }

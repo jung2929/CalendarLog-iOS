@@ -35,7 +35,7 @@ protocol LoginViewProtocol: class {
 protocol LoginPresenterProtocol: class {
     var view: LoginViewProtocol? { get set }
     var interactor: LoginInteractorInputProtocol? { get set }
-    var wireFrame: LoginWireframeProtocol? { get set }
+    var wireframe: LoginWireframeProtocol? { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad()

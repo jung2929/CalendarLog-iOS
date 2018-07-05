@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class LoginView: SuperViewController {
     var presenter: LoginPresenterProtocol?
@@ -16,6 +17,11 @@ class LoginView: SuperViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserDefaults.standard.bool(forKey: "isAutoLogin") {
+            let email = UserDefaults.standard.string(forKey: "email")!
+            let password = UserDefaults.standard.string(forKey: "password")!
+            self.presenter?.pressedLoginButton(email, password)
+        }
         self.presenter?.viewDidLoad()
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self

@@ -43,7 +43,7 @@ class MainView: SuperViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        self.presenter?.viewDidLoad()
         self.fsCalendar.delegate = self
         self.fsCalendar.dataSource = self
         self.mainTableView.delegate = self
@@ -58,34 +58,22 @@ class MainView: SuperViewController {
         let profileBarButtonImte = UIBarButtonItem.init(customView: profileButton)
         self.navigationItem.leftBarButtonItem = profileBarButtonImte
         // 내비게이션바 우측상단 쪽지 이미지 설정
-        let letterBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_letter.png"), style: .done, target: self, action: #selector(self.pushLetter))
-        self.navigationItem.rightBarButtonItem = letterBarButtonItem
+        let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note.png"), style: .done, target: self, action: #selector(self.pushNoteList))
+        self.navigationItem.rightBarButtonItem = noteBarButtonItem
     }
 }
 extension MainView: MainViewProtocol {
-    func showHUD(with message: String) {
-        SVProgressHUD.show(withStatus: message)
-    }
-    
-    func dismissHUD() {
-        SVProgressHUD.dismiss()
-    }
-    
-    func showError(with message: String) {
-        SVProgressHUD.showError(withStatus: message)
-    }
-    
     func reloadMainData() {
         self.fsCalendar.reloadData()
         self.mainTableView.reloadData()
     }
     
     @objc func pushUserInfo() {
-        self.presentAlert(title: "사용자 계정정보", message: "클릭")
+        self.presenter?.presentUserInfo()
     }
     
-    @objc func pushLetter() {
-        self.presentAlert(title: "쪽지", message: "클릭")
+    @objc func pushNoteList() {
+        self.presenter?.presentNoteList()
     }
     
     func initializeUI() {
@@ -145,7 +133,19 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentAlert(title: "알림", message: "\(indexPath.row)")
+        if let cell: MainTableViewCell = tableView.cellForRow(at: indexPath) as? MainTableViewCell {
+            if let feed = cell.feed {
+                self.presenter?.presentScheduleDetail(with: feed)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let feedList = self.feedList {
+            if feedList.count == indexPath.row + 1 {
+                self.presenter?.detectEndOfScroll(feedList.count)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,6 +154,8 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
         cell.selectionStyle = .none
         if let feedList = self.feedList {
             let feed = feedList[indexPath.row]
+            // Feed 내용 설정
+            cell.feed = feed
             // 닉네임 설정
             cell.nicknameLabel.text = feed.nickname
             // 일정 이미지 설정
@@ -276,8 +278,15 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
-            self.presentAlert(title: "알람", message: self.dateFormatter.string(from: date))
         }
-        self.presentAlert(title: "알람", message: self.dateFormatter.string(from: date))
+        if let scheduleList = self.scheduleList {
+            for schedule in scheduleList {
+                if schedule.scheduleDate == self.dateFormatter.string(from: date) {
+                    self.presenter?.presentScheduleList(with: self.dateFormatter.string(from: date))
+                    return
+                }
+            }
+        }
+        self.presenter?.presentScheduleForAdd(with: self.dateFormatter.string(from: date))
     }
 }
