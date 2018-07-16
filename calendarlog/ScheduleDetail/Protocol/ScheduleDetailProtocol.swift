@@ -13,6 +13,8 @@ protocol ScheduleDetailWireframeProtocol: class {
 }
 
 protocol ScheduleDetailViewProtocol: class {
+    var feedValue: Feed? { get set }
+    
     var presenter: ScheduleDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW

@@ -8,7 +8,6 @@
 
 import UIKit
 import FSCalendar
-import SVProgressHUD
 import Alamofire
 import AlamofireImage
 
@@ -17,15 +16,6 @@ class MainView: SuperViewController {
     var scheduleList: [Schedule]?
     var feedList: [Feed]?
     
-    // 캘린더 설정
-    fileprivate var fsCalendar: FSCalendar!
-    
-    // 피드 설정
-    let mainTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -46,8 +36,8 @@ class MainView: SuperViewController {
         self.presenter?.viewDidLoad()
         self.fsCalendar.delegate = self
         self.fsCalendar.dataSource = self
-        self.mainTableView.delegate = self
-        self.mainTableView.dataSource = self
+        self.feedTableView.delegate = self
+        self.feedTableView.dataSource = self
         //내비게이션바 설정
         let titleImageView = UIImageView(image: UIImage(named: "title_navigation.png"))
         self.navigationItem.titleView = titleImageView
@@ -61,11 +51,27 @@ class MainView: SuperViewController {
         let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note.png"), style: .done, target: self, action: #selector(self.pushNoteList))
         self.navigationItem.rightBarButtonItem = noteBarButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.presenter?.viewWillAppear()
+    }
+    
+    // 캘린더 설정
+    fileprivate var fsCalendar: FSCalendar!
+    
+    // 피드 설정
+    let feedTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        return tableView
+    }()
 }
 extension MainView: MainViewProtocol {
     func reloadMainData() {
         self.fsCalendar.reloadData()
-        self.mainTableView.reloadData()
+        self.feedTableView.reloadData()
     }
     
     @objc func pushUserInfo() {
@@ -77,6 +83,18 @@ extension MainView: MainViewProtocol {
     }
     
     func initializeUI() {
+        // 윗 쪽 파랑배경 설정
+        let backgroundTopimageView: UIImageView = UIImageView()
+        if let backgroundTopImage = UIImage(named: "background_top.png") {
+            backgroundTopimageView.image = backgroundTopImage
+        }
+        self.view.addSubview(backgroundTopimageView)
+        backgroundTopimageView.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.height.equalTo(self.view.frame.height / 2.5)
+        }
+        // 캘린더 설정
         let calendarSize = self.view.bounds.width - 40
         let calendar = FSCalendar(frame: CGRect(x: 20, y: 94, width: calendarSize, height: calendarSize))
         calendar.backgroundColor = .white
@@ -112,10 +130,9 @@ extension MainView: MainViewProtocol {
         }
         // 수직 드래그 제스쳐를 통해 캘린더 월/주 설정 변경
         self.view.addGestureRecognizer(self.scopeGesture)
-        self.mainTableView.panGestureRecognizer.require(toFail: self.scopeGesture)
-        self.mainTableView.showsVerticalScrollIndicator = false
-        self.view.addSubview(self.mainTableView)
-        self.mainTableView.snp.makeConstraints { make in
+        self.feedTableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        self.view.addSubview(self.feedTableView)
+        self.feedTableView.snp.makeConstraints { make in
             make.top.equalTo(self.fsCalendar.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
@@ -133,7 +150,7 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell: MainTableViewCell = tableView.cellForRow(at: indexPath) as? MainTableViewCell {
+        if let cell: FeedTableViewCell = tableView.cellForRow(at: indexPath) as? FeedTableViewCell {
             if let feed = cell.feed {
                 self.presenter?.presentScheduleDetail(with: feed)
             }
@@ -149,7 +166,7 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MainTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "feedCell")
+        let cell = FeedTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "feedCell")
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         if let feedList = self.feedList {
@@ -207,7 +224,7 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let shouldBegin = self.mainTableView.contentOffset.y <= -self.mainTableView.contentInset.top
+        let shouldBegin = self.feedTableView.contentOffset.y <= -self.feedTableView.contentInset.top
         if shouldBegin {
             let velocity = self.scopeGesture.velocity(in: self.view)
             switch self.fsCalendar.scope {

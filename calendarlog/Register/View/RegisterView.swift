@@ -17,7 +17,7 @@ class RegisterView: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
-        //내비게이션바 설정
+        //내비게이션바 타이틀 설정
         self.title = "회원가입"
         // 전달받은 이메일 값 설정
         self.emailTextField.text = self.emailValue
@@ -256,7 +256,7 @@ class RegisterView: SuperViewController {
     }()
 }
 
-extension RegisterView: RegisterViewProtocol {    
+extension RegisterView: RegisterViewProtocol {
     // 로그인 혹은 회원가입 버튼 눌렀을 경우 함수
     @objc func pressedRegisterButton() {
         self.presenter?.pressedRegisterButton(self.emailValue,
@@ -309,8 +309,19 @@ extension RegisterView: RegisterViewProtocol {
         }
     }
     func initializeUI() {
+        // 윗 쪽 파랑배경 설정
+        let backgroundTopimageView: UIImageView = UIImageView()
+        if let backgroundTopImage = UIImage(named: "background_top.png") {
+            backgroundTopimageView.image = backgroundTopImage
+        }
+        self.view.addSubview(backgroundTopimageView)
+        backgroundTopimageView.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.height.equalTo(self.view.frame.height / 2.5)
+        }
         // 메인 스크롤 뷰 추가
-        view.addSubview(self.mainScrollView)
+        self.view.addSubview(self.mainScrollView)
         self.mainScrollView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.leftMargin)

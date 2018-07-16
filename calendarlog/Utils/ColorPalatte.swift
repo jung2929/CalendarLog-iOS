@@ -31,11 +31,13 @@ struct ColorPalette {
     static let Orange = UIColor(rgb: 0xff9b3f)
     /***
      회색글자 : 9b9b9b
+     연한 회색 하단 라인 : f9fafe
      텍스트 필드 하단 라인 : dfdfdf
      기본검은글자 : 4a4a4a
      오류글자 : e25d6e
      */
     static let GrayForText = UIColor(rgb: 0x9b9b9b)
+    static let GrayLightForBottomBorder = UIColor(rgb: 0xf9fafe)
     static let GrayForBottomBorder = UIColor(rgb: 0xdfdfdf)
     static let BlackForText = UIColor(rgb: 0x4a4a4a)
     static let RedForText = UIColor(rgb: 0xe25d6e)

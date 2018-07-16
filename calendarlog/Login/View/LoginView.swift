@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation
 
 class LoginView: SuperViewController {
     var presenter: LoginPresenterProtocol?
@@ -208,6 +207,17 @@ extension LoginView: LoginViewProtocol {
     }
     
     func initializeUI() {
+        // 윗 쪽 파랑배경 설정
+        let backgroundTopimageView: UIImageView = UIImageView()
+        if let backgroundTopImage = UIImage(named: "background_top.png") {
+            backgroundTopimageView.image = backgroundTopImage
+        }
+        self.view.addSubview(backgroundTopimageView)
+        backgroundTopimageView.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.height.equalTo(self.view.frame.height / 2.5)
+        }
         // 로고 설정
         let logoImageView: UIImageView = UIImageView(image: UIImage(named: "logo_login.png"))
         // 타이틀 설정
@@ -216,7 +226,7 @@ extension LoginView: LoginViewProtocol {
         self.view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.view).offset(40)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
         // 로고 타이틀 추가
         self.view.addSubview(titleImageView)

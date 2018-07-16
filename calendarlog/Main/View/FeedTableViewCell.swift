@@ -1,5 +1,5 @@
 //
-//  MainTableViewCell.swift
+//  FeedTableViewCell.swift
 //  calendarlog
 //
 //  Created by JerryJung on 2018. 6. 1..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTableViewCell: UITableViewCell {
+class FeedTableViewCell: UITableViewCell {
     var feed: Feed?
     
     let feedView: UIView = {

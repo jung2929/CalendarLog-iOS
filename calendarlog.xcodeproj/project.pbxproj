@@ -55,7 +55,7 @@
 		BD5E332520B5EE8600B637FD /* LoginWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332420B5EE8600B637FD /* LoginWireframe.swift */; };
 		BD5E332720B673EF00B637FD /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332620B673EF00B637FD /* LoginInteractor.swift */; };
 		BD5E332D20B6759400B637FD /* LoginRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E332C20B6759400B637FD /* LoginRemoteDataManager.swift */; };
-		BD60DEFB20C0460300A3DF4E /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60DEFA20C0460300A3DF4E /* MainTableViewCell.swift */; };
+		BD60DEFB20C0460300A3DF4E /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60DEFA20C0460300A3DF4E /* FeedTableViewCell.swift */; };
 		BD65362720BEE97200E5C63B /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65362620BEE97200E5C63B /* MainProtocols.swift */; };
 		BD65362920BEE9D700E5C63B /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65362820BEE9D700E5C63B /* MainPresenter.swift */; };
 		BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD889B95209F779A005A8043 /* InfoPlist.strings */; };
@@ -147,7 +147,7 @@
 		BD5E332420B5EE8600B637FD /* LoginWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWireframe.swift; sourceTree = "<group>"; };
 		BD5E332620B673EF00B637FD /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		BD5E332C20B6759400B637FD /* LoginRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemoteDataManager.swift; sourceTree = "<group>"; };
-		BD60DEFA20C0460300A3DF4E /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		BD60DEFA20C0460300A3DF4E /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		BD65362620BEE97200E5C63B /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
 		BD65362820BEE9D700E5C63B /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		BD889B98209F77C3005A8043 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				BD3D054B20BB217D00F8284B /* MainView.swift */,
-				BD60DEFA20C0460300A3DF4E /* MainTableViewCell.swift */,
+				BD60DEFA20C0460300A3DF4E /* FeedTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1123,7 +1123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD60DEFB20C0460300A3DF4E /* MainTableViewCell.swift in Sources */,
+				BD60DEFB20C0460300A3DF4E /* FeedTableViewCell.swift in Sources */,
 				BD53505B20EE4095006AEE68 /* AddScheduleView.swift in Sources */,
 				BD53505D20EE40A1006AEE68 /* AddSchedulePresenter.swift in Sources */,
 				BD53506120EE40B7006AEE68 /* AddScheduleRemoteDataManager.swift in Sources */,

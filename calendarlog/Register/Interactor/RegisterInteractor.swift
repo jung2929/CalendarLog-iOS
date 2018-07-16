@@ -6,6 +6,8 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import Foundation
+
 class RegisterInteractor: RegisterInteractorInputProtocol {
     weak var presenter: RegisterInteractorOutputProtocol?
     var remoteDatamanager: RegisterRemoteDataManagerInputProtocol?
@@ -49,7 +51,12 @@ class RegisterInteractor: RegisterInteractorInputProtocol {
 }
 
 extension RegisterInteractor: RegisterRemoteDataManagerOutputProtocol {
-    func onRegisterSuccess() {
+    func onRegisterSuccess(_ email: String, _ password: String) {
+        if !UserDefaults.standard.bool(forKey: "isAutoLogin") {
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(password, forKey: "password")
+            UserDefaults.standard.set(true, forKey: "isAutoLogin")
+        }
         self.presenter?.didTryRegister()
     }
     

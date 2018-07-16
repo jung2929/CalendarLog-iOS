@@ -57,7 +57,7 @@ protocol RegisterRemoteDataManagerInputProtocol: class {
 
 protocol RegisterRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onRegisterSuccess()
+    func onRegisterSuccess(_ email: String, _ password: String)
     
     func onError(with message: String)
 }

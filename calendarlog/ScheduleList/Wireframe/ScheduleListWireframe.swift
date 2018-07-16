@@ -26,4 +26,12 @@ class ScheduleListWireframe: ScheduleListWireframeProtocol {
         
         return view
     }
+    
+    func presentScheduleDetail(from view: ScheduleListViewProtocol, with feed: Feed) {
+        if let sourceView = view as? UIViewController {
+            let scheduleDetailViewController = ScheduleDetailWireframe.createScheduleDetailModule()
+            scheduleDetailViewController.feedValue = feed
+            sourceView.navigationController?.pushViewController(scheduleDetailViewController, animated: true)
+        }
+    }
 }

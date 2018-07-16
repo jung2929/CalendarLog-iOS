@@ -3,24 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MainView.calendar(_:imageFor:):MainView.swift">
+         contextName = "MainPresenter.didRetrieveScheduleList(_:):MainPresenter.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddScheduleView.textFieldShouldReturn(_:):AddScheduleView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "">
-            </PersistentString>
-            <PersistentString
-               value = "self.scheduleDetailList == nil">
+               value = "textField.tag">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MainRemoteDataManager.retrieveFeedList(_:_:):MainRemoteDataManager.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MainView.tableView(_:willDisplay:forRowAt:):MainView.swift">
+         contextName = "MainView.viewDidLoad():MainView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row + 1">
+               value = "self.fsCalendar.cell(for: Date(), at: .notFound)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,48 +30,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LoginViewController.pressedLoginOrRegisterButton():LoginViewController.swift">
+         contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.emailTextField.text?.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LoginPresenter.viewDidLoad():LoginPresenter.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
+               value = "self.mainView.bounds.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #2 in MainView.tableView(_:cellForRowAt:):MainView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in RegisterViewController.addCategories():RegisterViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "15 + (rowIndex * 20)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MainViewController.viewDidLoad():MainViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.mainView.bounds.width">
-            </PersistentString>
-            <PersistentString
-               value = "self.mainView.frame.width">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #2 in LoginViewController.initializeUI():LoginViewController.swift">
@@ -85,23 +49,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainPresenter.didRetrieveScheduleList(_:):MainPresenter.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MainView.viewDidLoad():MainView.swift">
+         contextName = "LoginViewController.pressedLoginOrRegisterButton():LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.fsCalendar.cell(for: Date(), at: .notFound)">
+               value = "self.emailTextField.text?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainView.tableView(_:cellForRowAt:):MainView.swift">
+         contextName = "closure #2 in RegisterViewController.addCategories():RegisterViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "15 + (rowIndex * 20)">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MainRemoteDataManager.retrieveFeedList(_:_:):MainRemoteDataManager.swift">
       </ContextState>
       <ContextState
          contextName = "MainViewController.loadView():MainViewController.swift">
@@ -123,6 +87,63 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "MainView.calendar(_:imageFor:):MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "self.scheduleDetailList == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.tableView(_:cellForRowAt:):MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScheduleListView.tableView(_:willDisplay:forRowAt:):ScheduleListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feedList.count == indexPath.row + 1">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row + 1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScheduleListPresenter.didRetrieveFeedList(_:):ScheduleListPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view?.feedList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainView.tableView(_:willDisplay:forRowAt:):MainView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row + 1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewController.viewDidLoad():MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.mainView.bounds.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.mainView.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MainViewController.initializeUI():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -134,10 +155,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
+         contextName = "LoginPresenter.viewDidLoad():LoginPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.mainView.bounds.width">
+               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

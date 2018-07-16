@@ -27,7 +27,7 @@ class RegisterRemoteDataManager: RegisterRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let defaultResponse):
                     if defaultResponse.isSuccess {
-                        self.remoteRequestHandler?.onRegisterSuccess()
+                        self.remoteRequestHandler?.onRegisterSuccess(userInfo.email, userInfo.password)
                     } else {
                         self.remoteRequestHandler?.onError(with: defaultResponse.message)
                     }

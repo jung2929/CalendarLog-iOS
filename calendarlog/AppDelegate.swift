@@ -26,8 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let loginViewController = LoginWireframe.createLoginModule()
         self.window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        
         //let mainViewController = MainWireframe.createMainModule()
         //self.window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+        
+        //let addScheduleViewController = AddScheduleWireframe.createAddScheduleModule()
+        //self.window?.rootViewController = UINavigationController(rootViewController: addScheduleViewController)
+        
         self.window?.makeKeyAndVisible()
         return true
     }

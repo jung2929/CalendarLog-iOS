@@ -45,6 +45,8 @@ protocol MainPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     
+    func viewWillAppear()
+    
     func detectEndOfScroll(_ row: Int)
     
     func presentUserInfo()

@@ -14,9 +14,12 @@ class MainPresenter: MainPresenterProtocol {
     var wireframe: MainWireframeProtocol?
     
     func viewDidLoad() {
+        self.view?.initializeUI()
+    }
+    
+    func viewWillAppear() {
         SVProgressHUD.show(withStatus: "일정 및 피드를 불러오는중입니다.")
         self.interactor?.retrieveScheduleAndFeedList()
-        self.view?.initializeUI()
     }
     
     func detectEndOfScroll(_ row: Int) {
@@ -55,8 +58,12 @@ extension MainPresenter: MainInteractorOutputProtocol {
     
     func didRetrieveFeedList(_ feedList: [Feed]) {
         if feedList.count != 0 {
-            self.view?.feedList! += feedList
-            self.view?.reloadMainData()
+            if self.view?.feedList == nil {
+                self.view?.feedList = feedList
+            } else {
+                self.view?.feedList! += feedList
+                self.view?.reloadMainData()
+            }
         }
         SVProgressHUD.dismiss()
     }

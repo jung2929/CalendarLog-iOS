@@ -13,6 +13,8 @@ protocol AddScheduleWireframeProtocol: class {
 }
 
 protocol AddScheduleViewProtocol: class {
+    var dateValue: String? { get set }
+    
     var presenter: AddSchedulePresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
