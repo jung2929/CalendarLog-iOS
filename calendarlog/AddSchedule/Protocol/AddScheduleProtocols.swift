@@ -6,6 +6,8 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import UIKit
+
 protocol AddScheduleWireframeProtocol: class {
     static func createAddScheduleModule() -> AddScheduleView
     
@@ -18,6 +20,12 @@ protocol AddScheduleViewProtocol: class {
     var presenter: AddSchedulePresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func pushDone()
+
+    func setPickerViewWithToolbar(_ textField: UITextField, _ pickerView: UIPickerView,
+                                  _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int,
+                                  hourIndex: Int, minuteIndex: Int, _ doneButton: UIBarButtonItem)
+    
     func initializeUI()
 }
 

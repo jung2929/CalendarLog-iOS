@@ -16,6 +16,8 @@ class AddScheduleView: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+        self.startDateTextField.delegate = self
+        self.endDateTextField.delegate = self
         self.titleTextField.delegate = self
         self.contentTextView.delegate = self
         self.locationTextField.delegate = self
@@ -55,7 +57,7 @@ class AddScheduleView: SuperViewController {
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         textField.isUserInteractionEnabled = false
-        textField.text = "2018.01.01 오전 0:00"
+        textField.text = "2018.01.01 0:00"
         return textField
     }()
     // 종료일 라벨 설정
@@ -72,7 +74,7 @@ class AddScheduleView: SuperViewController {
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         textField.isUserInteractionEnabled = false
-        textField.text = "2018.01.01 오전 0:00"
+        textField.text = "2018.01.01 23:59"
         return textField
     }()
     // 일자 하단 라인 설정
@@ -202,7 +204,33 @@ class AddScheduleView: SuperViewController {
     }()
 }
 
-extension AddScheduleView: AddScheduleViewProtocol {
+extension AddScheduleView: AddScheduleViewProtocol {    
+    @objc func pushDone() {
+        
+    }
+    
+    func setPickerViewWithToolbar(_ textField: UITextField, _ pickerView: UIPickerView,
+                                  _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int,
+                                  hourIndex: Int, minuteIndex: Int, _ doneButton: UIBarButtonItem) {
+        pickerView.backgroundColor = UIColor.white
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.selectRow(hourIndex, inComponent: 0, animated: false)
+        pickerView.selectRow(minuteIndex, inComponent: 1, animated: false)
+        // MARK: Toolbar 설정
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.backgroundColor = UIColor.white
+        toolbar.isTranslucent = true
+        toolbar.tintColor = ColorPalette.Primary
+        toolbar.sizeToFit()
+        toolbar.isUserInteractionEnabled = true
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([spaceButton, doneButton], animated: false)
+        textField.inputAccessoryView = toolbar
+        textField.inputView = pickerView
+    }
+    
     func initializeUI() {
         self.view.backgroundColor = .white
         // 메인 스크롤 뷰 추가
@@ -232,6 +260,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.width.equalTo(80)
         }
         // 시작일 텍스트 필드 추가
+        //self.setPickerViewWithToolbar(self.textFieldStartTime, self.pickerViewStartTime, self.startTimeHourIndex, self.startTimeMinuteIndex, doneButtonStartTime)
         self.centerView.addSubview(self.startDateTextField)
         self.startDateTextField.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(25)
@@ -246,6 +275,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.width.equalTo(80)
         }
         // 종료일 텍스트 필드
+        //self.setPickerViewWithToolbar(self.textFieldStartTime, self.pickerViewStartTime, self.startTimeHourIndex, self.startTimeMinuteIndex, doneButtonStartTime)
         self.centerView.addSubview(self.endDateTextField)
         self.endDateTextField.snp.makeConstraints { make in
             make.top.equalTo(self.startDateTextField.snp.bottom).offset(10)
@@ -371,13 +401,17 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.right.equalToSuperview().offset(offsetRightValue)
         }
     }
-    
-    @objc func pushDone() {
-        
-    }
 }
 
-extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate {
+extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 5
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 5
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "내용을 입력하세요." {
             textView.text.removeAll()
@@ -435,6 +469,10 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate {
     // 텍스트 필드 선택했을 경우 밑줄 색상 변경
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
+        case self.startDateTextField:
+            self.startDateTextField.backgroundColor = ColorPalette.Primary
+        case self.endDateTextField:
+            self.endDateTextField.backgroundColor = ColorPalette.Primary
         case self.titleTextField:
             self.titleBottomBorderView.backgroundColor = ColorPalette.Primary
         case self.locationTextField:
@@ -454,6 +492,10 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate {
     // 텍스트 필드 빠져나갔을 경우 밑줄 색상 변경
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
+        case self.startDateTextField:
+            self.startDateTextField.backgroundColor = ColorPalette.GrayForBottomBorder
+        case self.endDateTextField:
+            self.endDateTextField.backgroundColor = ColorPalette.GrayForBottomBorder
         case self.titleTextField:
             self.titleBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         case self.locationTextField:

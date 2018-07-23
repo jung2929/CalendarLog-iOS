@@ -18,13 +18,13 @@ class MainPresenter: MainPresenterProtocol {
     }
     
     func viewWillAppear() {
-        SVProgressHUD.show(withStatus: "일정 및 피드를 불러오는중입니다.")
-        self.interactor?.retrieveScheduleAndFeedList()
+        //SVProgressHUD.show(withStatus: "일정 및 피드를 불러오는중입니다.")
+        //self.interactor?.retrieveScheduleAndFeedList()
     }
     
     func detectEndOfScroll(_ row: Int) {
-        SVProgressHUD.show(withStatus: "피드를 불러오는중입니다.")
-        self.interactor?.retrieveFeedList(row)
+        //SVProgressHUD.show(withStatus: "피드를 불러오는중입니다.")
+        //self.interactor?.retrieveFeedList(row)
     }
     
     func presentUserInfo() {
