@@ -15,16 +15,36 @@ protocol AddScheduleWireframeProtocol: class {
 }
 
 protocol AddScheduleViewProtocol: class {
-    var dateValue: String? { get set }
+    var startDateValue: String { get set }
+    var startYearIndexValue: Int { get set }
+    var startMonthIndexValue: Int { get set }
+    var startDayIndexValue: Int { get set }
+    var startHourIndexValue: Int { get set }
+    var startMinuteIndexValue: Int { get set }
+    
+    var endDateValue: String { get set }
+    var endYearIndexValue: Int { get set }
+    var endMonthIndexValue: Int { get set }
+    var endDayIndexValue: Int { get set }
+    var endHourIndexValue: Int { get set }
+    var endMinuteIndexValue: Int { get set }
     
     var presenter: AddSchedulePresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func pushImageUploadButton()
+    
+    func findMaxDayIndex(with monthIndex: Int) -> Int
+    
     func pushDone()
+    
+    func pushStartDateDone()
+    
+    func pushEndDateDone()
 
     func setPickerViewWithToolbar(_ textField: UITextField, _ pickerView: UIPickerView,
                                   _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int,
-                                  hourIndex: Int, minuteIndex: Int, _ doneButton: UIBarButtonItem)
+                                  _ hourIndex: Int, _ minuteIndex: Int, _ doneButton: UIBarButtonItem)
     
     func initializeUI()
 }

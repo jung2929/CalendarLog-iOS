@@ -183,7 +183,7 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
                     }
                 }
             } else {
-                cell.scheduleImageView.snp.makeConstraints { make in
+                cell.scheduleImageView.snp.updateConstraints { make in
                     make.top.equalTo(cell.borderView.snp.bottom).offset(0)
                     make.size.equalTo(0)
                 }
@@ -283,6 +283,18 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
         }
     }
     
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.date(from: "20180101")!
+    }
+    
+    func maximumDate(for calendar: FSCalendar) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.date(from: "20191231")!
+    }
+    
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(20)
@@ -304,6 +316,15 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
                 }
             }
         }
-        self.presenter?.presentScheduleForAdd(with: self.dateFormatter.string(from: date))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let selectedDate = formatter.string(from: date)
+        formatter.dateFormat = "yyyy"
+        let selectedYearIndex = Int(formatter.string(from: date))! - 2018
+        formatter.dateFormat = "MM"
+        let selectedMonthIndex = Int(formatter.string(from: date))! - 1
+        formatter.dateFormat = "dd"
+        let selectedDayIndex = Int(formatter.string(from: date))! - 1
+        self.presenter?.presentScheduleForAdd(with: selectedDate, selectedYearIndex, selectedMonthIndex, selectedDayIndex)
     }
 }

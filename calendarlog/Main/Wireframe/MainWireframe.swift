@@ -57,10 +57,21 @@ class MainWireframe: MainWireframeProtocol {
         }
     }
     
-    func presentScheduleForAdd(from view: MainViewProtocol, with date: String) {
+    func presentScheduleForAdd(from view: MainViewProtocol, with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int) {
         if let sourceView = view as? UIViewController {
             let addScheduleViewController = AddScheduleWireframe.createAddScheduleModule()
-            addScheduleViewController.dateValue = date
+            addScheduleViewController.startDateValue = date
+            addScheduleViewController.startYearIndexValue = yearIndex
+            addScheduleViewController.startMonthIndexValue = monthIndex
+            addScheduleViewController.startDayIndexValue = dayIndex
+            addScheduleViewController.startHourIndexValue = 0
+            addScheduleViewController.startMinuteIndexValue = 0
+            addScheduleViewController.endDateValue = date
+            addScheduleViewController.endYearIndexValue = yearIndex
+            addScheduleViewController.endMonthIndexValue = monthIndex
+            addScheduleViewController.endDayIndexValue = dayIndex
+            addScheduleViewController.endHourIndexValue = 0
+            addScheduleViewController.endMinuteIndexValue = 0
             sourceView.navigationController?.pushViewController(addScheduleViewController, animated: true)
         }
     }

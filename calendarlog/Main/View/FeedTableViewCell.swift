@@ -10,13 +10,14 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell {
     var feed: Feed?
-    
+    // 피드 뷰 설정
     let feedView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 19
         return view
     }()
+    // 기본 사용자 프로필 설정
     let profileImageView: UIImageView = UIImageView(image: UIImage(named: "ic_profile_default.png"))
     let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -25,6 +26,7 @@ class FeedTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12, weight: .medium)
         return label
     }()
+    // 등록시간 설정
     let commentDateTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "2018-12-31 PM 5:00"
@@ -38,12 +40,14 @@ class FeedTableViewCell: UITableViewCell {
         view.backgroundColor = ColorPalette.GrayForBottomBorder
         return view
     }()
+    // 이미지뷰 설정
     let scheduleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "ic_placeholder.png")
         return imageView
     }()
+    // 제목 설정
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "타이틀"
@@ -51,6 +55,7 @@ class FeedTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
+    // 내용 설정
     let contentLabel: UILabel = {
         let label = UILabel()
         label.text = "내용"
@@ -59,6 +64,7 @@ class FeedTableViewCell: UITableViewCell {
         label.numberOfLines = 3
         return label
     }()
+    // 좋아요 수, 아이콘 설정
     let likeLabel: UILabel = {
         let label = UILabel()
         label.text = "0"
@@ -66,6 +72,7 @@ class FeedTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
+    // 댓글 수, 아이콘 설정
     let commentLabel: UILabel = {
         let label = UILabel()
         label.text = "0"

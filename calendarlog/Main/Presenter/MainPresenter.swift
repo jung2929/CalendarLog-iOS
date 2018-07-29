@@ -18,8 +18,8 @@ class MainPresenter: MainPresenterProtocol {
     }
     
     func viewWillAppear() {
-        //SVProgressHUD.show(withStatus: "일정 및 피드를 불러오는중입니다.")
-        //self.interactor?.retrieveScheduleAndFeedList()
+        SVProgressHUD.show(withStatus: "일정 및 피드를 불러오는중입니다.")
+        self.interactor?.retrieveScheduleAndFeedList()
     }
     
     func detectEndOfScroll(_ row: Int) {
@@ -43,8 +43,8 @@ class MainPresenter: MainPresenterProtocol {
         self.wireframe?.presentScheduleDetail(from: self.view!, with: feed)
     }
     
-    func presentScheduleForAdd(with date: String) {
-        self.wireframe?.presentScheduleForAdd(from: self.view!, with: date)
+    func presentScheduleForAdd(with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int) {
+        self.wireframe?.presentScheduleForAdd(from: self.view!, with: date, yearIndex, monthIndex, dayIndex)
     }
 }
 

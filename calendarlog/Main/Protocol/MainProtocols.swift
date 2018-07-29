@@ -18,7 +18,7 @@ protocol MainWireframeProtocol: class {
     
     func presentScheduleDetail(from view: MainViewProtocol, with feed: Feed)
     
-    func presentScheduleForAdd(from view: MainViewProtocol, with date: String)
+    func presentScheduleForAdd(from view: MainViewProtocol, with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int)
 }
 
 protocol MainViewProtocol: class {
@@ -57,7 +57,7 @@ protocol MainPresenterProtocol: class {
     
     func presentScheduleDetail(with feed: Feed)
     
-    func presentScheduleForAdd(with date: String)
+    func presentScheduleForAdd(with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int)
 }
 
 protocol MainInteractorInputProtocol: class {

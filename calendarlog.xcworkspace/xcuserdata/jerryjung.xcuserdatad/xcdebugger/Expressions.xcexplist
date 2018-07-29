@@ -30,10 +30,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AddScheduleView.pushEndDateDone():AddScheduleView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.startYearIndexValue == endYearIndexValue">
+            </PersistentString>
+            <PersistentString
+               value = "self.startYearIndexValue == endYearIndexValue &amp;&amp; self.startMonthIndexValue &gt; endMonthIndexValue">
+            </PersistentString>
+            <PersistentString
+               value = "self.startMonthIndexValue &gt; endMonthIndexValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.mainView.bounds.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddScheduleView.pickerView(_:didSelectRow:inComponent:):AddScheduleView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.startMonthIndexValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -79,14 +101,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in RegisterViewController.addCategories():RegisterViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.categoryView.frame.width / 3">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "MainView.calendar(_:imageFor:):MainView.swift">
          <PersistentStrings>
             <PersistentString
@@ -94,6 +108,14 @@
             </PersistentString>
             <PersistentString
                value = "self.scheduleDetailList == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in RegisterViewController.addCategories():RegisterViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.categoryView.frame.width / 3">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -158,13 +180,13 @@
          contextName = "LoginPresenter.viewDidLoad():LoginPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
+               value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
             </PersistentString>
             <PersistentString
                value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
+               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -30,6 +30,10 @@ class ScheduleListPresenter: ScheduleListPresenterProtocol {
     func presentScheduleDetail(with feed: Feed) {
         self.wireframe?.presentScheduleDetail(from: self.view!, with: feed)
     }
+    
+    func presentScheduleForAdd(with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int) {
+        self.wireframe?.presentScheduleForAdd(from: self.view!, with: date, yearIndex, monthIndex, dayIndex)
+    }
 }
 
 extension ScheduleListPresenter: ScheduleListInteractorOutputProtocol {

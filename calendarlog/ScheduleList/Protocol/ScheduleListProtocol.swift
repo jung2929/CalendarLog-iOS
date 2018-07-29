@@ -11,6 +11,8 @@ protocol ScheduleListWireframeProtocol: class {
     
     // PRESENTER -> WIREFRAME
     func presentScheduleDetail(from view: ScheduleListViewProtocol, with feed: Feed)
+    
+    func presentScheduleForAdd(from view: ScheduleListViewProtocol, with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int)
 }
 
 protocol ScheduleListViewProtocol: class {
@@ -21,6 +23,8 @@ protocol ScheduleListViewProtocol: class {
     
     // PRESENTER -> VIEW
     func initializeUI()
+    
+    func pushAddSchedule()
     
     func reloadFeed()
 }
@@ -38,6 +42,8 @@ protocol ScheduleListPresenterProtocol: class {
     func detectEndOfScroll(_ row: Int, _ scheduleDate: String)
     
     func presentScheduleDetail(with feed: Feed)
+    
+    func presentScheduleForAdd(with date: String, _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int)
 }
 
 protocol ScheduleListInteractorInputProtocol: class {

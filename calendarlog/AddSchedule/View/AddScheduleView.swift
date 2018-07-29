@@ -11,7 +11,47 @@ import SVProgressHUD
 
 class AddScheduleView: SuperViewController {
     var presenter: AddSchedulePresenterProtocol?
-    var dateValue: String?
+    var startDateValue: String = "2018.01.01 00:00" {
+        didSet {
+            self.startDateTextField.text = startDateValue
+        }
+    }
+    var startYearIndexValue: Int = 0
+    var startMonthIndexValue: Int = 0
+    var startDayIndexValue: Int = 0 {
+        didSet {
+            self.startDatePickerView.selectRow(self.startDayIndexValue, inComponent: 2, animated: false)
+        }
+    }
+    var startHourIndexValue: Int = 0
+    var startMinuteIndexValue: Int = 0
+    
+    var endDateValue: String = "2018.01.01 00:00" {
+        didSet {
+            self.endDateTextField.text = endDateValue
+        }
+    }
+    var endYearIndexValue: Int = 0
+    var endMonthIndexValue: Int = 0
+    var endDayIndexValue: Int = 0 {
+        didSet {
+            self.endDatePickerView.selectRow(self.endDayIndexValue, inComponent: 2, animated: false)
+        }
+    }
+    var endHourIndexValue: Int = 0
+    var endMinuteIndexValue: Int = 0
+    
+    let yearInfo = Array(2018...2019)
+    let monthInfo = Array(1...12)
+    let dayInfo = Array(1...31)
+    let hourInfo = Array(0...23)
+    let minuteInfo = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
+    
+    var selectedCategoryValue = -1 {
+        didSet {
+            self.categoryTextField.textColor = ColorPalette.BlackForText
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +60,13 @@ class AddScheduleView: SuperViewController {
         self.endDateTextField.delegate = self
         self.titleTextField.delegate = self
         self.contentTextView.delegate = self
+        self.categoryTextField.delegate = self
         self.locationTextField.delegate = self
         self.urlFirstTextField.delegate = self
         self.urlSecondTextField.delegate = self
         self.urlThirdTextField.delegate = self
+        let touchUpInsideTap = UITapGestureRecognizer(target: self, action: #selector(pushImageUploadButton))
+        self.scheduleImageView.addGestureRecognizer(touchUpInsideTap)
         //내비게이션바 타이틀 설정
         self.title = "일정 추가"
         // 내비게이션바 우측상단 쪽지 이미지 설정
@@ -56,10 +99,12 @@ class AddScheduleView: SuperViewController {
         let textField = UITextField()
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
-        textField.isUserInteractionEnabled = false
-        textField.text = "2018.01.01 0:00"
+        // 커서 색상 없애기
+        textField.tintColor = UIColor.clear
         return textField
     }()
+    // 시작일 피커뷰 설정
+    let startDatePickerView = UIPickerView()
     // 종료일 라벨 설정
     let endDateLabel: UILabel = {
         let label = UILabel()
@@ -73,10 +118,12 @@ class AddScheduleView: SuperViewController {
         let textField = UITextField()
         textField.textColor = ColorPalette.BlackForText
         textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
-        textField.isUserInteractionEnabled = false
-        textField.text = "2018.01.01 23:59"
+        // 커서 색상 없애기
+        textField.tintColor = UIColor.clear
         return textField
     }()
+    // 종료일 피커뷰 설정
+    let endDatePickerView = UIPickerView()
     // 일자 하단 라인 설정
     let dateBottomBorderView: UIView = {
         let view = UIView()
@@ -109,6 +156,26 @@ class AddScheduleView: SuperViewController {
         textView.layer.cornerRadius = 5
         return textView
     }()
+    // 카테고리 라벨 설정
+    let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "카테고리"
+        label.textColor = ColorPalette.BlackForText
+        label.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        return label
+    }()
+    // 카테고리 텍스트 필드 설정
+    let categoryTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "카테고리를 선택해주세요."
+        textField.textColor = ColorPalette.GrayForText
+        textField.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+        textField.textAlignment = .right
+        //textField.inputView = nil
+        // 커서 색상 없애기
+        textField.tintColor = UIColor.clear
+        return textField
+    }()
     // 이미지 라벨 설정
     let imageLabel: UILabel = {
         let label = UILabel()
@@ -118,14 +185,23 @@ class AddScheduleView: SuperViewController {
         return label
     }()
     // 이미지 첨부 버튼 설정
-    let imageButton: UIButton = {
+    let imageUploadButton: UIButton = {
         let button = UIButton()
         button.setTitle("이미지 첨부", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.backgroundColor = ColorPalette.BlueForButton
         button.layer.cornerRadius = 4
+        button.addTarget(self, action: #selector(pushImageUploadButton), for: .touchUpInside)
         return button
+    }()
+    // 업로드 이미지뷰 설정
+    let scheduleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "ic_placeholder.png")
+        imageView.isUserInteractionEnabled = true
+        return imageView
     }()
     // 장소 텍스트 필드 설정
     let locationTextField: UITextField = {
@@ -204,23 +280,115 @@ class AddScheduleView: SuperViewController {
     }()
 }
 
-extension AddScheduleView: AddScheduleViewProtocol {    
+extension AddScheduleView: AddScheduleViewProtocol {
+    @objc func pushImageUploadButton() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionCamera = UIAlertAction(title: "사진 촬영", style: .default, handler: { _ -> Void in
+            // 일정 이미지 설정
+            self.scheduleImageView.snp.updateConstraints { make in
+                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
+                make.size.equalTo(200)
+            }
+            self.scheduleImageView.setNeedsUpdateConstraints()
+        })
+        let actionAlbum = UIAlertAction(title: "사진 앨범에서 선택", style: .default, handler: { _ -> Void in
+            // 일정 이미지 설정
+            self.scheduleImageView.snp.updateConstraints { make in
+                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
+                make.size.equalTo(200)
+            }
+        })
+        let actionDelete = UIAlertAction(title: "사진 제거", style: .default, handler: { _ -> Void in
+            // 일정 이미지 설정
+            self.scheduleImageView.snp.updateConstraints { make in
+                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(0)
+                make.size.equalTo(0)
+            }
+            self.scheduleImageView.layoutIfNeeded()
+        })
+        let actionCancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        alert.addAction(actionCamera)
+        alert.addAction(actionAlbum)
+        alert.addAction(actionDelete)
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func findMaxDayIndex(with monthIndex: Int) -> Int {
+        //28일 이후로 선택시
+        if monthIndex == 1 {
+            //2월 = 28일까지
+            return 27
+        } else if monthIndex == 3 || monthIndex == 5 || monthIndex == 8 || monthIndex == 10 {
+            // 4월, 6월, 9월, 11월 = 30일까지
+            return 29
+        } else {
+            return 30
+        }
+    }
+    
     @objc func pushDone() {
         
     }
     
+    @objc func pushStartDateDone() {
+        self.startYearIndexValue = self.startDatePickerView.selectedRow(inComponent: 0)
+        self.startMonthIndexValue = self.startDatePickerView.selectedRow(inComponent: 1)
+        self.startDayIndexValue = self.startDatePickerView.selectedRow(inComponent: 2)
+        let maxDayIndex = findMaxDayIndex(with: self.startMonthIndexValue)
+        if maxDayIndex < self.startDayIndexValue {
+            self.startDayIndexValue = maxDayIndex
+        }
+        self.startHourIndexValue = self.startDatePickerView.selectedRow(inComponent: 3)
+        self.startMinuteIndexValue = self.startDatePickerView.selectedRow(inComponent: 4)
+        let month = self.startMonthIndexValue < 9 ? "0\(self.monthInfo[self.startMonthIndexValue])" : String(self.monthInfo[self.startMonthIndexValue])
+        let day = self.startDayIndexValue < 9 ? "0\(self.dayInfo[self.startDayIndexValue])" : String(self.dayInfo[self.startDayIndexValue])
+        let hour = self.startHourIndexValue < 10 ? "0\(self.hourInfo[self.startHourIndexValue])" : String(self.hourInfo[self.startHourIndexValue])
+        self.startDateValue = "\(self.yearInfo[self.startYearIndexValue]).\(month).\(day) \(hour):\(self.minuteInfo[self.startMinuteIndexValue])"
+        self.startDateTextField.resignFirstResponder()
+    }
+    // MARK: 종료시간 완료 클릭시 DatePicker Dismiss
+    @objc func pushEndDateDone() {
+        let endYearIndexValue = self.endDatePickerView.selectedRow(inComponent: 0)
+        let endMonthIndexValue = self.endDatePickerView.selectedRow(inComponent: 1)
+        var endDayIndexValue = self.endDatePickerView.selectedRow(inComponent: 2)
+        let maxDayIndex = findMaxDayIndex(with: endMonthIndexValue)
+        if maxDayIndex < endDayIndexValue {
+            endDayIndexValue = maxDayIndex
+        }
+        let endHourIndexValue = self.endDatePickerView.selectedRow(inComponent: 3)
+        let endMinuteIndexValue = self.endDatePickerView.selectedRow(inComponent: 4)
+        let month = endMonthIndexValue < 9 ? "0\(self.monthInfo[endMonthIndexValue])" : String(self.monthInfo[endMonthIndexValue])
+        let day = endDayIndexValue < 9 ? "0\(self.dayInfo[endDayIndexValue])" : String(self.dayInfo[endDayIndexValue])
+        let hour = endHourIndexValue < 10 ? "0\(self.hourInfo[endHourIndexValue])" : String(self.hourInfo[endHourIndexValue])
+        let endDateValue = "\(self.yearInfo[endYearIndexValue]).\(month).\(day) \(hour):\(self.minuteInfo[endMinuteIndexValue])"
+        if self.startDateValue > endDateValue {
+            SVProgressHUD.showError(withStatus: "시작일자가 종료일자보다 클 수 없습니다.")
+            return
+        }
+        self.endYearIndexValue = endYearIndexValue
+        self.endMonthIndexValue = endMonthIndexValue
+        self.endDayIndexValue = endDayIndexValue
+        self.endHourIndexValue = endHourIndexValue
+        self.endMinuteIndexValue = endMinuteIndexValue
+        self.endDateValue = endDateValue
+        self.endDateTextField.resignFirstResponder()
+    }
+    
     func setPickerViewWithToolbar(_ textField: UITextField, _ pickerView: UIPickerView,
                                   _ yearIndex: Int, _ monthIndex: Int, _ dayIndex: Int,
-                                  hourIndex: Int, minuteIndex: Int, _ doneButton: UIBarButtonItem) {
+                                  _ hourIndex: Int, _ minuteIndex: Int, _ doneButton: UIBarButtonItem) {
         pickerView.backgroundColor = UIColor.white
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.selectRow(hourIndex, inComponent: 0, animated: false)
-        pickerView.selectRow(minuteIndex, inComponent: 1, animated: false)
+        pickerView.selectRow(yearIndex, inComponent: 0, animated: false)
+        pickerView.selectRow(monthIndex, inComponent: 1, animated: false)
+        pickerView.selectRow(dayIndex, inComponent: 2, animated: false)
+        pickerView.selectRow(hourIndex, inComponent: 3, animated: false)
+        pickerView.selectRow(minuteIndex, inComponent: 4, animated: false)
         // MARK: Toolbar 설정
         let toolbar = UIToolbar()
         toolbar.barStyle = .default
-        toolbar.backgroundColor = UIColor.white
         toolbar.isTranslucent = true
         toolbar.tintColor = ColorPalette.Primary
         toolbar.sizeToFit()
@@ -229,6 +397,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
         toolbar.setItems([spaceButton, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
         textField.inputView = pickerView
+        pickerView.delegate = self
     }
     
     func initializeUI() {
@@ -260,13 +429,17 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.width.equalTo(80)
         }
         // 시작일 텍스트 필드 추가
-        //self.setPickerViewWithToolbar(self.textFieldStartTime, self.pickerViewStartTime, self.startTimeHourIndex, self.startTimeMinuteIndex, doneButtonStartTime)
+        self.startDateTextField.text = self.startDateValue
         self.centerView.addSubview(self.startDateTextField)
         self.startDateTextField.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(25)
             make.left.equalTo(self.startDateLabel.snp.right)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
+        // 시작일 피커뷰 추가
+        self.startDatePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 216)
+        let startDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done.png"), style: .plain, target: self, action: #selector(pushStartDateDone))
+        self.setPickerViewWithToolbar(self.startDateTextField, self.startDatePickerView, self.startYearIndexValue, self.startMonthIndexValue, self.startDayIndexValue, self.startHourIndexValue, self.startMinuteIndexValue, startDateBarButtonItem)
         // 종료일 라벨 추가
         self.centerView.addSubview(self.endDateLabel)
         self.endDateLabel.snp.makeConstraints { make in
@@ -275,13 +448,17 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.width.equalTo(80)
         }
         // 종료일 텍스트 필드
-        //self.setPickerViewWithToolbar(self.textFieldStartTime, self.pickerViewStartTime, self.startTimeHourIndex, self.startTimeMinuteIndex, doneButtonStartTime)
+        self.endDateTextField.text = self.endDateValue
         self.centerView.addSubview(self.endDateTextField)
         self.endDateTextField.snp.makeConstraints { make in
             make.top.equalTo(self.startDateTextField.snp.bottom).offset(10)
             make.left.equalTo(self.endDateLabel.snp.right)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
+        // 종료일 피커뷰 추가
+        self.endDatePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 216)
+        let endDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done.png"), style: .plain, target: self, action: #selector(pushEndDateDone))
+        self.setPickerViewWithToolbar(self.endDateTextField, self.endDatePickerView, self.endYearIndexValue, self.endMonthIndexValue, self.endDayIndexValue, self.endHourIndexValue, self.endMinuteIndexValue, endDateBarButtonItem)
         // 일자 하단 라인 추가
         self.centerView.addSubview(self.dateBottomBorderView)
         self.dateBottomBorderView.snp.makeConstraints { make in
@@ -313,23 +490,44 @@ extension AddScheduleView: AddScheduleViewProtocol {
             make.right.equalToSuperview().offset(offsetRightValue + 5)
             make.height.equalTo(120)
         }
-        // 이미지 라벨 추가
-        self.centerView.addSubview(self.imageLabel)
-        self.imageLabel.snp.makeConstraints { make in
+        // 카테고리 라벨 추가
+        self.centerView.addSubview(self.categoryLabel)
+        self.categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentTextView.snp.bottom).offset(19)
             make.left.equalToSuperview().offset(offsetLeftValue)
         }
+        // 카테고리 텍스트 필드 추가
+        self.centerView.addSubview(self.categoryTextField)
+        self.categoryTextField.snp.makeConstraints { make in
+            make.centerY.equalTo(self.categoryLabel)
+            make.left.equalTo(self.categoryLabel.snp.right).offset(0)
+            make.right.equalToSuperview().offset(offsetRightValue)
+        }
+        // 이미지 라벨 추가
+        self.centerView.addSubview(self.imageLabel)
+        self.imageLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.categoryLabel.snp.bottom).offset(25)
+            make.left.equalToSuperview().offset(offsetLeftValue)
+        }
         // 이미지 첨부 버튼 추가
-        self.centerView.addSubview(self.imageButton)
-        self.imageButton.snp.makeConstraints { make in
+        self.centerView.addSubview(self.imageUploadButton)
+        self.imageUploadButton.snp.makeConstraints { make in
             make.centerY.equalTo(self.imageLabel)
             make.right.equalToSuperview().offset(offsetRightValue)
             make.width.equalTo(110)
         }
+        // 업로드 이미지 추가
+        self.centerView.addSubview(self.scheduleImageView)
+        self.scheduleImageView.snp.makeConstraints { make in
+            make.top.equalTo(self.imageUploadButton.snp.bottom).offset(0)
+            make.left.equalToSuperview().offset(offsetLeftValue)
+            make.right.equalToSuperview().offset(offsetRightValue)
+            make.size.height.equalTo(0)
+        }
         // 장소 텍스트 필드 추가
         self.centerView.addSubview(self.locationTextField)
         self.locationTextField.snp.makeConstraints { make in
-            make.top.equalTo(self.imageLabel.snp.bottom).offset(37)
+            make.top.equalTo(self.scheduleImageView.snp.bottom).offset(37)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
@@ -409,7 +607,112 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        switch component {
+        case 0:
+            // year
+            return self.yearInfo.count
+        case 1:
+            // month
+            return self.monthInfo.count
+        case 2:
+            // day
+            return self.dayInfo.count
+        case 3:
+            // hour
+            return self.hourInfo.count
+        case 4:
+            // minute
+            return self.minuteInfo.count
+        default:
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            // year
+            return String(self.yearInfo[row])
+        case 1:
+            // month
+            let month = String(self.monthInfo[row])
+            return month.count == 1 ? "0\(month)" : month
+        case 2:
+            // day
+            let day = String(self.dayInfo[row])
+            return day.count == 1 ? "0\(day)" : day
+        case 3:
+            // hour
+            let hour = String(self.hourInfo[row])
+            return hour.count == 1 ? "0\(hour)" : hour
+        case 4:
+            // minute
+            return self.minuteInfo[row]
+        default:
+            return "Error"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == self.startDatePickerView {
+            switch component {
+            case 0:
+                // 년
+                self.startYearIndexValue = row
+            case 1:
+                // 월
+                self.startMonthIndexValue = row
+                let maxDayIndex = findMaxDayIndex(with: row)
+                if maxDayIndex < self.startDayIndexValue {
+                    self.startDayIndexValue = maxDayIndex
+                }
+            case 2:
+                // 일
+                let maxDayIndex = findMaxDayIndex(with: self.startMonthIndexValue)
+                if maxDayIndex < row {
+                    self.startDayIndexValue = maxDayIndex
+                } else {
+                    self.startDayIndexValue = row
+                }
+            case 3:
+                // 시
+                self.startHourIndexValue = row
+            case 4:
+                // 분
+                self.startMinuteIndexValue = row
+            default:
+                ()
+            }
+        } else {
+            switch component {
+            case 0:
+                // 년
+                self.endYearIndexValue = row
+            case 1:
+                // 월
+                self.endMonthIndexValue = row
+                let maxDayIndex = findMaxDayIndex(with: row)
+                if maxDayIndex < self.endDayIndexValue {
+                    self.endDayIndexValue = maxDayIndex
+                }
+            case 2:
+                // 일
+                let maxDayIndex = findMaxDayIndex(with: self.endMonthIndexValue)
+                if maxDayIndex < row {
+                    self.endDayIndexValue = maxDayIndex
+                } else {
+                    self.endDayIndexValue = row
+                }
+            case 3:
+                // 시
+                self.endHourIndexValue = row
+            case 4:
+                // 분
+                self.endMinuteIndexValue = row
+            default:
+                ()
+            }
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -470,11 +773,52 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case self.startDateTextField:
-            self.startDateTextField.backgroundColor = ColorPalette.Primary
+            self.startDateTextField.textColor = ColorPalette.Primary
         case self.endDateTextField:
-            self.endDateTextField.backgroundColor = ColorPalette.Primary
+            self.endDateTextField.textColor = ColorPalette.Primary
         case self.titleTextField:
             self.titleBottomBorderView.backgroundColor = ColorPalette.Primary
+        case self.categoryTextField:
+            self.categoryTextField.textColor = ColorPalette.Primary
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let actionFirst = UIAlertAction(title: "IT", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 1
+                self.categoryTextField.text = "IT"
+            })
+            let actionSecond = UIAlertAction(title: "문화/예술", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 2
+                self.categoryTextField.text = "문화/예술"
+            })
+            let actionThird = UIAlertAction(title: "방송/연예", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 3
+                self.categoryTextField.text = "방송/연예"
+            })
+            let actionFourth = UIAlertAction(title: "패션/뷰티", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 4
+                self.categoryTextField.text = "패션/뷰티"
+            })
+            let actionFifth = UIAlertAction(title: "전시/박람회", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 5
+                self.categoryTextField.text = "전시/박람회"
+            })
+            let actionSixth = UIAlertAction(title: "여행/스포츠", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 6
+                self.categoryTextField.text = "여행/스포츠"
+            })
+            let actionSeventh = UIAlertAction(title: "기타", style: .default, handler: { _ -> Void in
+                self.selectedCategoryValue = 0
+                self.categoryTextField.text = "기타"
+            })
+            alert.addAction(actionFirst)
+            alert.addAction(actionSecond)
+            alert.addAction(actionThird)
+            alert.addAction(actionFourth)
+            alert.addAction(actionFifth)
+            alert.addAction(actionSixth)
+            alert.addAction(actionSeventh)
+            self.present(alert, animated: true, completion: { () in
+                self.categoryTextField.resignFirstResponder()
+            })
         case self.locationTextField:
             self.locationBottomBorderView.backgroundColor = ColorPalette.Primary
         case self.urlFirstTextField:
@@ -493,9 +837,9 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case self.startDateTextField:
-            self.startDateTextField.backgroundColor = ColorPalette.GrayForBottomBorder
+            self.startDateTextField.textColor = ColorPalette.BlackForText
         case self.endDateTextField:
-            self.endDateTextField.backgroundColor = ColorPalette.GrayForBottomBorder
+            self.endDateTextField.textColor = ColorPalette.BlackForText
         case self.titleTextField:
             self.titleBottomBorderView.backgroundColor = ColorPalette.GrayForBottomBorder
         case self.locationTextField:

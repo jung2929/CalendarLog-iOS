@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // HUD 설정
         SVProgressHUD.setMinimumSize(CGSize(width: 120, height: 120))
         SVProgressHUD.setDefaultMaskType(.black)
+        // 0.1초로 하긴했는데 0.1초까진 안됨 (약 0.6초 걸리는듯)
+        SVProgressHUD.setMinimumDismissTimeInterval(0.1)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //let loginViewController = LoginWireframe.createLoginModule()

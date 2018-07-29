@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SVProgressHUD
 
 class ScheduleListView: SuperViewController {
     var presenter: ScheduleListPresenterProtocol?
@@ -38,9 +39,35 @@ class ScheduleListView: SuperViewController {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
+    // 스케줄 추가 버튼 설정
+    let addScheduleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "ic_plus.png"), for: .normal)
+        button.addTarget(self, action: #selector(pushAddSchedule), for: .touchUpInside)
+        return button
+    }()
 }
 
 extension ScheduleListView: ScheduleListViewProtocol {
+    @objc func pushAddSchedule() {
+        if let dateValue = self.dateValue {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            let date = formatter.date(from: dateValue)!
+            formatter.dateFormat = "yyyy"
+            let selectedYearIndex = Int(formatter.string(from: date))! - 2018
+            formatter.dateFormat = "MM"
+            let selectedMonthIndex = Int(formatter.string(from: date))! - 1
+            formatter.dateFormat = "dd"
+            let selectedDayIndex = Int(formatter.string(from: date))! - 1
+            formatter.dateFormat = "yyyy.MM.dd HH:mm"
+            let selectedDate = formatter.string(from: date)
+            self.presenter?.presentScheduleForAdd(with: selectedDate, selectedYearIndex, selectedMonthIndex, selectedDayIndex)
+        } else {
+            SVProgressHUD.showError(withStatus: "스케줄을 추가 할 수 없습니다.")
+        }
+    }
+    
     func reloadFeed() {
         self.feedTableView.reloadData()
     }
@@ -52,9 +79,11 @@ extension ScheduleListView: ScheduleListViewProtocol {
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.leftMargin).offset(20)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.rightMargin).offset(-20)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin).offset(-20)
-//            make.top.equalTo(self.fsCalendar.snp.bottom).offset(20)
-//            make.left.right.equalToSuperview().inset(20)
-//            make.bottom.equalToSuperview()
+        }
+        self.view.addSubview(self.addScheduleButton)
+        self.addScheduleButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
 }
