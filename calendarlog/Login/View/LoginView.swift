@@ -209,7 +209,7 @@ extension LoginView: LoginViewProtocol {
     func initializeUI() {
         // 윗 쪽 파랑배경 설정
         let backgroundTopimageView: UIImageView = UIImageView()
-        if let backgroundTopImage = UIImage(named: "background_top.png") {
+        if let backgroundTopImage = UIImage(named: "background_top") {
             backgroundTopimageView.image = backgroundTopImage
         }
         self.view.addSubview(backgroundTopimageView)
@@ -219,9 +219,9 @@ extension LoginView: LoginViewProtocol {
             make.height.equalTo(self.view.frame.height / 2.5)
         }
         // 로고 설정
-        let logoImageView: UIImageView = UIImageView(image: UIImage(named: "logo_login.png"))
+        let logoImageView: UIImageView = UIImageView(image: UIImage(named: "logo_login"))
         // 타이틀 설정
-        let titleImageView: UIImageView = UIImageView(image: UIImage(named: "title_login.png"))
+        let titleImageView: UIImageView = UIImageView(image: UIImage(named: "title_login"))
         // 로고 이미지 추가
         self.view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in

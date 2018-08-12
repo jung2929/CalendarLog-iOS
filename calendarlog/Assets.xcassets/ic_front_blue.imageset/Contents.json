@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "path3.png",
+      "filename" : "ic_front_blue.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "path3@2x.png",
+      "filename" : "ic_front_blue@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "path3@3x.png",
+      "filename" : "ic_front_blue@3x.png",
       "scale" : "3x"
     }
   ],

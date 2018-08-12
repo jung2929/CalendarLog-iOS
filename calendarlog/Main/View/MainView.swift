@@ -39,16 +39,16 @@ class MainView: SuperViewController {
         self.feedTableView.delegate = self
         self.feedTableView.dataSource = self
         //내비게이션바 설정
-        let titleImageView = UIImageView(image: UIImage(named: "title_navigation.png"))
+        let titleImageView = UIImageView(image: UIImage(named: "title_navigation"))
         self.navigationItem.titleView = titleImageView
         // 내비게이션바 좌측상단 사람 이미지 설정
         let profileButton = UIButton.init(type: .custom)
-        profileButton.setImage(UIImage.init(named: "ic_profile_main.png"), for: .normal)
+        profileButton.setImage(UIImage.init(named: "ic_profile_main"), for: .normal)
         profileButton.addTarget(self, action: #selector(self.pushUserInfo), for: .touchUpInside)
         let profileBarButtonImte = UIBarButtonItem.init(customView: profileButton)
         self.navigationItem.leftBarButtonItem = profileBarButtonImte
         // 내비게이션바 우측상단 쪽지 이미지 설정
-        let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note.png"), style: .done, target: self, action: #selector(self.pushNoteList))
+        let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note"), style: .done, target: self, action: #selector(self.pushNoteList))
         self.navigationItem.rightBarButtonItem = noteBarButtonItem
     }
     
@@ -85,7 +85,7 @@ extension MainView: MainViewProtocol {
     func initializeUI() {
         // 윗 쪽 파랑배경 설정
         let backgroundTopimageView: UIImageView = UIImageView()
-        if let backgroundTopImage = UIImage(named: "background_top.png") {
+        if let backgroundTopImage = UIImage(named: "background_top") {
             backgroundTopimageView.image = backgroundTopImage
         }
         self.view.addSubview(backgroundTopimageView)
@@ -116,8 +116,8 @@ extension MainView: MainViewProtocol {
         calendar.appearance.titleSelectionColor  = .black
         self.view.addSubview(calendar)
         self.fsCalendar = calendar
-        let backBlueImageView = UIImageView(image: UIImage(named: "ic_back_blue.png"))
-        let frontBlueImageView = UIImageView(image: UIImage(named: "ic_front_blue.png"))
+        let backBlueImageView = UIImageView(image: UIImage(named: "ic_back_blue"))
+        let frontBlueImageView = UIImageView(image: UIImage(named: "ic_front_blue"))
         self.fsCalendar.addSubview(backBlueImageView)
         backBlueImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
@@ -196,9 +196,9 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
             let likeCountAttributedString = NSMutableAttributedString(string: "")
             let likeImage = NSTextAttachment()
             if feed.isLike == "Y" {
-                likeImage.image = UIImage(named: "ic_like_selected.png")
+                likeImage.image = UIImage(named: "ic_like_selected")
             } else {
-                likeImage.image = UIImage(named: "ic_like_default.png")
+                likeImage.image = UIImage(named: "ic_like_default")
             }
             likeCountAttributedString.append(NSAttributedString(attachment: likeImage))
             likeCountAttributedString.append(NSAttributedString(string: String(feed.likeCount)))
@@ -206,15 +206,15 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
             // 댓글 숫자 설정
             let commentCountAttributedString = NSMutableAttributedString(string: "")
             let commentImage = NSTextAttachment()
-            commentImage.image = UIImage(named: "ic_comment.png")
+            commentImage.image = UIImage(named: "ic_comment")
             commentCountAttributedString.append(NSAttributedString(attachment: commentImage))
             commentCountAttributedString.append(NSAttributedString(string: String(feed.commentCount)))
             cell.commentLabel.attributedText = commentCountAttributedString
             // 비공개 여부 설정
             let registerDatetimeAttributedString = NSMutableAttributedString(string: "")
-            if feed.isPublic == "Y" {
+            if feed.isPublic == "N" {
                 let privateImage = NSTextAttachment()
-                privateImage.image = UIImage(named: "ic_private.png")
+                privateImage.image = UIImage(named: "ic_private")
                 registerDatetimeAttributedString.append(NSAttributedString(attachment: privateImage))
             }
             registerDatetimeAttributedString.append(NSAttributedString(string: feed.registerDatetime))
@@ -257,26 +257,26 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
         if height < 600 {
             switch scheduleCount {
             case 1:
-                return UIImage(named: "ic_schedule_39_1.png")!
+                return UIImage(named: "ic_schedule_39_1")!
             case 2:
-                return UIImage(named: "ic_schedule_39_2.png")!
+                return UIImage(named: "ic_schedule_39_2")!
             case 3:
-                return UIImage(named: "ic_schedule_39_3.png")!
+                return UIImage(named: "ic_schedule_39_3")!
             case 4:
-                return UIImage(named: "ic_schedule_39_etc.png")!
+                return UIImage(named: "ic_schedule_39_etc")!
             default:
                 return nil
             }
         } else {
             switch scheduleCount {
             case 1:
-                return UIImage(named: "ic_schedule_43_1.png")!
+                return UIImage(named: "ic_schedule_43_1")!
             case 2:
-                return UIImage(named: "ic_schedule_43_2.png")!
+                return UIImage(named: "ic_schedule_43_2")!
             case 3:
-                return UIImage(named: "ic_schedule_43_3.png")!
+                return UIImage(named: "ic_schedule_43_3")!
             case 4:
-                return UIImage(named: "ic_schedule_43_etc.png")!
+                return UIImage(named: "ic_schedule_43_etc")!
             default:
                 return nil
             }

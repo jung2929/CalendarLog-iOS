@@ -21,7 +21,7 @@ class ScheduleListView: SuperViewController {
         self.feedTableView.delegate = self
         self.feedTableView.dataSource = self
         //내비게이션바 설정
-        let titleImageView = UIImageView(image: UIImage(named: "title_navigation.png"))
+        let titleImageView = UIImageView(image: UIImage(named: "title_navigation"))
         self.navigationItem.titleView = titleImageView
     }
     
@@ -42,7 +42,7 @@ class ScheduleListView: SuperViewController {
     // 스케줄 추가 버튼 설정
     let addScheduleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ic_plus.png"), for: .normal)
+        button.setImage(UIImage(named: "ic_plus"), for: .normal)
         button.addTarget(self, action: #selector(pushAddSchedule), for: .touchUpInside)
         return button
     }()
@@ -144,9 +144,9 @@ extension ScheduleListView: UITableViewDelegate, UITableViewDataSource {
             let likeCountAttributedString = NSMutableAttributedString(string: "")
             let likeImage = NSTextAttachment()
             if feed.isLike == "Y" {
-                likeImage.image = UIImage(named: "ic_like_selected.png")
+                likeImage.image = UIImage(named: "ic_like_selected")
             } else {
-                likeImage.image = UIImage(named: "ic_like_default.png")
+                likeImage.image = UIImage(named: "ic_like_default")
             }
             likeCountAttributedString.append(NSAttributedString(attachment: likeImage))
             likeCountAttributedString.append(NSAttributedString(string: String(feed.likeCount)))
@@ -154,7 +154,7 @@ extension ScheduleListView: UITableViewDelegate, UITableViewDataSource {
             // 댓글 숫자 설정
             let commentCountAttributedString = NSMutableAttributedString(string: "")
             let commentImage = NSTextAttachment()
-            commentImage.image = UIImage(named: "ic_comment.png")
+            commentImage.image = UIImage(named: "ic_comment")
             commentCountAttributedString.append(NSAttributedString(attachment: commentImage))
             commentCountAttributedString.append(NSAttributedString(string: String(feed.commentCount)))
             cell.commentLabel.attributedText = commentCountAttributedString
@@ -162,7 +162,7 @@ extension ScheduleListView: UITableViewDelegate, UITableViewDataSource {
             let registerDatetimeAttributedString = NSMutableAttributedString(string: "")
             if feed.isPublic == "Y" {
                 let privateImage = NSTextAttachment()
-                privateImage.image = UIImage(named: "ic_private.png")
+                privateImage.image = UIImage(named: "ic_private")
                 registerDatetimeAttributedString.append(NSAttributedString(attachment: privateImage))
             }
             registerDatetimeAttributedString.append(NSAttributedString(string: feed.registerDatetime))

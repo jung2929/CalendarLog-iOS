@@ -311,7 +311,7 @@ extension RegisterView: RegisterViewProtocol {
     func initializeUI() {
         // 윗 쪽 파랑배경 설정
         let backgroundTopimageView: UIImageView = UIImageView()
-        if let backgroundTopImage = UIImage(named: "background_top.png") {
+        if let backgroundTopImage = UIImage(named: "background_top") {
             backgroundTopimageView.image = backgroundTopImage
         }
         self.view.addSubview(backgroundTopimageView)

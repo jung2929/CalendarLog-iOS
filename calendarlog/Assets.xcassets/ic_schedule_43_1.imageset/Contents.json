@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "oval3.png",
+      "filename" : "ic_schedule_43_1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "oval3@2x.png",
+      "filename" : "ic_schedule_43_1@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "oval3@3x.png",
+      "filename" : "ic_schedule_43_1@3x.png",
       "scale" : "3x"
     }
   ],

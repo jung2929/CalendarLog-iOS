@@ -37,8 +37,9 @@ struct ColorPalette {
      오류글자 : e25d6e
      */
     static let GrayForText = UIColor(rgb: 0x9b9b9b)
-    static let GrayLightForBottomBorder = UIColor(rgb: 0xf9fafe)
+    static let GrayLightForBorder = UIColor(rgb: 0xf9fafe)
     static let GrayForBottomBorder = UIColor(rgb: 0xdfdfdf)
+    static let GrayForBackground = UIColor(rgb: 0xf2f2f2)
     static let BlackForText = UIColor(rgb: 0x4a4a4a)
     static let RedForText = UIColor(rgb: 0xe25d6e)
 //    struct Gray {

@@ -17,6 +17,10 @@ protocol UserInfoViewProtocol: class {
     
     // PRESENTER -> VIEW
     func initializeUI()
+    
+    func pushEdit()
+    
+    func pushSetting()
 }
 
 protocol UserInfoPresenterProtocol: class {

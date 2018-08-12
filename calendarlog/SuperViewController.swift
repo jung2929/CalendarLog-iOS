@@ -17,7 +17,7 @@ class SuperViewController: UIViewController {
         // 배경색상 설정
         self.view.backgroundColor = ColorPalette.Background
         // 내비게이션바 배경 Primary 색상 설정
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "background_top.png"), for: .default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "background_top"), for: .default)
         // 내비게이션바 테두리 지우기
         self.navigationController?.navigationBar.shadowImage = UIImage()
         // 내비게이션바 아이콘 Tint 색상 설정
@@ -27,7 +27,7 @@ class SuperViewController: UIViewController {
         let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         // 뒤로가기 커스텀 아이콘 적용
-        let imageBack = UIImage(named: "ic_back.png")
+        let imageBack = UIImage(named: "ic_back")
         self.navigationController?.navigationBar.backIndicatorImage = imageBack
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = imageBack
 //        Primary 색상으로 배경을 주려고했는데, 연위에 setBackgroundImage 를 통해 전체 내비게이션바 색상 통일로 주석 처리

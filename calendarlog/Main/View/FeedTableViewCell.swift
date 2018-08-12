@@ -17,8 +17,9 @@ class FeedTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 19
         return view
     }()
-    // 기본 사용자 프로필 설정
-    let profileImageView: UIImageView = UIImageView(image: UIImage(named: "ic_profile_default.png"))
+    // 기본 사용자 프로필 이미지 설정
+    let profileImageView: UIImageView = UIImageView(image: UIImage(named: "ic_profile_default"))
+    // 기본 사용자 닉네임 설정
     let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
@@ -44,7 +45,7 @@ class FeedTableViewCell: UITableViewCell {
     let scheduleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "ic_placeholder.png")
+        imageView.image = UIImage(named: "ic_placeholder")
         return imageView
     }()
     // 제목 설정

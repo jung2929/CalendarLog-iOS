@@ -18,6 +18,10 @@ protocol ScheduleDetailViewProtocol: class {
     var presenter: ScheduleDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func pushLikeButton()
+    
+    func pushEdit()
+    
     func initializeUI()
 }
 

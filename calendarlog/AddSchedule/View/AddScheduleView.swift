@@ -70,7 +70,7 @@ class AddScheduleView: SuperViewController {
         //내비게이션바 타이틀 설정
         self.title = "일정 추가"
         // 내비게이션바 우측상단 쪽지 이미지 설정
-        let doneBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done.png"), style: .done, target: self, action: #selector(self.pushDone))
+        let doneBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done"), style: .done, target: self, action: #selector(self.pushDone))
         self.navigationItem.rightBarButtonItem = doneBarButtonItem
     }
     
@@ -127,7 +127,7 @@ class AddScheduleView: SuperViewController {
     // 일자 하단 라인 설정
     let dateBottomBorderView: UIView = {
         let view = UIView()
-        view.backgroundColor = ColorPalette.GrayLightForBottomBorder
+        view.backgroundColor = ColorPalette.GrayLightForBorder
         return view
     }()
     // 제목 텍스트 필드 설정
@@ -151,6 +151,7 @@ class AddScheduleView: SuperViewController {
         textView.text = "내용을 입력하세요."
         textView.textColor = ColorPalette.GrayForText
         textView.backgroundColor = .white
+        textView.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         textView.layer.borderColor = ColorPalette.GrayForBottomBorder.cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 5
@@ -195,11 +196,11 @@ class AddScheduleView: SuperViewController {
         button.addTarget(self, action: #selector(pushImageUploadButton), for: .touchUpInside)
         return button
     }()
-    // 업로드 이미지뷰 설정
+    // 업로드 이미지 뷰 설정
     let scheduleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "ic_placeholder.png")
+        imageView.image = UIImage(named: "ic_placeholder")
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -438,7 +439,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
         }
         // 시작일 피커뷰 추가
         self.startDatePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 216)
-        let startDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done.png"), style: .plain, target: self, action: #selector(pushStartDateDone))
+        let startDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done"), style: .plain, target: self, action: #selector(pushStartDateDone))
         self.setPickerViewWithToolbar(self.startDateTextField, self.startDatePickerView, self.startYearIndexValue, self.startMonthIndexValue, self.startDayIndexValue, self.startHourIndexValue, self.startMinuteIndexValue, startDateBarButtonItem)
         // 종료일 라벨 추가
         self.centerView.addSubview(self.endDateLabel)
@@ -457,7 +458,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
         }
         // 종료일 피커뷰 추가
         self.endDatePickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 216)
-        let endDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done.png"), style: .plain, target: self, action: #selector(pushEndDateDone))
+        let endDateBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done"), style: .plain, target: self, action: #selector(pushEndDateDone))
         self.setPickerViewWithToolbar(self.endDateTextField, self.endDatePickerView, self.endYearIndexValue, self.endMonthIndexValue, self.endDayIndexValue, self.endHourIndexValue, self.endMinuteIndexValue, endDateBarButtonItem)
         // 일자 하단 라인 추가
         self.centerView.addSubview(self.dateBottomBorderView)
