@@ -1,5 +1,5 @@
 //
-//  FeedResult.swift
+//  FeedResponse.swift
 //  calendarlog
 //
 //  Created by JerryJung on 2018. 7. 2..
@@ -8,13 +8,14 @@
 
 import ObjectMapper
 
-struct FeedResult {
+struct FeedResponse {
     var isSuccess: Bool!
     var message: String!
+    var likedScheduleCount: String!
     var feedList: [Feed]!
 }
 
-extension FeedResult: Mappable {
+extension FeedResponse: Mappable {
     
     init?(map: Map) {
     }
@@ -22,6 +23,7 @@ extension FeedResult: Mappable {
     mutating func mapping(map: Map) {
         isSuccess <- map["isSuccess"]
         message <- map["message"]
+        likedScheduleCount <- map["likedScheduleCount"]
         feedList <- map["feedList"]
     }
     

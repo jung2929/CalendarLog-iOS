@@ -83,7 +83,7 @@ protocol LoginRemoteDataManagerOutputProtocol: class {
     
     func onLoginEmailNotRetrieved(_ email: String)
     
-    func onLoginSuccess(_ email: String, _ password: String)
+    func onLoginSuccess(_ email: String, _ password: String, _ nickname: String)
     
     func onErrorForEmail(with message: String)
     

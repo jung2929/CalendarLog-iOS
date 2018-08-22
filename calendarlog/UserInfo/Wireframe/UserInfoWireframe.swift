@@ -26,4 +26,26 @@ class UserInfoWireframe: UserInfoWireframeProtocol {
         
         return view
     }
+    
+    func presentScheduleDetail(from view: UserInfoViewProtocol, with feed: Feed) {
+        if let sourceView = view as? UIViewController {
+            let scheduleDetailViewController = ScheduleDetailWireframe.createScheduleDetailModule()
+            scheduleDetailViewController.feedValue = feed
+            sourceView.navigationController?.pushViewController(scheduleDetailViewController, animated: true)
+        }
+    }
+    
+    func presentEdit(from view: UserInfoViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let editViewController = EditWireframe.createEditModule()
+            sourceView.navigationController?.pushViewController(editViewController, animated: true)
+        }
+    }
+    
+    func presentSettings(from view: UserInfoViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let settingsViewController = SettingsWireframe.createSettingsModule()
+            sourceView.navigationController?.pushViewController(settingsViewController, animated: true)
+        }
+    }
 }

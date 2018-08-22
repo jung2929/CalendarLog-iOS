@@ -1,5 +1,5 @@
 //
-//  ScheduleResult.swift
+//  ScheduleResponse.swift
 //  calendarlog
 //
 //  Created by JerryJung on 2018. 7. 2..
@@ -8,14 +8,14 @@
 
 import ObjectMapper
 
-struct ScheduleResult {
+struct ScheduleResponse {
     var isSuccess: Bool!
     var message: String!
     var scheduleList: [Schedule]!
     var feedList: [Feed]!
 }
 
-extension ScheduleResult: Mappable {
+extension ScheduleResponse: Mappable {
     
     init?(map: Map) {
     }

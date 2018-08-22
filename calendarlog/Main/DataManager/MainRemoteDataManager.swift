@@ -17,13 +17,13 @@ class MainRemoteDataManager: MainRemoteDataManagerInputProtocol {
         Alamofire
             .request("\(API.baseUrl)schedule_and_feed_list", method: .get, parameters: parameters)
             .validate()
-            .responseObject(completionHandler: { (response: DataResponse<ScheduleResult>) in
+            .responseObject(completionHandler: { (response: DataResponse<ScheduleResponse>) in
                 switch response.result {
-                case .success(let scheduleResult):
-                    if scheduleResult.isSuccess {
-                        self.remoteRequestHandler?.onScheduleAndFeedListRetrieved(scheduleResult.scheduleList, scheduleResult.feedList)
+                case .success(let scheduleResponse):
+                    if scheduleResponse.isSuccess {
+                        self.remoteRequestHandler?.onScheduleAndFeedListRetrieved(scheduleResponse.scheduleList, scheduleResponse.feedList)
                     } else {
-                        self.remoteRequestHandler?.onError(scheduleResult.message)
+                        self.remoteRequestHandler?.onError(scheduleResponse.message)
                     }
                 case .failure:
                     self.remoteRequestHandler?.onError("네트워크 상태를 확인해주세요.")
@@ -36,13 +36,13 @@ class MainRemoteDataManager: MainRemoteDataManagerInputProtocol {
         Alamofire
             .request("\(API.baseUrl)feed_list", method: .get, parameters: parameters)
             .validate()
-            .responseObject(completionHandler: { (response: DataResponse<ScheduleResult>) in
+            .responseObject(completionHandler: { (response: DataResponse<ScheduleResponse>) in
                 switch response.result {
-                case .success(let scheduleResult):
-                    if scheduleResult.isSuccess {
-                        self.remoteRequestHandler?.onFeedListRetrieved(scheduleResult.feedList)
+                case .success(let scheduleResponse):
+                    if scheduleResponse.isSuccess {
+                        self.remoteRequestHandler?.onFeedListRetrieved(scheduleResponse.feedList)
                     } else {
-                        self.remoteRequestHandler?.onError(scheduleResult.message)
+                        self.remoteRequestHandler?.onError(scheduleResponse.message)
                     }
                 case .failure:
                     self.remoteRequestHandler?.onError("네트워크 상태를 확인해주세요.")

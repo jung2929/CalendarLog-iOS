@@ -17,13 +17,13 @@ class ScheduleListRemoteDataManager: ScheduleListRemoteDataManagerInputProtocol 
         Alamofire
             .request("\(API.baseUrl)feed_list_for_day", method: .get, parameters: parameters)
             .validate()
-            .responseObject(completionHandler: { (response: DataResponse<ScheduleResult>) in
+            .responseObject(completionHandler: { (response: DataResponse<ScheduleResponse>) in
                 switch response.result {
-                case .success(let scheduleResult):
-                    if scheduleResult.isSuccess {
-                        self.remoteRequestHandler?.onFeedListRetrieved(scheduleResult.feedList, row)
+                case .success(let scheduleResponse):
+                    if scheduleResponse.isSuccess {
+                        self.remoteRequestHandler?.onFeedListRetrieved(scheduleResponse.feedList, row)
                     } else {
-                        self.remoteRequestHandler?.onError(scheduleResult.message)
+                        self.remoteRequestHandler?.onError(scheduleResponse.message)
                     }
                 case .failure:
                     self.remoteRequestHandler?.onError("네트워크 상태를 확인해주세요.")

@@ -44,7 +44,7 @@ class LoginRemoteDataManager: LoginRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let defaultResponse):
                     if defaultResponse.isSuccess {
-                        self.remoteRequestHandler?.onLoginSuccess(email, password)
+                        self.remoteRequestHandler?.onLoginSuccess(email, password, defaultResponse.message)
                     } else {
                         self.remoteRequestHandler?.onErrorForPassword(with: defaultResponse.message)
                     }

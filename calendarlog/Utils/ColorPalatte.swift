@@ -27,8 +27,10 @@ struct ColorPalette {
     static let BackgroundDark = UIColor(rgb: 0xf9fafe)
     /***
      주황색 : ff9b3f
+     흰색 : ffffff
      */
     static let Orange = UIColor(rgb: 0xff9b3f)
+    static let White = UIColor(rgb: 0xffffff)
     /***
      회색글자 : 9b9b9b
      연한 회색 하단 라인 : f9fafe
