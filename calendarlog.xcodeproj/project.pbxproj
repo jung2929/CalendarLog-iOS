@@ -87,6 +87,7 @@
 		BD93C19420EA668900C9C981 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93C19320EA668900C9C981 /* FeedResponse.swift */; };
 		BD98557320B8645D00AE5460 /* DefaultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557220B8645D00AE5460 /* DefaultResponse.swift */; };
 		BD98557720B875EF00AE5460 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557620B875EF00AE5460 /* API.swift */; };
+		BD9A8414212F07F8000D7464 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */; };
 		BDBD364820BC2868004AFEF4 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBD364720BC2868004AFEF4 /* UserInfo.swift */; };
 		BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2C20749318000519E0 /* AppDelegate.swift */; };
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
@@ -199,6 +200,7 @@
 		BD93C19320EA668900C9C981 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
 		BD98557220B8645D00AE5460 /* DefaultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResponse.swift; sourceTree = "<group>"; };
 		BD98557620B875EF00AE5460 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		BDBD364720BC2868004AFEF4 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		BDCECB2920749318000519E0 /* calendarlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendarlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB2C20749318000519E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -942,6 +944,7 @@
 				BDBD364720BC2868004AFEF4 /* UserInfo.swift */,
 				BD93C18D20EA3DFD00C9C981 /* ScheduleResponse.swift */,
 				BD93C19320EA668900C9C981 /* FeedResponse.swift */,
+				BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1352,6 +1355,7 @@
 				BD53505B20EE4095006AEE68 /* AddScheduleView.swift in Sources */,
 				BD53505D20EE40A1006AEE68 /* AddSchedulePresenter.swift in Sources */,
 				BD355C6F212D97FC00A51514 /* SettingsPresenter.swift in Sources */,
+				BD9A8414212F07F8000D7464 /* UserInfoResponse.swift in Sources */,
 				BD53506120EE40B7006AEE68 /* AddScheduleRemoteDataManager.swift in Sources */,
 				BD53509920EE4F8D006AEE68 /* ScheduleDetailInteractor.swift in Sources */,
 				BD53508920EE4F31006AEE68 /* NoteListView.swift in Sources */,

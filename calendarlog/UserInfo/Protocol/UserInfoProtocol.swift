@@ -76,7 +76,7 @@ protocol UserInfoRemoteDataManagerInputProtocol: class {
 
 protocol UserInfoRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onFeedListRetrieved(_ feedList: [Feed], _ row: Int, _ count: String)
+    func onFeedListRetrieved(_ feedList: [Feed], _ row: Int, _ count: String, _ nickname: String, _ isReceiveNote: String)
     
     func onError(_ message: String)
 }

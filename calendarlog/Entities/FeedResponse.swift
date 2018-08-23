@@ -11,7 +11,6 @@ import ObjectMapper
 struct FeedResponse {
     var isSuccess: Bool!
     var message: String!
-    var likedScheduleCount: String!
     var feedList: [Feed]!
 }
 
@@ -23,7 +22,6 @@ extension FeedResponse: Mappable {
     mutating func mapping(map: Map) {
         isSuccess <- map["isSuccess"]
         message <- map["message"]
-        likedScheduleCount <- map["likedScheduleCount"]
         feedList <- map["feedList"]
     }
     

@@ -19,7 +19,12 @@ class UserInfoInteractor: UserInfoInteractorInputProtocol {
 }
 
 extension UserInfoInteractor: UserInfoRemoteDataManagerOutputProtocol {
-    func onFeedListRetrieved(_ feedList: [Feed], _ row: Int, _ count: String) {
+    func onFeedListRetrieved(_ feedList: [Feed], _ row: Int, _ count: String, _ nickname: String, _ isReceiveNote: String) {
+        if isReceiveNote == "Y" {
+            UserDefaults.standard.set(true, forKey: "isReceiveNote")
+        } else {
+            UserDefaults.standard.set(false, forKey: "isReceiveNote")
+        }
         self.presenter?.didRetrieveFeedList(feedList, count)
     }
     

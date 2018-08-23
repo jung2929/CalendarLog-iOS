@@ -6,6 +6,8 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import UIKit
+
 class SettingsWireframe: SettingsWireframeProtocol {
     static func createSettingsModule() -> SettingsView {
         let view = SettingsView()
@@ -23,5 +25,19 @@ class SettingsWireframe: SettingsWireframeProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         return view
+    }
+    
+    func presentLicense(from view: SettingsViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let settingsViewController = LicenseWireframe.createLicenseModule()
+            sourceView.navigationController?.pushViewController(settingsViewController, animated: true)
+        }
+    }
+    
+    func presentLogin(from view: SettingsViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: LoginWireframe.createLoginModule())
+            sourceView.navigationController?.popToRootViewController(animated: true)
+        }
     }
 }

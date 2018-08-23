@@ -14,11 +14,34 @@ class SettingsPresenter: SettingsPresenterProtocol {
     var wireframe: SettingsWireframeProtocol?
     
     func viewDidLoad() {
-        view?.initializeUI()
+        self.view?.initializeUI()
+    }
+    
+    func updateNoteStatus(_ isReceiveNote: Bool) {
+        self.interactor?.updateNoteStatus(isReceiveNote)
+    }
+    
+    func presentLicense() {
+        self.wireframe?.presentLicense(from: self.view!)
+    }
+    
+    func turnOffAutoLogin() {
+        self.interactor?.turnOffAutoLogin()
+    }
+    
+    func deleteUserInfo() {
+        self.interactor?.deleteUserInfo()
     }
 }
 
 extension SettingsPresenter: SettingsInteractorOutputProtocol {
+    func didUpdateNoteStatus(_ isReceiveNote: Bool) {
+        self.view?.switchNoteStatus(isReceiveNote)
+    }
+    
+    func presentLogin() {
+        self.wireframe?.presentLogin(from: self.view!)
+    }
     
     func onError(_ message: String) {
         SVProgressHUD.showError(withStatus: message)

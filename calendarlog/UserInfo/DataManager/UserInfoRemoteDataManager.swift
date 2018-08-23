@@ -16,13 +16,13 @@ class UserInfoRemoteDataManager: UserInfoRemoteDataManagerInputProtocol {
         Alamofire
             .request("\(API.baseUrl)feed_list_for_user_info", method: .get, parameters: parameters)
             .validate()
-            .responseObject(completionHandler: { (response: DataResponse<FeedResponse>) in
+            .responseObject(completionHandler: { (response: DataResponse<UserInfoResponse>) in
                 switch response.result {
-                case .success(let feedResponse):
-                    if feedResponse.isSuccess {
-                        self.remoteRequestHandler?.onFeedListRetrieved(feedResponse.feedList, row, feedResponse.likedScheduleCount)
+                case .success(let userInfoResponse):
+                    if userInfoResponse.isSuccess {
+                        self.remoteRequestHandler?.onFeedListRetrieved(userInfoResponse.feedList, row, userInfoResponse.likedScheduleCount, userInfoResponse.nickname, userInfoResponse.isReceiveNote)
                     } else {
-                        self.remoteRequestHandler?.onError(feedResponse.message)
+                        self.remoteRequestHandler?.onError(userInfoResponse.message)
                     }
                 case .failure:
                     self.remoteRequestHandler?.onError("네트워크 상태를 확인해주세요.")

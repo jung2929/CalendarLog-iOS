@@ -14,10 +14,9 @@ class SettingsView: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+        self.isReceiveNoteSwitch.addTarget(self, action: #selector(self.pushNoteSwitch), for: .valueChanged)
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
-        //내비게이션바 타이틀 설정
-        self.title = "설정"
     }
     // 쪽지 수신 여부 라벨 설정
     let isReceiveNoteLabel: UILabel = {
@@ -31,7 +30,7 @@ class SettingsView: SuperViewController {
     let isReceiveNoteSwitch: UISwitch = {
         let uiSwitch = UISwitch()
         uiSwitch.onTintColor = ColorPalette.Orange
-        uiSwitch.isOn = true
+        uiSwitch.isOn = UserDefaults.standard.bool(forKey: "isReceiveNote")
         return uiSwitch
     }()
     // 쪽지 수신 여부 하단 라인 설정
@@ -50,6 +49,32 @@ class SettingsView: SuperViewController {
 }
 
 extension SettingsView: SettingsViewProtocol {
+    func switchNoteStatus(_ isReceiveNote: Bool) {
+        self.isReceiveNoteSwitch.isOn = isReceiveNote
+    }
+    
+    @objc func pushNoteSwitch() {
+        self.presenter?.updateNoteStatus(self.isReceiveNoteSwitch.isOn)
+    }
+    
+    func pushLicense() {
+        self.presenter?.presentLicense()
+    }
+    
+    func pushLogOut() {
+        let actionLogOut = UIAlertAction(title: "확인", style: .destructive) { _ in
+            self.presenter?.turnOffAutoLogin()
+        }
+        self.presentAlertWithAction(title: "로그아웃", message: "로그아웃하시겠습니까?", actionLogOut)
+    }
+    
+    func pushDeleteUserInfo() {
+        let actionDeleteUserInfo = UIAlertAction(title: "탈퇴", style: .destructive) { _ in
+            self.presenter?.deleteUserInfo()
+        }
+        self.presentAlertWithAction(title: "회원탈퇴", message: "회원탈퇴하시겠습니까?", actionDeleteUserInfo)
+    }
+    
     func initializeUI() {
         self.view.backgroundColor = .white
         // 쪽지 수신 여부 라벨 추가
@@ -89,6 +114,18 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 0:
+            self.pushLicense()
+        case 1:
+            self.pushLogOut()
+        case 2:
+            self.pushDeleteUserInfo()
+        case 3:
+            ()
+        default:
+            ()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
