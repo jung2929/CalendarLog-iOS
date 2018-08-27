@@ -6,6 +6,8 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import UIKit
+
 protocol RegisterWireframeProtocol: class {
     static func createRegisterModule() -> RegisterView
     
@@ -18,6 +20,12 @@ protocol RegisterViewProtocol: class {
     
     // PRESENTER -> VIEW
     func initializeUI()
+    
+    func pressedRegisterButton()
+    
+    func pressedSexButton(_ sender: UIButton)
+    
+    func pressedCategoryButton(_ sender: UIButton)
     
     func addCategories()
 }

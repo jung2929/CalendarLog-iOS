@@ -35,7 +35,6 @@ class RegisterView: SuperViewController {
         self.categoryButton5.addTarget(self, action: #selector(self.pressedCategoryButton), for: .touchUpInside)
         self.registerButton.addTarget(self, action: #selector(self.pressedRegisterButton), for: .touchUpInside)
     }
-    
     // 메인 스크롤 뷰 설정
     let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -165,7 +164,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton0: UIButton = {
         let button = UIButton()
-        button.setTitle("자바스크립트", for: .normal)
+        button.setTitle("IT", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -176,7 +175,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton1: UIButton = {
         let button = UIButton()
-        button.setTitle("자바", for: .normal)
+        button.setTitle("문화/예술", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -187,7 +186,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton2: UIButton = {
         let button = UIButton()
-        button.setTitle("코틀린", for: .normal)
+        button.setTitle("방송/연예", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -198,7 +197,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton3: UIButton = {
         let button = UIButton()
-        button.setTitle("스위프트", for: .normal)
+        button.setTitle("패션/뷰티", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -209,7 +208,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton4: UIButton = {
         let button = UIButton()
-        button.setTitle("파이썬", for: .normal)
+        button.setTitle("전시/박람회", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -220,7 +219,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton5: UIButton = {
         let button = UIButton()
-        button.setTitle("스칼라", for: .normal)
+        button.setTitle("여행/스포츠", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -266,6 +265,29 @@ extension RegisterView: RegisterViewProtocol {
                                               self.maleButton.isSelected ? "M" : "F",
                                               self.categoryTuples,
                                               self.associateTextField.text!)
+    }
+    // 성별 버튼 눌렀을 경우 함수
+    @objc func pressedSexButton(_ sender: UIButton) {
+        switch sender {
+        case self.maleButton:
+            self.maleButton.isSelected = true
+            self.femailButton.isSelected = false
+        case self.femailButton:
+            self.maleButton.isSelected = false
+            self.femailButton.isSelected = true
+        default:
+            ()
+        }
+    }
+    // 카테고리 버튼 눌렀을 경우 함수
+    @objc func pressedCategoryButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.categoryTuples[sender.tag].1 = 0
+        } else {
+            sender.isSelected = true
+            self.categoryTuples[sender.tag].1 = 1
+        }
     }
     
     func addCategories() {
@@ -468,28 +490,6 @@ extension RegisterView: RegisterViewProtocol {
 }
 
 extension RegisterView: UITextFieldDelegate {
-    @objc func pressedSexButton(_ sender: UIButton) {
-        switch sender {
-        case self.maleButton:
-            self.maleButton.isSelected = true
-            self.femailButton.isSelected = false
-        case self.femailButton:
-            self.maleButton.isSelected = false
-            self.femailButton.isSelected = true
-        default:
-            ()
-        }
-    }
-    
-    @objc func pressedCategoryButton(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            self.categoryTuples[sender.tag].1 = 0
-        } else {
-            sender.isSelected = true
-            self.categoryTuples[sender.tag].1 = 1
-        }
-    }
     // Return Key 눌렀을시 메소드
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 태그 값 다음 찾을시 이동

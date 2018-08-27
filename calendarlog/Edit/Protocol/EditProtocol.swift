@@ -6,6 +6,8 @@
 //  Copyright © 2018년 penguinexpedition. All rights reserved.
 //
 
+import UIKit
+
 protocol EditWireframeProtocol: class {
     static func createEditModule() -> EditView
     
@@ -19,6 +21,12 @@ protocol EditViewProtocol: class {
     func initializeUI()
     
     func pushDone()
+    
+    func pressedSexButton(_ sender: UIButton)
+    
+    func pressedCategoryButton(_ sender: UIButton)
+    
+    func addCategories()
 }
 
 protocol EditPresenterProtocol: class {
