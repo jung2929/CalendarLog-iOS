@@ -16,21 +16,9 @@ class LicenseView: SuperViewController {
         presenter?.viewDidLoad()
         self.licenseTableView.delegate = self
         self.licenseTableView.dataSource = self
+        //내비게이션바 타이틀 설정
+        self.title = "Open Source Library"
     }
-    // 오픈 소스 라이브러리 라벨 설정
-    let openSourceLibraryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Open Source Library"
-        label.textColor = ColorPalette.BlackForText
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        return label
-    }()
-    // 오픈 소스 라이브러리 하단 라인 설정
-    let openSourceLibraryBorderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = ColorPalette.GrayForBottomBorder
-        return view
-    }()
     // MIT 라벨 설정
     let mitLabel: UILabel = {
         let label = UILabel()
@@ -75,24 +63,10 @@ class LicenseView: SuperViewController {
 extension LicenseView: LicenseViewProtocol {
     func initializeUI() {
         self.view.backgroundColor = .white
-        // 오픈 소스 라이브러리 라벨 추가
-        self.view.addSubview(self.openSourceLibraryLabel)
-        self.openSourceLibraryLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(18)
-            make.left.equalToSuperview().offset(8)
-        }
-        // 오픈 소스 라이브러리 하단 라인 추가
-        self.view.addSubview(self.openSourceLibraryBorderView)
-        self.openSourceLibraryBorderView.snp.makeConstraints { make in
-            make.top.equalTo(self.openSourceLibraryLabel.snp.bottom).offset(8)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.size.height.equalTo(1)
-        }
         // MIT 라벨 추가
         self.view.addSubview(self.mitLabel)
         self.mitLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.openSourceLibraryBorderView.snp.bottom).offset(18)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(18)
             make.left.equalToSuperview().offset(8)
         }
         // MIT 텍스트 뷰 추가

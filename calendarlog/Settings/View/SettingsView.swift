@@ -133,7 +133,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
         let cell = SettingsTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "settingsCell")
         switch indexPath.row {
         case 0:
-            cell.titleLabel.text = "라이선스"
+            cell.titleLabel.text = "Open Source Library"
         case 1:
             cell.titleLabel.text = "로그아웃"
         case 2:
