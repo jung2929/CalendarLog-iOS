@@ -97,6 +97,7 @@ extension SettingsView: SettingsViewProtocol {
             make.right.equalToSuperview()
             make.size.height.equalTo(1)
         }
+        // 설정 테이블뷰 추가
         self.view.addSubview(self.settingsTableView)
         self.settingsTableView.snp.makeConstraints { make in
             make.top.equalTo(self.borderView.snp.bottom)

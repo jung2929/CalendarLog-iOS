@@ -83,7 +83,7 @@ class FeedTableViewCell: UITableViewCell {
     }()
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(self.feedView)
+        self.contentView.addSubview(self.feedView)
         self.feedView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
