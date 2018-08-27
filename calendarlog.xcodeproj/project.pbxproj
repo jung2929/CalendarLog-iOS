@@ -94,6 +94,7 @@
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
 		BDCECB5020749318000519E0 /* CalendarlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */; };
 		BDD5B03921343B47008FF9D8 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD5B03821343B47008FF9D8 /* LicenseTableViewCell.swift */; };
+		BDD5B03B213468B5008FF9D8 /* EditUserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD5B03A213468B5008FF9D8 /* EditUserInfoResponse.swift */; };
 		BDDFFF2320CD145800393504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDFFF2220CD145700393504 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -214,6 +215,7 @@
 		BDCECB4F20749318000519E0 /* CalendarlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarlogUITests.swift; sourceTree = "<group>"; };
 		BDCECB5120749318000519E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDD5B03821343B47008FF9D8 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
+		BDD5B03A213468B5008FF9D8 /* EditUserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoResponse.swift; sourceTree = "<group>"; };
 		BDDFFF2220CD145700393504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D129450DD4A1B9C659D1C1AD /* Pods-calendarlogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogUITests/Pods-calendarlogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -948,6 +950,7 @@
 				BD93C18D20EA3DFD00C9C981 /* ScheduleResponse.swift */,
 				BD93C19320EA668900C9C981 /* FeedResponse.swift */,
 				BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */,
+				BDD5B03A213468B5008FF9D8 /* EditUserInfoResponse.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1416,6 +1419,7 @@
 				BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */,
 				BD355C7F212D984B00A51514 /* LicenseWireframe.swift in Sources */,
 				BD53508D20EE4F44006AEE68 /* NoteListInteractor.swift in Sources */,
+				BDD5B03B213468B5008FF9D8 /* EditUserInfoResponse.swift in Sources */,
 				BD53509F20EE4FB6006AEE68 /* ScheduleListWireframe.swift in Sources */,
 				BD355C69212D97E600A51514 /* EditProtocol.swift in Sources */,
 				BD65362720BEE97200E5C63B /* MainProtocols.swift in Sources */,

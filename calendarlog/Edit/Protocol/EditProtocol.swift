@@ -27,6 +27,8 @@ protocol EditViewProtocol: class {
     func pressedCategoryButton(_ sender: UIButton)
     
     func addCategories()
+    
+    func setEditUserInfo(_ sex: String, _ categories: [Int], _ associate: String)
 }
 
 protocol EditPresenterProtocol: class {
@@ -36,6 +38,8 @@ protocol EditPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
+    func pushDone(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String)
 }
 
 protocol EditInteractorInputProtocol: class {
@@ -43,10 +47,16 @@ protocol EditInteractorInputProtocol: class {
     var remoteDatamanager: EditRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func retrieveEditUserInfo()
+    
+    func validateUpdateUserInfo(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String)
 }
 
 protocol EditInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
+    func didTryUpdateUserInfo()
+    
+    func didRetrieveEditUserInfo(_ sex: String, _ categories: [Int], _ associate: String)
     
     func onError(_ message: String)
 }
@@ -55,10 +65,16 @@ protocol EditRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: EditRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func retrieveEditUserInfo(_ email: String)
+    
+    func tryUpdateUserInfo(with userInfo: UserInfo)
 }
 
 protocol EditRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
+    func didRetrieveEditUserInfo(_ sex: String, _ categories: [Int], _ associate: String)
+    
+    func didUpdateUserInfo()
     
     func onError(_ message: String)
 }

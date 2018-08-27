@@ -259,6 +259,37 @@ class EditView: SuperViewController {
 }
 
 extension EditView: EditViewProtocol {
+    func setEditUserInfo(_ sex: String, _ categories: [Int], _ associate: String) {
+        if sex == "M" {
+            self.maleButton.isSelected = true
+            self.femailButton.isSelected = false
+        } else {
+            self.maleButton.isSelected = false
+            self.femailButton.isSelected = true
+        }
+        for category in categories {
+            switch category {
+            case 0:
+                self.categoryButton0.isSelected = true
+            case 1:
+                self.categoryButton1.isSelected = true
+            case 2:
+                self.categoryButton2.isSelected = true
+            case 3:
+                self.categoryButton3.isSelected = true
+            case 4:
+                self.categoryButton4.isSelected = true
+            case 5:
+                self.categoryButton5.isSelected = true
+            default:
+                ()
+            }
+            self.categoryTuples[category].1 = 1
+        }
+        
+        self.associateTextField.text = associate
+    }
+    
     @objc func pushDone() {
         ()
     }

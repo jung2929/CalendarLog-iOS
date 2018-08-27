@@ -13,6 +13,7 @@ struct UserInfoResponse {
     var message: String!
     var likedScheduleCount: String!
     var nickname: String!
+    var categoryTuples: [(Int, Int)]!
     var isReceiveNote: String!
     var feedList: [Feed]!
 }

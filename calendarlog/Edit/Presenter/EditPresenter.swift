@@ -14,11 +14,25 @@ class EditPresenter: EditPresenterProtocol {
     var wireframe: EditWireframeProtocol?
     
     func viewDidLoad() {
-        view?.initializeUI()
+        self.view?.initializeUI()
+        SVProgressHUD.show(withStatus: "계정정보를 불러오는중입니다.")
+        self.interactor?.retrieveEditUserInfo()
+    }
+    
+    func pushDone(_ email: String, _ password: String, _ passwordConfirmation: String, _ nickname: String, _ sex: String, _ categoryTuples: [(Int, Int)], _ associate: String) {
+        ()
     }
 }
 
 extension EditPresenter: EditInteractorOutputProtocol {
+    func didTryUpdateUserInfo() {
+        ()
+    }
+    
+    func didRetrieveEditUserInfo(_ sex: String, _ categories: [Int], _ associate: String) {
+        SVProgressHUD.dismiss()
+        self.view?.setEditUserInfo(sex, categories, associate)
+    }
     
     func onError(_ message: String) {
         SVProgressHUD.showError(withStatus: message)
