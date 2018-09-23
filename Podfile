@@ -11,7 +11,7 @@ target 'calendarlog' do
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireImage', '~> 3.3'
   pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
-  pod 'AlamofireObjectMapper', '~> 5.0'
+  pod 'AlamofireObjectMapper', '~> 5.1'
   pod 'SVProgressHUD'
 
   target 'calendarlogTests' do

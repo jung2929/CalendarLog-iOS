@@ -45,11 +45,10 @@ extension LoginInteractor: LoginRemoteDataManagerOutputProtocol {
         self.presenter?.didNotRetrieveEmail(email)
     }
     
-    func onLoginSuccess(_ email: String, _ password: String, _ nickname: String) {
+    func onLoginSuccess(_ email: String, _ password: String) {
         if !UserDefaults.standard.bool(forKey: "isAutoLogin") {
             UserDefaults.standard.set(email, forKey: "email")
             UserDefaults.standard.set(password, forKey: "password")
-            UserDefaults.standard.set(nickname, forKey: "nickname")
             UserDefaults.standard.set(true, forKey: "isAutoLogin")
         }
         self.presenter?.didTryLogin()

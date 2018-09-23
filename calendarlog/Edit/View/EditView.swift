@@ -324,13 +324,13 @@ extension EditView: EditViewProtocol {
         self.categoryButton0.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalToSuperview().offset(10)
-            make.width.equalTo(buttonWidthSize + 5)
+            make.width.equalTo(buttonWidthSize)
         }
         self.categoryView.addSubview(self.categoryButton1)
         self.categoryButton1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalTo(self.categoryButton0.snp.right)
-            make.width.equalTo(buttonWidthSize - 15)
+            make.width.equalTo(buttonWidthSize)
         }
         self.categoryView.addSubview(self.categoryButton2)
         self.categoryButton2.snp.makeConstraints { make in
@@ -342,13 +342,13 @@ extension EditView: EditViewProtocol {
         self.categoryButton3.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-20)
-            make.width.equalTo(buttonWidthSize + 5)
+            make.width.equalTo(buttonWidthSize)
         }
         self.categoryView.addSubview(self.categoryButton4)
         self.categoryButton4.snp.makeConstraints { make in
             make.left.equalTo(self.categoryButton3.snp.right)
             make.bottom.equalToSuperview().offset(-20)
-            make.width.equalTo(buttonWidthSize - 15)
+            make.width.equalTo(buttonWidthSize)
         }
         self.categoryView.addSubview(self.categoryButton5)
         self.categoryButton5.snp.makeConstraints { make in
