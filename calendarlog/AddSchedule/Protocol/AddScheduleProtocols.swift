@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol AddScheduleWireframeProtocol: class {
     static func createAddScheduleModule() -> AddScheduleView
@@ -47,6 +48,8 @@ protocol AddScheduleViewProtocol: class {
                                   _ hourIndex: Int, _ minuteIndex: Int, _ doneButton: UIBarButtonItem)
     
     func initializeUI()
+    
+    func popViewController()
 }
 
 protocol AddSchedulePresenterProtocol: class {
@@ -56,6 +59,15 @@ protocol AddSchedulePresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
+    func createSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
+                        _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                        _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool)
+    
+    func updateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
+                        _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                        _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool,
+                        _ sequence: Int)
 }
 
 protocol AddScheduleInteractorInputProtocol: class {
@@ -63,10 +75,20 @@ protocol AddScheduleInteractorInputProtocol: class {
     var remoteDatamanager: AddScheduleRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func validateCreateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
+                                _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                                _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool)
+    
+    func validateUpdateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
+                                _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                                _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool,
+                                _ sequence: Int)
 }
 
 protocol AddScheduleInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
+    func didCreateOrUpdateSchedule()
+    
     func onError(_ message: String)
 }
 
@@ -74,9 +96,14 @@ protocol AddScheduleRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: AddScheduleRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func tryCreateSchedule(_ parameters: Parameters)
+    
+    func tryUpdateSchedule(_ parameters: Parameters)
 }
 
 protocol AddScheduleRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onError(_ message: String)
+    func didCreateOrUpdateSchedule()
+    
+    func onError(with message: String)
 }

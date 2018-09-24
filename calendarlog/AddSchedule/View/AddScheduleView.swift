@@ -282,6 +282,10 @@ class AddScheduleView: SuperViewController {
 }
 
 extension AddScheduleView: AddScheduleViewProtocol {
+    func popViewController() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc func pushImageUploadButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let actionCamera = UIAlertAction(title: "사진 촬영", style: .default, handler: { _ -> Void in
@@ -329,7 +333,32 @@ extension AddScheduleView: AddScheduleViewProtocol {
     }
     
     @objc func pushDone() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let formatterShort = DateFormatter()
+        formatterShort.dateFormat = "yyyyMMdd"
         
+        let startDate = formatterShort.string(from: formatter.date(from: self.startDateValue)!)
+        let endDate = formatterShort.string(from: formatter.date(from: self.endDateValue)!)
+        let startDatetime = self.startDateValue
+        let endDatetime = self.endDateValue
+        let title = self.titleTextField.text!
+        let content = self.contentTextView.text == "내용을 입력하세요." ? "" : self.contentTextView.text!
+        let imgUrl = ""
+        let location = self.locationTextField.text!
+        let url1 = self.urlFirstTextField.text!
+        let url2 = self.urlSecondTextField.text!
+        let url3 = self.urlThirdTextField.text!
+        if selectedCategoryValue == -1 {
+            self.categoryTextField.textColor = ColorPalette.RedForText
+            return
+        }
+        let category = selectedCategoryValue
+        let etc = ""
+        let isPublic = isPublicSwitch.isOn
+        
+        self.presenter?.createSchedule(startDate, endDate, startDatetime, endDatetime, title, content, imgUrl, location,
+                                       url1, url2, url3, category, etc, isPublic)
     }
     
     @objc func pushStartDateDone() {
