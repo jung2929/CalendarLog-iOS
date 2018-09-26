@@ -39,10 +39,13 @@ protocol ScheduleDetailInteractorInputProtocol: class {
     var remoteDatamanager: ScheduleDetailRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func retrieveScheduleDetail()
 }
 
 protocol ScheduleDetailInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
+    func didRetrieveScheduleDetail(_ feedList: [Feed])
+    
     func onError(_ message: String)
 }
 
@@ -50,9 +53,12 @@ protocol ScheduleDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ScheduleDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func retrieveScheduleDetail(_ email: String, _ sequence: Int)
 }
 
 protocol ScheduleDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
+    func onScheduleDetailRetrieved()
+    
     func onError(_ message: String)
 }
