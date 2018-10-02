@@ -13,6 +13,8 @@ target 'calendarlog' do
   pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
   pod 'AlamofireObjectMapper', '~> 5.1'
   pod 'SVProgressHUD'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
 
   target 'calendarlogTests' do
     inherit! :search_paths

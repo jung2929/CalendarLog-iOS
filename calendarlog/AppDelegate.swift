@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import AlamofireNetworkActivityIndicator
 import SVProgressHUD
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(.black)
         // 0.1초로 하긴했는데 0.1초까진 안됨 (약 0.6초 걸리는듯)
         SVProgressHUD.setMinimumDismissTimeInterval(0.1)
+        
+        // Use Firebase library to configure APIs
+        FirebaseApp.configure()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let loginViewController = LoginWireframe.createLoginModule()

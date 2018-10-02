@@ -44,6 +44,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in AddScheduleInteractor.validateCreateSchedule(_:_:_:_:_:_:_:_:_:_:_:_:_:_:):AddScheduleInteractor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MainViewController.viewDidAppear(_:):MainViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -180,13 +188,13 @@
          contextName = "LoginPresenter.viewDidLoad():LoginPresenter.swift">
          <PersistentStrings>
             <PersistentString
+               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
+            </PersistentString>
+            <PersistentString
                value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
             </PersistentString>
             <PersistentString
                value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

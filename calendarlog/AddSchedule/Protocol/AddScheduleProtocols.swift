@@ -16,6 +16,10 @@ protocol AddScheduleWireframeProtocol: class {
 }
 
 protocol AddScheduleViewProtocol: class {
+    var isSelectedScheduleImage: Bool { get set }
+    var isEditSchedule: Bool { get set }
+    var sequence: Int { get set }
+    
     var startDateValue: String { get set }
     var startYearIndexValue: Int { get set }
     var startMonthIndexValue: Int { get set }
@@ -50,6 +54,10 @@ protocol AddScheduleViewProtocol: class {
     func initializeUI()
     
     func popViewController()
+    
+    func presentCamera()
+    
+    func presentAlbum()
 }
 
 protocol AddSchedulePresenterProtocol: class {
@@ -61,11 +69,11 @@ protocol AddSchedulePresenterProtocol: class {
     func viewDidLoad()
     
     func createSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
-                        _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                        _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String,
                         _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool)
     
     func updateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
-                        _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                        _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String,
                         _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool,
                         _ sequence: Int)
 }
@@ -76,11 +84,11 @@ protocol AddScheduleInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func validateCreateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
-                                _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                                _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String,
                                 _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool)
     
     func validateUpdateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String,
-                                _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String,
+                                _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String,
                                 _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool,
                                 _ sequence: Int)
 }

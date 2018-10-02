@@ -19,6 +19,10 @@ class ScheduleDetailPresenter: ScheduleDetailPresenterProtocol {
 }
 
 extension ScheduleDetailPresenter: ScheduleDetailInteractorOutputProtocol {
+    func didRetrieveScheduleDetail(_ feedList: [Feed]) {
+        ()
+    }
+    
     func onError(_ message: String) {
         SVProgressHUD.showError(withStatus: message)
     }

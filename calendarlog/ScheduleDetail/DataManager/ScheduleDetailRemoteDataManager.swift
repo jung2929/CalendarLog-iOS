@@ -11,4 +11,7 @@ import Alamofire
 class ScheduleDetailRemoteDataManager: ScheduleDetailRemoteDataManagerInputProtocol {
     var remoteRequestHandler: ScheduleDetailRemoteDataManagerOutputProtocol?
     
+    func retrieveScheduleDetail(_ email: String, _ sequence: Int) {
+        ()
+    }
 }

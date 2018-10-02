@@ -10,9 +10,16 @@ class ScheduleDetailInteractor: ScheduleDetailInteractorInputProtocol {
     var presenter: ScheduleDetailInteractorOutputProtocol?
     var remoteDatamanager: ScheduleDetailRemoteDataManagerInputProtocol?
     
+    func retrieveScheduleDetail() {
+        ()
+    }
 }
 
 extension ScheduleDetailInteractor: ScheduleDetailRemoteDataManagerOutputProtocol {
+    func onScheduleDetailRetrieved() {
+        ()
+    }
+    
     func onError(_ message: String) {
         presenter?.onError(message)
     }

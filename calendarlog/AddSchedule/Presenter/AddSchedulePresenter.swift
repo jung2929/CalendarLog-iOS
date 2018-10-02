@@ -17,17 +17,20 @@ class AddSchedulePresenter: AddSchedulePresenterProtocol {
         view?.initializeUI()
     }
     
-    func createSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String, _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String, _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool) {
-        self.interactor?.validateCreateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, imgUrl, location, url1, url2, url3, category, etc, isPublic)
+    func createSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String, _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String, _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool) {
+        SVProgressHUD.show(withStatus: "스케줄을 등록중 입니다.")
+        self.interactor?.validateCreateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, scheduleImage, location, url1, url2, url3, category, etc, isPublic)
     }
     
-    func updateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String, _ title: String, _ content: String, _ imgUrl: String, _ location: String, _ url1: String, _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool, _ sequence: Int) {
-        self.interactor?.validateUpdateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, imgUrl, location, url1, url2, url3, category, etc, isPublic, sequence)
+    func updateSchedule(_ startDate: String, _ endDate: String, _ startDatetime: String, _ endDatetime: String, _ title: String, _ content: String, _ scheduleImage: UIImage?, _ location: String, _ url1: String, _ url2: String, _ url3: String, _ category: Int, _ etc: String, _ isPublic: Bool, _ sequence: Int) {
+        SVProgressHUD.show(withStatus: "스케줄을 수정중 입니다.")
+        self.interactor?.validateUpdateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, scheduleImage, location, url1, url2, url3, category, etc, isPublic, sequence)
     }
 }
 
 extension AddSchedulePresenter: AddScheduleInteractorOutputProtocol {
     func didCreateOrUpdateSchedule() {
+        SVProgressHUD.dismiss()
         self.view?.popViewController()
     }
     

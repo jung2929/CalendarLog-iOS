@@ -11,6 +11,7 @@
 		9E4B31F795B8061C0EA2AA08 /* Pods_calendarlogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BB0266C096E57EAB9622C5 /* Pods_calendarlogTests.framework */; };
 		A7C0D2E49727111BAC30FEC2 /* Pods_calendarlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */; };
 		BD1ABEAB20A1DE810072417B /* ColorPalatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */; };
+		BD21E5212161F37F00226754 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD21E5202161F37E00226754 /* GoogleService-Info.plist */; };
 		BD355C5F212D97BB00A51514 /* EditWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD355C5E212D97BB00A51514 /* EditWireframe.swift */; };
 		BD355C61212D97C300A51514 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD355C60212D97C300A51514 /* EditView.swift */; };
 		BD355C63212D97CD00A51514 /* EditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD355C62212D97CD00A51514 /* EditPresenter.swift */; };
@@ -125,6 +126,7 @@
 		7CB0386452B9EC2F7B28F9DE /* Pods-calendarlogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calendarlogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calendarlogTests/Pods-calendarlogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A70C5E7F2B0D090F9258EE11 /* Pods_calendarlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calendarlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1ABEAA20A1DE810072417B /* ColorPalatte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalatte.swift; sourceTree = "<group>"; };
+		BD21E5202161F37E00226754 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD355C5E212D97BB00A51514 /* EditWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWireframe.swift; sourceTree = "<group>"; };
 		BD355C60212D97C300A51514 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		BD355C62212D97CD00A51514 /* EditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPresenter.swift; sourceTree = "<group>"; };
@@ -997,6 +999,7 @@
 				BDDFFF2220CD145700393504 /* Assets.xcassets */,
 				BDCECB2C20749318000519E0 /* AppDelegate.swift */,
 				BDCECB3B20749318000519E0 /* Info.plist */,
+				BD21E5202161F37E00226754 /* GoogleService-Info.plist */,
 				BD889B95209F779A005A8043 /* InfoPlist.strings */,
 				BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */,
 				BD889B9C209F7ADD005A8043 /* LaunchScreen.storyboard */,
@@ -1154,6 +1157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD889B93209F779A005A8043 /* InfoPlist.strings in Resources */,
+				BD21E5212161F37F00226754 /* GoogleService-Info.plist in Resources */,
 				BDDFFF2320CD145800393504 /* Assets.xcassets in Resources */,
 				BD889B9D209F7ADD005A8043 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -1188,9 +1192,12 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1199,9 +1206,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityIndicator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

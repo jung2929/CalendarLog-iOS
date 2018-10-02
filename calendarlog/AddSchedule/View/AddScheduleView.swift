@@ -11,6 +11,9 @@ import SVProgressHUD
 
 class AddScheduleView: SuperViewController {
     var presenter: AddSchedulePresenterProtocol?
+    var isSelectedScheduleImage = false
+    var isEditSchedule = false
+    var sequence: Int = -1
     var startDateValue: String = "2018.01.01 00:00" {
         didSet {
             self.startDateTextField.text = startDateValue
@@ -65,6 +68,7 @@ class AddScheduleView: SuperViewController {
         self.urlFirstTextField.delegate = self
         self.urlSecondTextField.delegate = self
         self.urlThirdTextField.delegate = self
+        self.imagePickerController.delegate = self
         let touchUpInsideTap = UITapGestureRecognizer(target: self, action: #selector(pushImageUploadButton))
         self.scheduleImageView.addGestureRecognizer(touchUpInsideTap)
         //내비게이션바 타이틀 설정
@@ -279,9 +283,29 @@ class AddScheduleView: SuperViewController {
         uiSwitch.isOn = true
         return uiSwitch
     }()
+    // 카메라 혹은 앨범을 위한 picker
+    let imagePickerController = UIImagePickerController()
 }
 
 extension AddScheduleView: AddScheduleViewProtocol {
+    func presentCamera() {
+        if UIImagePickerController .isSourceTypeAvailable(.camera) {
+            self.imagePickerController.sourceType = .camera
+            present(self.imagePickerController, animated: false, completion: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: "카메라에 접근 할 수 없습니다.")
+        }
+    }
+    
+    func presentAlbum() {
+        if UIImagePickerController .isSourceTypeAvailable(.photoLibrary) {
+            self.imagePickerController.sourceType = .photoLibrary
+            present(self.imagePickerController, animated: false, completion: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: "앨범에 접근 할 수 없습니다.")
+        }
+    }
+    
     func popViewController() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -289,22 +313,14 @@ extension AddScheduleView: AddScheduleViewProtocol {
     @objc func pushImageUploadButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let actionCamera = UIAlertAction(title: "사진 촬영", style: .default, handler: { _ -> Void in
-            // 일정 이미지 설정
-            self.scheduleImageView.snp.updateConstraints { make in
-                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
-                make.size.equalTo(200)
-            }
-            self.scheduleImageView.setNeedsUpdateConstraints()
+            self.presentCamera()
         })
         let actionAlbum = UIAlertAction(title: "사진 앨범에서 선택", style: .default, handler: { _ -> Void in
-            // 일정 이미지 설정
-            self.scheduleImageView.snp.updateConstraints { make in
-                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
-                make.size.equalTo(200)
-            }
+            self.presentAlbum()
         })
         let actionDelete = UIAlertAction(title: "사진 제거", style: .default, handler: { _ -> Void in
             // 일정 이미지 설정
+            self.isSelectedScheduleImage = false
             self.scheduleImageView.snp.updateConstraints { make in
                 make.top.equalTo(self.imageUploadButton.snp.bottom).offset(0)
                 make.size.equalTo(0)
@@ -344,21 +360,42 @@ extension AddScheduleView: AddScheduleViewProtocol {
         let endDatetime = self.endDateValue
         let title = self.titleTextField.text!
         let content = self.contentTextView.text == "내용을 입력하세요." ? "" : self.contentTextView.text!
-        let imgUrl = ""
         let location = self.locationTextField.text!
         let url1 = self.urlFirstTextField.text!
         let url2 = self.urlSecondTextField.text!
         let url3 = self.urlThirdTextField.text!
-        if selectedCategoryValue == -1 {
+        let category = self.selectedCategoryValue
+        if category == -1 {
             self.categoryTextField.textColor = ColorPalette.RedForText
             return
         }
-        let category = selectedCategoryValue
         let etc = ""
-        let isPublic = isPublicSwitch.isOn
+        let isPublic = self.isPublicSwitch.isOn
         
-        self.presenter?.createSchedule(startDate, endDate, startDatetime, endDatetime, title, content, imgUrl, location,
-                                       url1, url2, url3, category, etc, isPublic)
+        if self.isEditSchedule {
+            if self.sequence == -1 {
+                SVProgressHUD.show(withStatus: "\(self.sequence)번호에 해당하는 스케줄을 찾을 수 없습니다.")
+                return
+            }
+            
+            let actionEditSchedule = UIAlertAction(title: "확인", style: .destructive) { _ in
+                if self.isSelectedScheduleImage {
+                    self.presenter?.updateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, self.scheduleImageView.image, location, url1, url2, url3, category, etc, isPublic, self.sequence)
+                } else {
+                    self.presenter?.updateSchedule(startDate, endDate, startDatetime, endDatetime, title, content, nil, location, url1, url2, url3, category, etc, isPublic, self.sequence)
+                }
+            }
+            self.presentAlertWithAction(title: "스케줄 수정", message: "스케줄을 수정하시겠습니까?", actionEditSchedule)
+        } else {
+            let actionAddSchedule = UIAlertAction(title: "확인", style: .destructive) { _ in
+                if self.isSelectedScheduleImage {
+                    self.presenter?.createSchedule(startDate, endDate, startDatetime, endDatetime, title, content, self.scheduleImageView.image, location, url1, url2, url3, category, etc, isPublic)
+                } else {
+                    self.presenter?.createSchedule(startDate, endDate, startDatetime, endDatetime, title, content, nil, location, url1, url2, url3, category, etc, isPublic)
+                }
+            }
+            self.presentAlertWithAction(title: "스케줄 추가", message: "스케줄을 추가하시겠습니까?", actionAddSchedule)
+        }
     }
     
     @objc func pushStartDateDone() {
@@ -631,7 +668,22 @@ extension AddScheduleView: AddScheduleViewProtocol {
     }
 }
 
-extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            // 일정 이미지 설정
+            self.isSelectedScheduleImage = true
+            self.scheduleImageView.image = image
+            self.scheduleImageView.snp.updateConstraints { make in
+                make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
+                make.size.equalTo(200)
+            }
+            self.scheduleImageView.setNeedsUpdateConstraints()
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 5
     }
@@ -812,31 +864,31 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
             self.categoryTextField.textColor = ColorPalette.Primary
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let actionFirst = UIAlertAction(title: "IT", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 1
+                self.selectedCategoryValue = 0
                 self.categoryTextField.text = "IT"
             })
             let actionSecond = UIAlertAction(title: "문화/예술", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 2
+                self.selectedCategoryValue = 1
                 self.categoryTextField.text = "문화/예술"
             })
             let actionThird = UIAlertAction(title: "방송/연예", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 3
+                self.selectedCategoryValue = 2
                 self.categoryTextField.text = "방송/연예"
             })
             let actionFourth = UIAlertAction(title: "패션/뷰티", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 4
+                self.selectedCategoryValue = 3
                 self.categoryTextField.text = "패션/뷰티"
             })
             let actionFifth = UIAlertAction(title: "전시/박람회", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 5
+                self.selectedCategoryValue = 4
                 self.categoryTextField.text = "전시/박람회"
             })
             let actionSixth = UIAlertAction(title: "여행/스포츠", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 6
+                self.selectedCategoryValue = 5
                 self.categoryTextField.text = "여행/스포츠"
             })
             let actionSeventh = UIAlertAction(title: "기타", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 0
+                self.selectedCategoryValue = 999
                 self.categoryTextField.text = "기타"
             })
             alert.addAction(actionFirst)
