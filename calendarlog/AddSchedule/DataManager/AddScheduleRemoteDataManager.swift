@@ -24,7 +24,7 @@ class AddScheduleRemoteDataManager: AddScheduleRemoteDataManagerInputProtocol {
                         self.remoteRequestHandler?.onError(with: defaultResponse.message)
                     }
                 case .failure:
-                    self.remoteRequestHandler?.onError(with: "스케줄 등록에 실패하였습니다.")
+                    self.remoteRequestHandler?.onError(with: "네트워크 상태를 확인해주세요.")
                 }
             })
     }
@@ -42,7 +42,7 @@ class AddScheduleRemoteDataManager: AddScheduleRemoteDataManagerInputProtocol {
                         self.remoteRequestHandler?.onError(with: defaultResponse.message)
                     }
                 case .failure:
-                    self.remoteRequestHandler?.onError(with: "스케줄 수정에 실패하였습니다.")
+                    self.remoteRequestHandler?.onError(with: "네트워크 상태를 확인해주세요.")
                 }
             })
     }

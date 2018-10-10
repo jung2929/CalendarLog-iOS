@@ -90,6 +90,8 @@
 		BD98557720B875EF00AE5460 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD98557620B875EF00AE5460 /* API.swift */; };
 		BD9A8414212F07F8000D7464 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */; };
 		BDBD364820BC2868004AFEF4 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBD364720BC2868004AFEF4 /* UserInfo.swift */; };
+		BDBED835216DF60D00556821 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBED834216DF60D00556821 /* CommentTableViewCell.swift */; };
+		BDBED837216DF8CB00556821 /* CommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBED836216DF8CB00556821 /* CommentResponse.swift */; };
 		BDCECB2D20749318000519E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB2C20749318000519E0 /* AppDelegate.swift */; };
 		BDCECB3520749318000519E0 /* calendarlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB3320749318000519E0 /* calendarlog.xcdatamodeld */; };
 		BDCECB4520749318000519E0 /* CalendarlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCECB4420749318000519E0 /* CalendarlogTests.swift */; };
@@ -206,6 +208,8 @@
 		BD98557620B875EF00AE5460 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		BDBD364720BC2868004AFEF4 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		BDBED834216DF60D00556821 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		BDBED836216DF8CB00556821 /* CommentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponse.swift; sourceTree = "<group>"; };
 		BDCECB2920749318000519E0 /* calendarlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendarlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCECB2C20749318000519E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCECB3420749318000519E0 /* calendarlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = calendarlog.xcdatamodel; sourceTree = "<group>"; };
@@ -659,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				BD53509420EE4F7C006AEE68 /* ScheduleDetailView.swift */,
+				BDBED834216DF60D00556821 /* CommentTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				BD93C19320EA668900C9C981 /* FeedResponse.swift */,
 				BD9A8413212F07F8000D7464 /* UserInfoResponse.swift */,
 				BDD5B03A213468B5008FF9D8 /* EditUserInfoResponse.swift */,
+				BDBED836216DF8CB00556821 /* CommentResponse.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1388,10 +1394,12 @@
 				BD889BA120A1A468005A8043 /* Extenstions.swift in Sources */,
 				BDBD364820BC2868004AFEF4 /* UserInfo.swift in Sources */,
 				BD5E332120B5E67900B637FD /* LoginProtocols.swift in Sources */,
+				BDBED837216DF8CB00556821 /* CommentResponse.swift in Sources */,
 				BD355C89212D986E00A51514 /* LicenseProtocol.swift in Sources */,
 				BD355C6D212D97F500A51514 /* SettingsView.swift in Sources */,
 				BD3D054620BADA3B00F8284B /* RegisterRemoteDataManager.swift in Sources */,
 				BD53507B20EE4EEB006AEE68 /* UserInfoWireframe.swift in Sources */,
+				BDBED835216DF60D00556821 /* CommentTableViewCell.swift in Sources */,
 				BD93C18E20EA3DFD00C9C981 /* ScheduleResponse.swift in Sources */,
 				BD53505F20EE40AA006AEE68 /* AddScheduleInteractor.swift in Sources */,
 				BD5E332520B5EE8600B637FD /* LoginWireframe.swift in Sources */,

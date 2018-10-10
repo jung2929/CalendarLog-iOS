@@ -13,14 +13,17 @@ import SVProgressHUD
 class ScheduleDetailView: SuperViewController {
     var presenter: ScheduleDetailPresenterProtocol?
     var feedValue: Feed?
+    var commentList: [Comment]?
     var sequence: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
-        self.url1TextField.delegate = self
-        self.url1TextField.delegate = self
-        self.url1TextField.delegate = self
+        self.commentTableView.delegate = self
+        self.commentTableView.dataSource = self
+        self.urlFirstTextField.delegate = self
+        self.urlSecondTextField.delegate = self
+        self.urlThirdTextField.delegate = self
         self.commentTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
@@ -30,11 +33,15 @@ class ScheduleDetailView: SuperViewController {
             let editBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_edit"), style: .done, target: self, action: #selector(self.pushEdit))
             self.navigationItem.rightBarButtonItem = editBarButtonItem
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.presenter?.viewWillAppear()
+        guard let feedValue = self.feedValue else {
+            SVProgressHUD.showError(withStatus: "스케줄 내역을 불러 올 수 없습니다.")
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        self.presenter?.viewWillAppear(feedValue.scheduleEmail, feedValue.scheduleSequence)
     }
     
     // 메인 스크롤 뷰 설정
@@ -159,7 +166,7 @@ class ScheduleDetailView: SuperViewController {
         return textField
     }()
     // URL1 라벨 설정
-    let url1Label: UILabel = {
+    let urlFirstLabel: UILabel = {
         let label = UILabel()
         label.text = "URL1"
         label.textColor = ColorPalette.GrayForText
@@ -167,17 +174,17 @@ class ScheduleDetailView: SuperViewController {
         return label
     }()
     // URL1 텍스트 필드 설정
-    let url1TextField: UITextField = {
+    let urlFirstTextField: UITextField = {
         let textField = UITextField()
         textField.text = ""
         textField.textColor = ColorPalette.BlueForText
         textField.font = .systemFont(ofSize: 14, weight: .medium)
         textField.textAlignment = .right
-        textField.isUserInteractionEnabled = false
+        textField.tintColor = UIColor.clear
         return textField
     }()
     // URL2 라벨 설정
-    let url2Label: UILabel = {
+    let urlSecondLabel: UILabel = {
         let label = UILabel()
         label.text = "URL2"
         label.textColor = ColorPalette.GrayForText
@@ -185,17 +192,17 @@ class ScheduleDetailView: SuperViewController {
         return label
     }()
     // URL2 텍스트 필드 설정
-    let url2TextField: UITextField = {
+    let urlSecondTextField: UITextField = {
         let textField = UITextField()
         textField.text = ""
         textField.textColor = ColorPalette.BlueForText
         textField.font = .systemFont(ofSize: 14, weight: .medium)
         textField.textAlignment = .right
-        textField.isUserInteractionEnabled = false
+        textField.tintColor = UIColor.clear
         return textField
     }()
     // URL3 라벨 설정
-    let url3Label: UILabel = {
+    let urlThirdLabel: UILabel = {
         let label = UILabel()
         label.text = "URL3"
         label.textColor = ColorPalette.GrayForText
@@ -203,13 +210,13 @@ class ScheduleDetailView: SuperViewController {
         return label
     }()
     // URL3 텍스트 필드 설정
-    let url3TextField: UITextField = {
+    let urlThirdTextField: UITextField = {
         let textField = UITextField()
         textField.text = ""
         textField.textColor = ColorPalette.BlueForText
         textField.font = .systemFont(ofSize: 14, weight: .medium)
         textField.textAlignment = .right
-        textField.isUserInteractionEnabled = false
+        textField.tintColor = UIColor.clear
         return textField
     }()
     // 좋아요 버튼 설정
@@ -242,12 +249,21 @@ class ScheduleDetailView: SuperViewController {
     }()
     // 기본 사용자 프로필 이미지 설정
     let profileImageView: UIImageView = UIImageView(image: UIImage(named: "ic_profile_default"))
-    // 기본 사용자 닉네임 설정
+    // 작성자 라벨 설정
+    let scheduleNicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "작성자"
+        label.textColor = ColorPalette.GrayForText
+        label.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.medium)
+        return label
+    }()
+    // 닉네임 설정
     let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임(나)"
         label.textColor = ColorPalette.BlackForText
         label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textAlignment = .right
         return label
     }()
     // 댓글 텍스트 필드 설정
@@ -263,6 +279,7 @@ class ScheduleDetailView: SuperViewController {
     let commentAddButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "ic_comment_add"), for: .normal)
+        button.addTarget(self, action: #selector(pushCommentAddButton), for: .touchUpInside)
         return button
     }()
     // 댓글 텍스트 필드 하단 라인 설정
@@ -277,11 +294,49 @@ class ScheduleDetailView: SuperViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
 }
 
 extension ScheduleDetailView: ScheduleDetailViewProtocol {
+    func addCommentToList() {
+        if let feedValue = self.feedValue {
+            self.feedValue?.commentCount = feedValue.commentCount + 1
+            self.commentButton.setTitle(String(self.feedValue?.commentCount ?? 0), for: .normal)
+        }
+        
+        let count = self.commentList?.count ?? 0
+        let height = count > 4 ? 5 * 91 : count * 91
+        self.commentTableView.snp.remakeConstraints { make in
+            make.top.equalTo(self.scheduleBottomBorderView.snp.bottom).offset(8)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(height)
+        }
+        self.commentTableView.reloadData()
+        self.commentTableView.layoutIfNeeded()
+    }
+    
+    func loadCommentList() {
+        let count = self.commentList?.count ?? 0
+        let height = count > 4 ? 5 * 91 : count * 91
+        self.commentTableView.snp.makeConstraints { make in
+            make.height.equalTo(height)
+        }
+        self.commentTableView.reloadData()
+        self.commentTableView.layoutIfNeeded()
+    }
+    
+    @objc func pushCommentAddButton() {
+        guard let feedValue = self.feedValue else {
+            SVProgressHUD.showError(withStatus: "스케줄에 댓글을 추가 할 수 없습니다.")
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        self.presenter?.createComment(feedValue.scheduleEmail, feedValue.scheduleSequence, self.commentTextField.text!)
+    }
+    
     func loadScheduleDetail() {
         guard let feedValue = self.feedValue else {
             SVProgressHUD.showError(withStatus: "스케줄 내역을 불러 올 수 없습니다.")
@@ -338,9 +393,9 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
             category = "잘못된 카테고리"
         }
         self.categoryTextField.text = category
-        self.url1TextField.text = feedValue.url1
-        self.url2TextField.text = feedValue.url2
-        self.url3TextField.text = feedValue.url3
+        self.urlFirstTextField.text = feedValue.url1
+        self.urlSecondTextField.text = feedValue.url2
+        self.urlThirdTextField.text = feedValue.url3
         if feedValue.isLike == "Y" {
             self.likeButton.isSelected = true
         }
@@ -350,7 +405,16 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
     }
     
     @objc func pushLikeButton() {
-        self.likeButton.isSelected = self.likeButton.isSelected == true ? false : true
+        if let feedValue = self.feedValue {
+            if self.likeButton.isSelected {
+                self.likeButton.isSelected = false
+                self.feedValue?.likeCount = feedValue.likeCount - 1
+            } else {
+                self.likeButton.isSelected = true
+                self.feedValue?.likeCount = feedValue.likeCount + 1
+            }
+            self.likeButton.setTitle(String(self.feedValue?.likeCount ?? 0), for: .normal)
+        }
     }
     
     @objc func pushEdit() {
@@ -447,7 +511,7 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
         self.centerView.addSubview(self.locationTextField)
         self.locationTextField.snp.makeConstraints { make in
             make.centerY.equalTo(self.locationLabel)
-            make.left.equalTo(self.locationLabel.snp.right).offset(0)
+            make.left.equalTo(self.locationLabel.snp.right).offset(10)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // 카테고리 라벨 추가
@@ -464,48 +528,61 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // URL1 라벨 추가
-        self.centerView.addSubview(self.url1Label)
-        self.url1Label.snp.makeConstraints { make in
+        self.centerView.addSubview(self.urlFirstLabel)
+        self.urlFirstLabel.snp.makeConstraints { make in
             make.top.equalTo(self.categoryLabel.snp.bottom).offset(19)
             make.left.equalToSuperview().offset(offsetLeftValue)
         }
         // URL1 텍스트 필드 추가
-        self.centerView.addSubview(self.url1TextField)
-        self.url1TextField.snp.makeConstraints { make in
-            make.centerY.equalTo(self.url1Label)
-            make.left.equalTo(self.url1Label.snp.right).offset(50)
+        self.centerView.addSubview(self.urlFirstTextField)
+        self.urlFirstTextField.snp.makeConstraints { make in
+            make.centerY.equalTo(self.urlFirstLabel)
+            make.left.equalTo(self.urlFirstLabel.snp.right).offset(50)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // URL2 라벨 추가
-        self.centerView.addSubview(self.url2Label)
-        self.url2Label.snp.makeConstraints { make in
-            make.top.equalTo(self.url1Label.snp.bottom).offset(19)
+        self.centerView.addSubview(self.urlSecondLabel)
+        self.urlSecondLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.urlFirstLabel.snp.bottom).offset(19)
             make.left.equalToSuperview().offset(offsetLeftValue)
         }
         // URL2 텍스트 필드 추가
-        self.centerView.addSubview(self.url2TextField)
-        self.url2TextField.snp.makeConstraints { make in
-            make.centerY.equalTo(self.url2Label)
-            make.left.equalTo(self.url2Label.snp.right).offset(50)
+        self.centerView.addSubview(self.urlSecondTextField)
+        self.urlSecondTextField.snp.makeConstraints { make in
+            make.centerY.equalTo(self.urlSecondLabel)
+            make.left.equalTo(self.urlSecondLabel.snp.right).offset(50)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // URL3 라벨 추가
-        self.centerView.addSubview(self.url3Label)
-        self.url3Label.snp.makeConstraints { make in
-            make.top.equalTo(self.url2Label.snp.bottom).offset(19)
+        self.centerView.addSubview(self.urlThirdLabel)
+        self.urlThirdLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.urlSecondLabel.snp.bottom).offset(19)
             make.left.equalToSuperview().offset(offsetLeftValue)
         }
         // URL3 텍스트 필드 추가
-        self.centerView.addSubview(self.url3TextField)
-        self.url3TextField.snp.makeConstraints { make in
-            make.centerY.equalTo(self.url3Label)
-            make.left.equalTo(self.url3Label.snp.right).offset(50)
+        self.centerView.addSubview(self.urlThirdTextField)
+        self.urlThirdTextField.snp.makeConstraints { make in
+            make.centerY.equalTo(self.urlThirdLabel)
+            make.left.equalTo(self.urlThirdLabel.snp.right).offset(50)
+            make.right.equalToSuperview().offset(offsetRightValue)
+        }
+        // 작성자 라벨 추가
+        self.centerView.addSubview(self.scheduleNicknameLabel)
+        self.scheduleNicknameLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.urlThirdLabel.snp.bottom).offset(19)
+            make.left.equalToSuperview().offset(offsetLeftValue)
+        }
+        // 닉네임 라벨 추가
+        self.centerView.addSubview(self.nicknameLabel)
+        self.nicknameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.scheduleNicknameLabel)
+            make.left.equalTo(self.scheduleNicknameLabel.snp.right).offset(50)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // 좋아요 버튼 추가
         self.centerView.addSubview(self.likeButton)
         self.likeButton.snp.makeConstraints { make in
-            make.top.equalTo(self.url3Label).offset(29)
+            make.top.equalTo(self.scheduleNicknameLabel.snp.bottom).offset(29)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.width.equalTo(50)
             make.height.equalTo(30)
@@ -513,7 +590,7 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
         // 댓글 버튼 추가
         self.centerView.addSubview(self.commentButton)
         self.commentButton.snp.makeConstraints { make in
-            make.top.equalTo(self.url3Label).offset(29)
+            make.top.equalTo(self.scheduleNicknameLabel.snp.bottom).offset(29)
             make.left.equalTo(self.likeButton.snp.right).offset(15)
             make.height.equalTo(30)
         }
@@ -525,29 +602,22 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
             make.right.equalToSuperview()
             make.height.equalTo(7)
         }
-        // 기본 사용자 프로필 이미지 설정
-        self.centerView.addSubview(self.profileImageView)
-        self.profileImageView.snp.makeConstraints { make in
-            make.top.equalTo(self.scheduleBottomBorderView.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-            make.size.equalTo(30)
-        }
-        // 기본 사용자 닉네임 설정
-        self.centerView.addSubview(self.nicknameLabel)
-        self.nicknameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.profileImageView)
-            make.left.equalTo(self.profileImageView.snp.right).offset(10)
+        // 댓글 테이블 뷰 추가
+        self.centerView.addSubview(self.commentTableView)
+        self.commentTableView.snp.makeConstraints { make in
+            make.top.equalTo(self.scheduleBottomBorderView.snp.bottom).offset(8)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
         // 댓글 입력 버튼 추가
         self.centerView.addSubview(self.commentAddButton)
         self.commentAddButton.snp.makeConstraints { make in
-            make.top.equalTo(self.profileImageView.snp.bottom).offset(20)
+            make.top.equalTo(self.commentTableView.snp.bottom).offset(20)
             make.right.equalToSuperview().offset(offsetRightValue)
         }
         // 댓글 텍스트 필드 추가
         self.centerView.addSubview(self.commentTextField)
         self.commentTextField.snp.makeConstraints { make in
-            //make.top.equalTo(self.profileImageView.snp.bottom).offset(20)
             make.centerY.equalTo(self.commentAddButton)
             make.left.equalToSuperview().offset(offsetLeftValue)
             make.right.equalTo(self.commentAddButton.snp.left).offset(5)
@@ -555,27 +625,65 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
         // 댓글 텍스트 하단 라인 추가
         self.centerView.addSubview(self.commentBottomBorderView)
         self.commentBottomBorderView.snp.makeConstraints { make in
-            //make.top.equalTo(self.commentTextField.snp.bottom).offset(8)
-            make.top.equalTo(self.commentAddButton.snp.bottom).offset(8)
+            make.top.equalTo(self.commentTextField.snp.bottom).offset(8)
             make.left.equalToSuperview().offset(offsetLeftValue - 5)
             make.right.equalToSuperview().offset(offsetRightValue + 5)
             make.height.equalTo(1)
-        }
-        // 댓글 테이블 뷰 추가
-        self.centerView.addSubview(self.commentTableView)
-        self.commentTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.commentBottomBorderView.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(offsetLeftValue)
-            make.right.equalToSuperview().offset(offsetRightValue)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-5)
         }
     }
 }
 
-extension ScheduleDetailView: UITextFieldDelegate {
+extension ScheduleDetailView: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let commentList = self.commentList {
+            return commentList.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = CommentTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "commentCell")
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        if let commentList = self.commentList {
+            let comment = commentList[indexPath.row]
+            // 댓글 닉네임 설정
+            cell.nicknameLabel.text = comment.nickname
+            // 댓글 작성 시간 설정
+            cell.registerDatetimeLabel.text = comment.registerDatetime
+            // 댓글 내용 설정
+            cell.contentTextView.text = comment.content
+        }
+        return cell
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case self.urlFirstTextField:
+            textField.resignFirstResponder()
+            if let url = URL(string: self.urlFirstTextField.text!) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        case self.urlSecondTextField:
+            textField.resignFirstResponder()
+            if let url = URL(string: self.urlSecondTextField.text!) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        case self.urlThirdTextField:
+            textField.resignFirstResponder()
+            if let url = URL(string: self.urlThirdTextField.text!) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        default:
+            ()
+        }
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {

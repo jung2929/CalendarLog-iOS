@@ -12,15 +12,23 @@ class ScheduleDetailInteractor: ScheduleDetailInteractorInputProtocol {
     var presenter: ScheduleDetailInteractorOutputProtocol?
     var remoteDatamanager: ScheduleDetailRemoteDataManagerInputProtocol?
     
-    func retrieveScheduleDetail(_ sequence: Int) {
+    func retrieveCommentList(_ scheduleEmail: String, _ scheduleSequence: Int) {
+        self.remoteDatamanager?.retrieveCommentList(scheduleEmail, scheduleSequence)
+    }
+    
+    func createComment(_ scheduleEmail: String, _ scheduleSequence: Int, _ content: String) {
         let email = UserDefaults.standard.string(forKey: "email")!
-        self.remoteDatamanager?.retrieveScheduleDetail(email, sequence)
+        self.remoteDatamanager?.tryCreateComment(scheduleEmail, scheduleSequence, email, content)
     }
 }
 
 extension ScheduleDetailInteractor: ScheduleDetailRemoteDataManagerOutputProtocol {
-    func onScheduleDetailRetrieved() {
-        //self.presenter?.didRetrieveScheduleDetail(nil)
+    func onCommentListRetrieved(_ commentList: [Comment]) {
+        self.presenter?.didRetrieveCommentList(commentList)
+    }
+    
+    func onCommentCreated(_ comment: Comment) {
+        self.presenter?.didCreateComment(comment)
     }
     
     func onError(_ message: String) {

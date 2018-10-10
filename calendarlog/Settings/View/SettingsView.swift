@@ -90,18 +90,18 @@ extension SettingsView: SettingsViewProtocol {
 //            make.right.equalToSuperview().offset(-18)
 //        }
 //        // 쪽지 수신 여부 하단 라인 추가
-        // 최상단 라인 추가
-        self.view.addSubview(self.borderView)
-        self.borderView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.size.height.equalTo(1)
-        }
+//        self.view.addSubview(self.borderView)
+//        self.borderView.snp.makeConstraints { make in
+//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+//            make.left.equalToSuperview()
+//            make.right.equalToSuperview()
+//            make.size.height.equalTo(1)
+//        }
         // 설정 테이블뷰 추가
         self.view.addSubview(self.settingsTableView)
         self.settingsTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.borderView.snp.bottom)
+//            make.top.equalTo(self.borderView.snp.bottom)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.leftMargin)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.rightMargin)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottomMargin)

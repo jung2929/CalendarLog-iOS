@@ -14,12 +14,19 @@ protocol ScheduleDetailWireframeProtocol: class {
 
 protocol ScheduleDetailViewProtocol: class {
     var feedValue: Feed? { get set }
+    var commentList: [Comment]? { get set }
     var sequence: Int? { get set }
     
     var presenter: ScheduleDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
     func loadScheduleDetail()
+    
+    func loadCommentList()
+    
+    func addCommentToList()
+    
+    func pushCommentAddButton()
     
     func pushLikeButton()
     
@@ -36,7 +43,9 @@ protocol ScheduleDetailPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     
-    func viewWillAppear()
+    func viewWillAppear(_ scheduleEmail: String, _ scheduleSequence: Int)
+    
+    func createComment(_ scheduleEmail: String, _ scheduleSequence: Int, _ content: String)
     
     func presentScheduleForEdit()
 }
@@ -46,12 +55,16 @@ protocol ScheduleDetailInteractorInputProtocol: class {
     var remoteDatamanager: ScheduleDetailRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveScheduleDetail(_ sequence: Int)
+    func retrieveCommentList(_ scheduleEmail: String, _ scheduleSequence: Int)
+    
+    func createComment(_ scheduleEmail: String, _ scheduleSequence: Int, _ content: String)
 }
 
 protocol ScheduleDetailInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveScheduleDetail(_ feedList: [Feed])
+    func didRetrieveCommentList(_ commentList: [Comment])
+    
+    func didCreateComment(_ comment: Comment)
     
     func onError(_ message: String)
 }
@@ -60,12 +73,16 @@ protocol ScheduleDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ScheduleDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrieveScheduleDetail(_ email: String, _ sequence: Int)
+    func retrieveCommentList(_ scheduleEmail: String, _ scheduleSequence: Int)
+    
+    func tryCreateComment(_ scheduleEmail: String, _ scheduleSequence: Int, _ email: String, _ content: String)
 }
 
 protocol ScheduleDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onScheduleDetailRetrieved()
+    func onCommentListRetrieved(_ commentList: [Comment])
+    
+    func onCommentCreated(_ comment: Comment)
     
     func onError(_ message: String)
 }

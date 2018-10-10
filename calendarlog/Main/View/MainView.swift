@@ -54,6 +54,7 @@ class MainView: SuperViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.presenter?.viewWillAppear()
+        self.feedTableView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
     // 캘린더 설정
