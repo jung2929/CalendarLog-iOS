@@ -30,6 +30,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ScheduleDetailView.viewDidLoad():ScheduleDetailView.swift">
+      </ContextState>
+      <ContextState
          contextName = "AddScheduleView.pushEndDateDone():AddScheduleView.swift">
          <PersistentStrings>
             <PersistentString
@@ -133,6 +136,9 @@
             <PersistentString
                value = "indexPath.row">
             </PersistentString>
+            <PersistentString
+               value = "feed.endDatetimeText">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -174,6 +180,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ScheduleDetailView.loadScheduleDetail():ScheduleDetailView.swift">
+      </ContextState>
+      <ContextState
          contextName = "MainViewController.initializeUI():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -188,13 +197,13 @@
          contextName = "LoginPresenter.viewDidLoad():LoginPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
+               value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
             </PersistentString>
             <PersistentString
                value = "UserDefaults.standard.string(forKey: &quot;email&quot;)">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.string(forKey: &quot;password&quot;)">
+               value = "UserDefaults.standard.bool(forKey: &quot;isAutoLogin&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

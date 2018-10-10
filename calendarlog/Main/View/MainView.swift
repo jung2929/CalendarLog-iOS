@@ -47,9 +47,9 @@ class MainView: SuperViewController {
         profileButton.addTarget(self, action: #selector(self.pushUserInfo), for: .touchUpInside)
         let profileBarButtonImte = UIBarButtonItem.init(customView: profileButton)
         self.navigationItem.leftBarButtonItem = profileBarButtonImte
-        // 내비게이션바 우측상단 쪽지 이미지 설정
-        let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note"), style: .done, target: self, action: #selector(self.pushNoteList))
-        self.navigationItem.rightBarButtonItem = noteBarButtonItem
+//        // 내비게이션바 우측상단 쪽지 이미지 설정
+//        let noteBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_note"), style: .done, target: self, action: #selector(self.pushNoteList))
+//        self.navigationItem.rightBarButtonItem = noteBarButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,7 +176,7 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
             // 닉네임 설정
             cell.nicknameLabel.text = feed.nickname
             // 일정 이미지 설정
-            if let scheduleImageUrl = feed.url {
+            if let scheduleImageUrl = feed.scheduleImageUrl {
                 Alamofire.request(scheduleImageUrl).responseImage { response in
                     if let image = response.result.value {
                         cell.scheduleImageView.image = image
@@ -211,14 +211,14 @@ extension MainView: FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognize
             commentCountAttributedString.append(NSAttributedString(string: String(feed.commentCount)))
             cell.commentLabel.attributedText = commentCountAttributedString
             // 비공개 여부 설정
-            let registerDatetimeAttributedString = NSMutableAttributedString(string: "")
+            let endDatetimeTextAttributedString = NSMutableAttributedString(string: "")
             if feed.isPublic == "N" {
                 let privateImage = NSTextAttachment()
                 privateImage.image = UIImage(named: "ic_private")
-                registerDatetimeAttributedString.append(NSAttributedString(attachment: privateImage))
+                endDatetimeTextAttributedString.append(NSAttributedString(attachment: privateImage))
             }
-            registerDatetimeAttributedString.append(NSAttributedString(string: feed.registerDatetime))
-            cell.commentDateTimeLabel.attributedText = registerDatetimeAttributedString
+            endDatetimeTextAttributedString.append(NSAttributedString(string: feed.endDatetimeText))
+            cell.endDatetimeTextLabel.attributedText = endDatetimeTextAttributedString
         }
         return cell
     }

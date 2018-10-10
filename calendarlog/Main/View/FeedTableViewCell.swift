@@ -28,9 +28,9 @@ class FeedTableViewCell: UITableViewCell {
         return label
     }()
     // 등록시간 설정
-    let commentDateTimeLabel: UILabel = {
+    let endDatetimeTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "2018-12-31 PM 5:00"
+        label.text = "2018-12-31 오후 5:00"
         label.textColor = ColorPalette.GrayForText
         label.font = .systemFont(ofSize: 12, weight: .medium)
         return label
@@ -102,8 +102,8 @@ class FeedTableViewCell: UITableViewCell {
             make.centerY.equalTo(self.profileImageView)
             make.left.equalTo(self.profileImageView.snp.right).offset(10)
         }
-        self.feedView.addSubview(self.commentDateTimeLabel)
-        self.commentDateTimeLabel.snp.makeConstraints { make in
+        self.feedView.addSubview(self.endDatetimeTextLabel)
+        self.endDatetimeTextLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.profileImageView)
             make.right.equalToSuperview().offset(-10)
         }

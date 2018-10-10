@@ -14,13 +14,24 @@ class ScheduleDetailPresenter: ScheduleDetailPresenterProtocol {
     var wireframe: ScheduleDetailWireframeProtocol?
     
     func viewDidLoad() {
-        view?.initializeUI()
+        self.view?.initializeUI()
+    }
+    
+    func viewWillAppear() {
+        SVProgressHUD.show(withStatus: "일정 및 댓글내역을 불러오는중입니다.")
+        self.view?.loadScheduleDetail()
+        SVProgressHUD.dismiss()
+        //self.interactor?.retrieveScheduleDetail((view?.sequence)!)
+    }
+    
+    func presentScheduleForEdit() {
+        ()
     }
 }
 
 extension ScheduleDetailPresenter: ScheduleDetailInteractorOutputProtocol {
     func didRetrieveScheduleDetail(_ feedList: [Feed]) {
-        ()
+        //self.view?.loadScheduleDetail()
     }
     
     func onError(_ message: String) {

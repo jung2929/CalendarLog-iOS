@@ -50,7 +50,7 @@ class AddScheduleView: SuperViewController {
     let hourInfo = Array(0...23)
     let minuteInfo = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
     
-    var selectedCategoryValue = -1 {
+    var selectedCategoryIndex = -1 {
         didSet {
             self.categoryTextField.textColor = ColorPalette.BlackForText
         }
@@ -71,6 +71,8 @@ class AddScheduleView: SuperViewController {
         self.imagePickerController.delegate = self
         let touchUpInsideTap = UITapGestureRecognizer(target: self, action: #selector(pushImageUploadButton))
         self.scheduleImageView.addGestureRecognizer(touchUpInsideTap)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
         //내비게이션바 타이틀 설정
         self.title = "일정 추가"
         // 내비게이션바 우측상단 쪽지 이미지 설정
@@ -364,7 +366,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
         let url1 = self.urlFirstTextField.text!
         let url2 = self.urlSecondTextField.text!
         let url3 = self.urlThirdTextField.text!
-        let category = self.selectedCategoryValue
+        let category = self.selectedCategoryIndex
         if category == -1 {
             self.categoryTextField.textColor = ColorPalette.RedForText
             return
@@ -861,34 +863,35 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
         case self.titleTextField:
             self.titleBottomBorderView.backgroundColor = ColorPalette.Primary
         case self.categoryTextField:
+            self.categoryTextField.resignFirstResponder()
             self.categoryTextField.textColor = ColorPalette.Primary
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let actionFirst = UIAlertAction(title: "IT", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 0
+                self.selectedCategoryIndex = 0
                 self.categoryTextField.text = "IT"
             })
             let actionSecond = UIAlertAction(title: "문화/예술", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 1
+                self.selectedCategoryIndex = 1
                 self.categoryTextField.text = "문화/예술"
             })
             let actionThird = UIAlertAction(title: "방송/연예", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 2
+                self.selectedCategoryIndex = 2
                 self.categoryTextField.text = "방송/연예"
             })
             let actionFourth = UIAlertAction(title: "패션/뷰티", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 3
+                self.selectedCategoryIndex = 3
                 self.categoryTextField.text = "패션/뷰티"
             })
             let actionFifth = UIAlertAction(title: "전시/박람회", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 4
+                self.selectedCategoryIndex = 4
                 self.categoryTextField.text = "전시/박람회"
             })
             let actionSixth = UIAlertAction(title: "여행/스포츠", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 5
+                self.selectedCategoryIndex = 5
                 self.categoryTextField.text = "여행/스포츠"
             })
             let actionSeventh = UIAlertAction(title: "기타", style: .default, handler: { _ -> Void in
-                self.selectedCategoryValue = 999
+                self.selectedCategoryIndex = 999
                 self.categoryTextField.text = "기타"
             })
             alert.addAction(actionFirst)
@@ -898,9 +901,7 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
             alert.addAction(actionFifth)
             alert.addAction(actionSixth)
             alert.addAction(actionSeventh)
-            self.present(alert, animated: true, completion: { () in
-                self.categoryTextField.resignFirstResponder()
-            })
+            self.present(alert, animated: true, completion: nil)
         case self.locationTextField:
             self.locationBottomBorderView.backgroundColor = ColorPalette.Primary
         case self.urlFirstTextField:
@@ -935,5 +936,20 @@ extension AddScheduleView: UITextFieldDelegate, UITextViewDelegate, UIPickerView
         default:
             ()
         }
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        if !self.locationTextField.isEditing && !self.urlFirstTextField.isEditing
+            && !self.urlSecondTextField.isEditing && !self.urlThirdTextField.isEditing {return}
+        
+        guard let userInfo = sender.userInfo as? [String: Any] else {return}
+        guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        
+        self.view.frame.origin.y = -keyboardHeight // 키보드 높이만큼 위로 올라가기
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0 // Move view to original position
     }
 }

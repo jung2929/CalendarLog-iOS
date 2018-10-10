@@ -14,10 +14,13 @@ protocol ScheduleDetailWireframeProtocol: class {
 
 protocol ScheduleDetailViewProtocol: class {
     var feedValue: Feed? { get set }
+    var sequence: Int? { get set }
     
     var presenter: ScheduleDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func loadScheduleDetail()
+    
     func pushLikeButton()
     
     func pushEdit()
@@ -32,6 +35,10 @@ protocol ScheduleDetailPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
+    func viewWillAppear()
+    
+    func presentScheduleForEdit()
 }
 
 protocol ScheduleDetailInteractorInputProtocol: class {
@@ -39,7 +46,7 @@ protocol ScheduleDetailInteractorInputProtocol: class {
     var remoteDatamanager: ScheduleDetailRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveScheduleDetail()
+    func retrieveScheduleDetail(_ sequence: Int)
 }
 
 protocol ScheduleDetailInteractorOutputProtocol: class {
