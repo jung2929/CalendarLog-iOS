@@ -17,6 +17,8 @@ class RegisterView: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
         //내비게이션바 타이틀 설정
         self.title = "회원가입"
         // 전달받은 이메일 값 설정
@@ -186,7 +188,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton2: UIButton = {
         let button = UIButton()
-        button.setTitle("방송/연예", for: .normal)
+        button.setTitle("방송", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -219,7 +221,7 @@ class RegisterView: SuperViewController {
     }()
     let categoryButton5: UIButton = {
         let button = UIButton()
-        button.setTitle("여행/스포츠", for: .normal)
+        button.setTitle("여행", for: .normal)
         button.setTitleColor(ColorPalette.BlackForText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         button.setImage(UIImage(named: "ic_checkbox_default"), for: .normal)
@@ -567,5 +569,19 @@ extension RegisterView: UITextFieldDelegate {
         default:
             ()
         }
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        if !self.associateTextField.isEditing {return}
+        
+        guard let userInfo = sender.userInfo as? [String: Any] else {return}
+        guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        
+        self.view.frame.origin.y = -keyboardHeight // 키보드 높이만큼 위로 올라가기
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0 // Move view to original position
     }
 }

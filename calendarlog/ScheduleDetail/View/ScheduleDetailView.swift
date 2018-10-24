@@ -418,7 +418,47 @@ extension ScheduleDetailView: ScheduleDetailViewProtocol {
     }
     
     @objc func pushEdit() {
-        
+        guard let feedValue = self.feedValue else {
+            SVProgressHUD.showError(withStatus: "스케줄을 수정 할 수 없습니다.")
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let startDatetime = formatter.date(from: feedValue.startDatetime)
+        let endDatetime = formatter.date(from: feedValue.endDatetime)
+        formatter.dateFormat = "yyyy"
+        let startYearIndex = Int(formatter.string(from: startDatetime!))! - 2018
+        let endYearIndex = Int(formatter.string(from: endDatetime!))! - 2018
+        formatter.dateFormat = "MM"
+        let startMonthIndex = Int(formatter.string(from: startDatetime!))! - 1
+        let endMonthIndex = Int(formatter.string(from: endDatetime!))! - 1
+        formatter.dateFormat = "dd"
+        let startDayIndex = Int(formatter.string(from: startDatetime!))! - 1
+        let endDayIndex = Int(formatter.string(from: endDatetime!))! - 1
+        formatter.dateFormat = "HH"
+        let startHourIndex = Int(formatter.string(from: startDatetime!))!
+        let endHourIndex = Int(formatter.string(from: endDatetime!))!
+        formatter.dateFormat = "mm"
+        let startMinute = formatter.string(from: startDatetime!)
+        var startMinuteIndex = 0
+        let endMinute = formatter.string(from: endDatetime!)
+        var endMinuteIndex = 0
+        let minuteInfo = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"]
+        // 일단 성능 고려 X <- 졸프 발표일자 임박
+        for index in 0..<minuteInfo.count {
+            if startMinute == minuteInfo[index] {
+                startMinuteIndex = index
+            }
+            if endMinute == minuteInfo[index] {
+                endMinuteIndex = index
+            }
+        }
+        self.presenter?.presentScheduleForEdit(startYearIndex, startMonthIndex, startDayIndex,
+                                               startHourIndex, startMinuteIndex,
+                                               endYearIndex, endMonthIndex, endDayIndex,
+                                               endHourIndex, endMinuteIndex,
+                                               feedValue)
     }
     
     func initializeUI() {

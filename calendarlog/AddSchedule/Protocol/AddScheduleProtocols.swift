@@ -16,6 +16,7 @@ protocol AddScheduleWireframeProtocol: class {
 }
 
 protocol AddScheduleViewProtocol: class {
+    var feedValue: Feed? { get set }
     var isSelectedScheduleImage: Bool { get set }
     var isEditSchedule: Bool { get set }
     var sequence: Int { get set }

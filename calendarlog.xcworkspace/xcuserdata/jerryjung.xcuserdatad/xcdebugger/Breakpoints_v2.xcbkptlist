@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "calendarlog/ScheduleDetail/Presenter/ScheduleDetailPresenter.swift"
-            timestampString = "560888672.430914"
+            filePath = "calendarlog/AddSchedule/View/AddScheduleView.swift"
+            timestampString = "562068845.865862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "didCreateComment(_:)"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "pushDone()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "calendarlog/ScheduleDetail/View/ScheduleDetailView.swift"
-            timestampString = "560888672.4312479"
+            filePath = "calendarlog/AddSchedule/DataManager/AddScheduleRemoteDataManager.swift"
+            timestampString = "560926920.13124"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "679"
-            endingLineNumber = "679"
-            landmarkName = "textFieldDidBeginEditing(_:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "tryUpdateSchedule(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "calendarlog/ScheduleDetail/View/ScheduleDetailView.swift"
-            timestampString = "560888672.4318579"
+            filePath = "calendarlog/AddSchedule/DataManager/AddScheduleRemoteDataManager.swift"
+            timestampString = "560926920.131427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "668"
-            endingLineNumber = "668"
-            landmarkName = "textFieldDidBeginEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "calendarlog/Main/View/MainView.swift"
-            timestampString = "560888672.432205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "tryUpdateSchedule(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

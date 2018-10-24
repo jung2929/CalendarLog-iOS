@@ -28,8 +28,13 @@ class ScheduleDetailPresenter: ScheduleDetailPresenterProtocol {
         self.interactor?.createComment(scheduleEmail, scheduleSequence, content)
     }
     
-    func presentScheduleForEdit() {
-        ()
+    func presentScheduleForEdit(_ startYearIndex: Int, _ startMonthIndex: Int, _ startDayIndex: Int,
+                                _ startHourIndex: Int, _ startMinuteIndex: Int,
+                                _ endYearIndex: Int, _ endMonthIndex: Int, _ endDayIndex: Int,
+                                _ endHourIndex: Int, _ endMinuteIndex: Int,
+                                _ feedValue: Feed) {
+        self.wireframe?.presentScheduleForEdit(from: self.view!, startYearIndex, startMonthIndex, startDayIndex,
+        startHourIndex, startMinuteIndex, endYearIndex, endMonthIndex, endDayIndex, endHourIndex, endMinuteIndex, feedValue)
     }
 }
 

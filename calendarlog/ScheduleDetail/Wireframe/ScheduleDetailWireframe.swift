@@ -26,4 +26,30 @@ class ScheduleDetailWireframe: ScheduleDetailWireframeProtocol {
         
         return view
     }
+    
+    func presentScheduleForEdit(from view: ScheduleDetailViewProtocol,
+                                _ startYearIndex: Int, _ startMonthIndex: Int, _ startDayIndex: Int,
+                                _ startHourIndex: Int, _ startMinuteIndex: Int,
+                                _ endYearIndex: Int, _ endMonthIndex: Int, _ endDayIndex: Int,
+                                _ endHourIndex: Int, _ endMinuteIndex: Int,
+                                _ feedValue: Feed) {
+        if let sourceView = view as? UIViewController {
+            let addScheduleViewController = AddScheduleWireframe.createAddScheduleModule()
+            addScheduleViewController.startDateValue = feedValue.startDatetime
+            addScheduleViewController.startYearIndexValue = startYearIndex
+            addScheduleViewController.startMonthIndexValue = startMonthIndex
+            addScheduleViewController.startDayIndexValue = startDayIndex
+            addScheduleViewController.startHourIndexValue = startHourIndex
+            addScheduleViewController.startMinuteIndexValue = startMinuteIndex
+            addScheduleViewController.endDateValue = feedValue.endDatetime
+            addScheduleViewController.endYearIndexValue = endYearIndex
+            addScheduleViewController.endMonthIndexValue = endMonthIndex
+            addScheduleViewController.endDayIndexValue = endDayIndex
+            addScheduleViewController.endHourIndexValue = endHourIndex
+            addScheduleViewController.endMinuteIndexValue = endMinuteIndex
+            addScheduleViewController.isEditSchedule = true
+            addScheduleViewController.feedValue = feedValue
+            sourceView.navigationController?.pushViewController(addScheduleViewController, animated: true)
+        }
+    }
 }

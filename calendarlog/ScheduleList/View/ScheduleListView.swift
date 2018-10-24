@@ -160,7 +160,7 @@ extension ScheduleListView: UITableViewDelegate, UITableViewDataSource {
             cell.commentLabel.attributedText = commentCountAttributedString
             // 비공개 여부 설정
             let endDatetimeTextAttributedString = NSMutableAttributedString(string: "")
-            if feed.isPublic == "Y" {
+            if feed.isPublic == "N" {
                 let privateImage = NSTextAttachment()
                 privateImage.image = UIImage(named: "ic_private")
                 endDatetimeTextAttributedString.append(NSAttributedString(attachment: privateImage))

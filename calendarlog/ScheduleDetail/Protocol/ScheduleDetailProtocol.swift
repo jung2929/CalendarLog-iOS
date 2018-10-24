@@ -10,6 +10,12 @@ protocol ScheduleDetailWireframeProtocol: class {
     static func createScheduleDetailModule() -> ScheduleDetailView
     
     // PRESENTER -> WIREFRAME
+    func presentScheduleForEdit(from view: ScheduleDetailViewProtocol,
+                                _ startYearIndex: Int, _ startMonthIndex: Int, _ startDayIndex: Int,
+                                _ startHourIndex: Int, _ startMinuteIndex: Int,
+                                _ endYearIndex: Int, _ endMonthIndex: Int, _ endDayIndex: Int,
+                                _ endHourIndex: Int, _ endMinuteIndex: Int,
+                                _ feedValue: Feed)
 }
 
 protocol ScheduleDetailViewProtocol: class {
@@ -47,7 +53,11 @@ protocol ScheduleDetailPresenterProtocol: class {
     
     func createComment(_ scheduleEmail: String, _ scheduleSequence: Int, _ content: String)
     
-    func presentScheduleForEdit()
+    func presentScheduleForEdit(_ startYearIndex: Int, _ startMonthIndex: Int, _ startDayIndex: Int,
+                                _ startHourIndex: Int, _ startMinuteIndex: Int,
+                                _ endYearIndex: Int, _ endMonthIndex: Int, _ endDayIndex: Int,
+                                _ endHourIndex: Int, _ endMinuteIndex: Int,
+                                _ feedValue: Feed)
 }
 
 protocol ScheduleDetailInteractorInputProtocol: class {

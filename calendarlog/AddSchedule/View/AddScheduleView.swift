@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 import SVProgressHUD
 
 class AddScheduleView: SuperViewController {
     var presenter: AddSchedulePresenterProtocol?
+    var feedValue: Feed?
     var isSelectedScheduleImage = false
     var isEditSchedule = false
     var sequence: Int = -1
@@ -74,7 +76,11 @@ class AddScheduleView: SuperViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
         //내비게이션바 타이틀 설정
-        self.title = "일정 추가"
+        if self.isEditSchedule {
+            self.title = "일정 수정"
+        } else {
+            self.title = "일정 추가"
+        }
         // 내비게이션바 우측상단 쪽지 이미지 설정
         let doneBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_done"), style: .done, target: self, action: #selector(self.pushDone))
         self.navigationItem.rightBarButtonItem = doneBarButtonItem
@@ -309,7 +315,11 @@ extension AddScheduleView: AddScheduleViewProtocol {
     }
     
     func popViewController() {
-        self.navigationController?.popViewController(animated: true)
+        if self.isEditSchedule {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func pushImageUploadButton() {
@@ -376,7 +386,7 @@ extension AddScheduleView: AddScheduleViewProtocol {
         
         if self.isEditSchedule {
             if self.sequence == -1 {
-                SVProgressHUD.show(withStatus: "\(self.sequence)번호에 해당하는 스케줄을 찾을 수 없습니다.")
+                SVProgressHUD.showError(withStatus: "번호 : \(self.sequence)에 해당하는 스케줄을 찾을 수 없습니다.")
                 return
             }
             
@@ -666,6 +676,67 @@ extension AddScheduleView: AddScheduleViewProtocol {
         self.isPublicSwitch.snp.makeConstraints { make in
             make.centerY.equalTo(self.isPublicLabel)
             make.right.equalToSuperview().offset(offsetRightValue)
+        }
+        // 수정일 경우 값 설정
+        if self.isEditSchedule {
+            guard let feedValue = self.feedValue else {
+                SVProgressHUD.showError(withStatus: "스케줄을 수정 할 수 없습니다.")
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
+            self.sequence = feedValue.scheduleSequence
+            self.titleTextField.text = feedValue.title
+            self.contentTextView.text = feedValue.content
+//            // 내용 높이 맞추기
+//            let sizeThatFits = self.contentTextView.sizeThatFits(CGSize(width: self.view.frame.width, height: CGFloat(MAXFLOAT)))
+//            self.contentTextView.snp.makeConstraints { make in
+//                make.height.equalTo(sizeThatFits)
+//            }
+            let category: String?
+            self.selectedCategoryIndex = Int(feedValue.categoryIndex) ?? -1
+            switch self.selectedCategoryIndex {
+            case 0:
+                category = "IT"
+            case 1:
+                category = "문화/예술"
+            case 2:
+                category = "방송/연예"
+            case 3:
+                category = "패션/뷰티"
+            case 4:
+                category = "전시/박람회"
+            case 5:
+                category = "여행/스포츠"
+            case 999:
+                category = "기타"
+            default:
+                category = "잘못된 카테고리"
+            }
+            self.categoryTextField.text = category
+            self.categoryTextField.textColor = ColorPalette.BlackForText
+            self.locationTextField.text = feedValue.location
+            self.urlFirstTextField.text = feedValue.url1
+            self.urlSecondTextField.text = feedValue.url2
+            self.urlThirdTextField.text = feedValue.url3
+            if feedValue.isPublic == "Y" {
+                self.isPublicSwitch.isOn = true
+            } else {
+                self.isPublicSwitch.isOn = false
+            }
+            // 일정 이미지 설정
+            if let scheduleImageUrl = feedValue.scheduleImageUrl {
+                Alamofire.request(scheduleImageUrl).responseImage { response in
+                    if let image = response.result.value {
+                        self.isSelectedScheduleImage = true
+                        self.scheduleImageView.image = image
+                        self.scheduleImageView.snp.updateConstraints { make in
+                            make.top.equalTo(self.imageUploadButton.snp.bottom).offset(15)
+                            make.size.equalTo(200)
+                        }
+                        self.scheduleImageView.setNeedsUpdateConstraints()
+                    }
+                }
+            }
         }
     }
 }
