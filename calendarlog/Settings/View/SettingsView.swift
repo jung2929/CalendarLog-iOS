@@ -77,30 +77,9 @@ extension SettingsView: SettingsViewProtocol {
     
     func initializeUI() {
         self.view.backgroundColor = .white
-//        // 쪽지 수신 여부 라벨 추가
-//        self.view.addSubview(self.isReceiveNoteLabel)
-//        self.isReceiveNoteLabel.snp.makeConstraints { make in
-//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(18)
-//            make.left.equalToSuperview().offset(18)
-//        }
-//        // 쪽지 수신 여부 스위치 추가
-//        self.view.addSubview(self.isReceiveNoteSwitch)
-//        self.isReceiveNoteSwitch.snp.makeConstraints { make in
-//            make.centerY.equalTo(self.isReceiveNoteLabel)
-//            make.right.equalToSuperview().offset(-18)
-//        }
-//        // 쪽지 수신 여부 하단 라인 추가
-//        self.view.addSubview(self.borderView)
-//        self.borderView.snp.makeConstraints { make in
-//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-//            make.left.equalToSuperview()
-//            make.right.equalToSuperview()
-//            make.size.height.equalTo(1)
-//        }
         // 설정 테이블뷰 추가
         self.view.addSubview(self.settingsTableView)
         self.settingsTableView.snp.makeConstraints { make in
-//            make.top.equalTo(self.borderView.snp.bottom)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.leftMargin)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.rightMargin)
